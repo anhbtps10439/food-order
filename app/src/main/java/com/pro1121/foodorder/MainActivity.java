@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
         int abc = 2;
         //testtttt
 
-        String abcxyz = "áDADASD";
+        String abcxyz = "Hello World";
+        String AAAA = "Helloo";
     }
 }
