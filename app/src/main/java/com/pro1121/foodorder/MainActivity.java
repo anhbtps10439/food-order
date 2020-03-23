@@ -12,6 +12,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         
         int i = 0;
-        int i2 = 1;
+        int i2 = 1213214214;
     }
 }
