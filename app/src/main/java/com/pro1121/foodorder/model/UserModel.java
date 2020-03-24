@@ -2,9 +2,9 @@ package com.pro1121.foodorder.model;
 
 public class UserModel {
 
+    private String id; //phone number
     private String name;
     private String birthday; //dd/MM/yyyy
-    private String id; //phone number
     private String email;
     private String password;
     private String role;
