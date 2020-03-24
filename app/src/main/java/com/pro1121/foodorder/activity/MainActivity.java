@@ -12,8 +12,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//<<<<<<< HEAD
+        
+        int i = 0;
+        int i2 = 1213214214;
+//=======
 
 
-
+        // Luân đã đặt chân tới đây
+//>>>>>>> b5e83f46508e5072e7add0290443528f31af9bee
     }
 }
