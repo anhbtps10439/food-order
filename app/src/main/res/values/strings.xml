@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Food Order</string>
+
+    <string name="nav_main">Trang chính</string>
+    <string name="nav_category">Danh mục</string>
+    <string name="nav_bill">Hóa đơn</string>
+    <string name="nav_statistic">Thống kê</string>
+    <string name="nav_user_manager">Người dùng</string>
+    <string name="nav_profile">Người dùng</string>
+
 </resources>

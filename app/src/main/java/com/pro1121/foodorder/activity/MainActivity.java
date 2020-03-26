@@ -33,5 +33,6 @@ public class MainActivity extends AppCompatActivity {
 //        DishModel dishModel = new DishModel("TS-M3AzZdjbBpgdBFTAAP8", "TS", "Trà sữa truyền thống", 22000, "Trà sữa mang hương vị truyền thống đến từ Food Order", "Ảnh");
 //        detailOrderDao.insert(orderId, dishModel, 2);
 
+
     }
 }
