@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class LibraryClass {
 
     public static ArrayList<UserModel> userModelList = new ArrayList<>();
-    public static ArrayList<DishModel> dishModellList = new ArrayList<>();
+    public static ArrayList<DishModel> dishModelList = new ArrayList<>();
     public static ArrayList<DishCategoryModel> dishCategoryModelList = new ArrayList<>();
     public static ArrayList<OrderModel> orderModelList = new ArrayList<>();
 }
