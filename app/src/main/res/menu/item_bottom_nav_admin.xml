@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cnb_unselectedColor="@color/colorWhite">
+    <item
+        android:id="@+id/navHome"
+        android:title="@string/nav_main"
+        android:icon="@drawable/ic_home"
+        app:cnb_iconColor="@color/colorWhite"/>
+    <item
+        android:id="@+id/navCategory"
+        android:title="@string/nav_category"
+        android:icon="@drawable/ic_category"
+        app:cnb_iconColor="@color/colorWhite"/>
+    <item
+        android:id="@+id/navBill"
+        android:title="@string/nav_bill"
+        android:icon="@drawable/ic_bill"
+        app:cnb_iconColor="@color/colorWhite"/>
+    <item
+        android:id="@+id/navStatistic"
+        android:title="@string/nav_statistic"
+        android:icon="@drawable/ic_statistic"
+        app:cnb_iconColor="@color/colorWhite"/>
+    <item
+        android:id="@+id/navUserManager"
+        android:title="@string/nav_user_manager"
+        android:icon="@drawable/ic_user_manager"
+        app:cnb_iconColor="@color/colorWhite"/>
+
+</menu>
