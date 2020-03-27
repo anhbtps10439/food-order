@@ -83,7 +83,8 @@
             android:textColor="#FF0000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" Đăng ký"/>
+            android:text="Đăng ký"
+            android:onClick="moveToSignUp"/>
 
 
     </LinearLayout>
@@ -93,5 +94,6 @@
         android:textColor="#FF0000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" Quên mật khẩu"/>
+        android:text=" Quên mật khẩu"
+        android:onClick="moveToForgotPass"/>
 </LinearLayout>
