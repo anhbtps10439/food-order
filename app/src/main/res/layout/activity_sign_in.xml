@@ -15,20 +15,13 @@
         android:textColor="#FBF8EF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chào mừng"
+        android:text="Xin chào !"
         android:layout_marginTop="60dp"
         android:textSize="32dp"
-        android:layout_marginRight="85dp"/>
+        android:maxWidth="170dp"
+        />
 
-    <TextView
-        android:textStyle="bold"
-        android:textColor="#FBF8EF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="trở lại"
-        android:layout_marginTop="10dp"
-        android:textSize="32dp"
-        android:layout_marginRight="130dp"/>
+
 
     <EditText
         android:textColor="#FBF8EF"
@@ -38,7 +31,7 @@
         android:background="@drawable/shape"
         android:layout_width="330dp"
         android:layout_height="65dp"
-        android:hint="    Số điện thoại"
+        android:hint="Số điện thoại"
         android:layout_marginTop="38dp"
         android:drawablePadding="20dp"/>
     <EditText
@@ -50,7 +43,7 @@
         android:layout_marginTop="20dp"
         android:layout_width="330dp"
         android:layout_height="65dp"
-        android:hint="    Mật khẩu"
+        android:hint="Mật khẩu"
         android:drawablePadding="20dp"/>
 
     <CheckBox
@@ -69,7 +62,6 @@
         android:layout_marginLeft="69dp"
         android:layout_marginTop="6dp"
         android:background="@drawable/shape"
-        android:backgroundTint="#FE2E2E"
         android:text="Let's go !!!"
         android:textColor="#F8E0E0"
         android:textSize="16dp" />
@@ -98,7 +90,7 @@
 
     <TextView
         android:textSize="16dp"
-        android:textColor="#0101DF"
+        android:textColor="#FF0000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" Quên mật khẩu"/>
