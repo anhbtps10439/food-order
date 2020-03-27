@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@drawable/background_login"
+    tools:context=".activity.SignInActivity">
+
+
+    <TextView
+        android:textStyle="bold"
+        android:textColor="#FBF8EF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chào mừng"
+        android:layout_marginTop="60dp"
+        android:textSize="32dp"
+        android:layout_marginRight="85dp"/>
+
+    <TextView
+        android:textStyle="bold"
+        android:textColor="#FBF8EF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="trở lại"
+        android:layout_marginTop="10dp"
+        android:textSize="32dp"
+        android:layout_marginRight="130dp"/>
+
+    <EditText
+        android:textColor="#FBF8EF"
+        android:padding="11dp"
+        android:drawableLeft="@drawable/ic_phone_black_24dp"
+        android:textSize="20dp"
+        android:background="@drawable/shape"
+        android:layout_width="330dp"
+        android:layout_height="65dp"
+        android:hint="    Số điện thoại"
+        android:layout_marginTop="38dp"
+        android:drawablePadding="20dp"/>
+    <EditText
+        android:drawableRight="@drawable/ic_visibility_black_24dp"
+        android:padding="15dp"
+        android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
+        android:textSize="20dp"
+        android:background="@drawable/shape"
+        android:layout_marginTop="20dp"
+        android:layout_width="330dp"
+        android:layout_height="65dp"
+        android:hint="    Mật khẩu"
+        android:drawablePadding="20dp"/>
+
+    <CheckBox
+        android:layout_marginTop="10dp"
+        android:id="@+id/checkBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nhớ tài khoản"
+        android:layout_marginLeft="35dp"/>
+
+
+    <Button
+
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="69dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/shape"
+        android:backgroundTint="#FE2E2E"
+        android:text="Let's go !!!"
+        android:textColor="#F8E0E0"
+        android:textSize="16dp" />
+
+    <LinearLayout
+        android:layout_marginTop="78dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="Bạn chưa có tài khoản?"/>
+
+        <TextView
+            android:textSize="16dp"
+            android:textColor="#FF0000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Đăng ký"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:textSize="16dp"
+        android:textColor="#0101DF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" Quên mật khẩu"/>
+</LinearLayout>

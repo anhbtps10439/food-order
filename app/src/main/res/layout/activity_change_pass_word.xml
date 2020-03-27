@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@drawable/background_login"
+    tools:context=".activity.ForgotPassword">
+
+    <TextView
+
+        android:textStyle="bold"
+        android:textColor="#FBF8EF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đổi mật khẩu"
+        android:layout_marginTop="140dp"
+        android:textSize="37dp"
+        android:layout_marginRight="50dp"/>
+
+    <EditText
+
+        android:layout_width="330dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/shape"
+        android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
+        android:hint="    Mật khẩu cũ"
+        android:padding="15dp"
+        android:paddingLeft="20dp"
+        android:textSize="20dp"
+        android:drawablePadding="20dp"/>
+
+    <EditText
+
+        android:layout_width="331dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape"
+        android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
+        android:hint="    Mật khẩu mới"
+        android:padding="15dp"
+        android:paddingLeft="20dp"
+        android:textSize="20dp"
+        android:drawablePadding="20dp"/>
+
+    <EditText
+
+        android:layout_width="330dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape"
+        android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
+        android:hint="    Nhập lại mật khẩu"
+        android:padding="15dp"
+        android:paddingLeft="20dp"
+        android:textSize="20dp"
+        android:drawablePadding="20dp"/>
+    <Button
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="39dp"
+        android:background="@drawable/rectangle611"
+        android:backgroundTint="#FE2E2E"
+        android:text="Xác nhận"
+        android:textColor=" #F8E0E0"
+        android:textSize="16dp" />
+
+
+</LinearLayout>
