@@ -16,7 +16,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="400dp"
         android:background="@drawable/shape"
-        android:backgroundTint="#FE2E2E"
         android:text="Đăng nhập"
         android:textColor="#F8E0E0"
         android:textSize="20dp" />
@@ -28,7 +27,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="480dp"
         android:background="@drawable/shape"
-        android:backgroundTint="#FE2E2E"
         android:text="Đăng kí"
         android:textColor="#F8E0E0"
         android:textSize="20dp" />
