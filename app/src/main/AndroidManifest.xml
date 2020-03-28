@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
 
         <!--  HEAD  -->
-        <activity android:name=".activity.LoginActivity">
+        <activity android:name=".activity.UserCase.UserCaseActivity">
 
 
 <!--        <activity android:name=".huyTest.ClickKindFood">  -->
@@ -29,8 +29,8 @@
         <activity android:name=".activity.ChangePassWord"/>
         <activity android:name=".activity.ForgotPassword"/>
         <activity android:name=".activity.IsYourAccount"/>
+        <activity android:name=".activity.LoginActivity"/>
         <activity android:name=".activity.AdminCase.AdminCaseActivity"/>
-        <activity android:name=".activity.UserCase.UserCaseActivity"/>
 
     </application>
 
