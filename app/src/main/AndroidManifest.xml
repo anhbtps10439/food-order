@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
 
         <!--  HEAD  -->
-        <activity android:name=".activity.UserCase.UserCaseActivity">
+        <activity android:name=".huyTest.ClickKindFood">
 
 
 <!--        <activity android:name=".huyTest.ClickKindFood">  -->

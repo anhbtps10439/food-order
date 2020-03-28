@@ -1,10 +1,16 @@
 package com.pro1121.foodorder.huyTest;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,13 +33,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        public ImageView imageView;
+        public RelativeLayout imageView;
         public TextView tv_dishName, tv_dishDes, tv_dishPrice;
 
         public ViewHolder(View itemView){
             super(itemView);
-            imageView = (ImageView)itemView.findViewById(R.id.iv_dish_image);
-            tv_dishName = (TextView)itemView.findViewById(R.id.tv_dish_name);
+            imageView = itemView.findViewById(R.id.iv_dish_image);
+            tv_dishName = itemView.findViewById(R.id.tv_dish_name);
             tv_dishDes = itemView.findViewById(R.id.tv_dish_des);
             tv_dishPrice = itemView.findViewById(R.id.tv_dish_prices);
         }
@@ -59,9 +65,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tv_dishName.setText("asdas");
-        holder.tv_dishDes.setText("asdasdasdasdasdasdasd");
-        holder.tv_dishPrice.setText("10000000 VND");
+        DishModel dish = dishModels.get(position);
+        holder.imageView.setBackground(new BitmapDrawable(context.getResources(),ClickKindFood.convertStringToImg(dish.getImage())));
+        holder.tv_dishName.setText(dish.getName());
+        holder.tv_dishDes.setText(dish.getDes());
+        holder.tv_dishPrice.setText(dish.getPrice()+" VND");
         holder.bindData();
     }
 
