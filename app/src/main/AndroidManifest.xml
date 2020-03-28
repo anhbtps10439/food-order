@@ -9,11 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<!-- HEAD -->>
+//<<<<<<< HEAD
         <activity android:name=".activity.AdminCase.AdminCaseActivity">
-
-    <!--    <activity android:name=".huyTest.ClickKindFood"> -->
-<!-- ed079f76c4964467b66f8e26706177674d8bcd2e -->
+=======
+        <activity android:name=".huyTest.ClickKindFood">
+//>>>>>>> ed079f76c4964467b66f8e26706177674d8bcd2e
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

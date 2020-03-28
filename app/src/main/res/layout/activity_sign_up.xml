@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@drawable/background_login"
+    tools:context=".activity.SignUpActivity">
+
+
+    <TextView
+        android:textStyle="bold"
+        android:textColor="#FBF8EF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đăng ký"
+        android:layout_marginTop="60dp"
+        android:textSize="32dp"
+        android:maxWidth="170dp"
+        />
+    <EditText
+
+        android:layout_width="330dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="38dp"
+        android:background="@drawable/shape"
+        android:drawableLeft="@drawable/ic_person_black_24dp"
+        android:hint="Tên hiển thị"
+        android:padding="15dp"
+        android:textSize="20dp"
+        android:drawablePadding="20dp"/>
+    <EditText
+        android:padding="15dp"
+        android:drawableLeft="@drawable/ic_phone_black_24dp"
+        android:textSize="20dp"
+        android:background="@drawable/shape"
+        android:layout_width="330dp"
+        android:layout_height="65dp"
+        android:hint="Số điện thoại"
+        android:layout_marginTop="20dp"
+        android:drawablePadding="20dp"/>
+    <EditText
+        android:padding="15dp"
+        android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
+        android:textSize="20dp"
+        android:background="@drawable/shape"
+        android:layout_marginTop="20dp"
+        android:layout_width="330dp"
+        android:layout_height="65dp"
+        android:hint="Mật khẩu"
+        android:drawablePadding="20dp"/>
+    <EditText
+        android:background="@drawable/shape"
+        android:padding="20dp"
+        android:drawableLeft="@drawable/ic_email_black_24dp"
+        android:textSize="19dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="330dp"
+        android:layout_height="65dp"
+        android:hint="Email"
+        android:drawablePadding="20dp"/>
+
+    <Button
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/shape"
+        android:text="Đăng ký"
+        android:textColor="#F8E0E0"
+        android:textSize="16dp"
+        android:onClick="checkSignUp"/>
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="Bạn đã có tài khoản?"/>
+
+        <TextView
+            android:textSize="20dp"
+            android:textColor="#FF0040"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Đăng nhập"
+            android:onClick="moveToSignIn"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@drawable/background_login"
+    tools:context=".activity.IsYourAccount">
+
+    <TextView
+
+        android:textStyle="bold"
+        android:textColor="#FBF8EF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mật khẩu mới"
+        android:layout_marginTop="110dp"
+        android:textSize="36dp"
+        android:layout_marginRight="50dp"/>
+    <LinearLayout
+        android:layout_marginRight="100dp"
+        android:layout_marginTop="42dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textColor="#FBF2EF"
+            android:textSize="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="Xin chào, Trang"/>
+    </LinearLayout>
+
+    <EditText
+        android:textColor="#FBF8EF"
+        android:padding="11dp"
+        android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
+        android:textSize="20dp"
+        android:background="@drawable/shape"
+        android:layout_width="330dp"
+        android:layout_height="65dp"
+        android:hint="Mật khẩu hiện tại"
+        android:layout_marginTop="37dp"
+        android:drawablePadding="20dp"
+        />
+    <EditText
+        android:padding="15dp"
+        android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
+        android:textSize="20dp"
+        android:background="@drawable/shape"
+        android:layout_marginTop="20dp"
+        android:layout_width="330dp"
+        android:layout_height="65dp"
+        android:hint="Mật khẩu mới"
+        android:drawablePadding="20dp"/>
+    <EditText
+        android:padding="15dp"
+        android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
+        android:textSize="20dp"
+        android:background="@drawable/shape"
+        android:layout_marginTop="20dp"
+        android:layout_width="330dp"
+        android:layout_height="65dp"
+        android:hint="Nhập lại mật khẩu"
+        android:drawablePadding="20dp"/>
+
+
+    <Button
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/shape"
+        android:text="Xác nhận"
+        android:textColor="#F8E0E0"
+        android:textSize="16dp"
+        android:elevation="10dp"
+        />
+
+
+
+</LinearLayout>
