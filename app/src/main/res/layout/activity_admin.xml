@@ -5,11 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarAdminCase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <FrameLayout
         android:id="@+id/nav_host_admin_case"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/navAdminCase"
+        android:layout_below="@id/toolbarAdminCase"
         />
 
     <com.ismaeldivita.chipnavigation.ChipNavigationBar
