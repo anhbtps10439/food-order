@@ -2,11 +2,13 @@ package com.pro1121.foodorder.activity.AdminCase;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -24,20 +26,31 @@ import com.pro1121.foodorder.activity.AdminCase.fragment.UserManagerFragment;
 public class AdminCaseActivity extends AppCompatActivity {
 
     private ChipNavigationBar chipNavigationBar;
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
         //Ánh xạ
         init();
+        hideTitleToolbar();
 
-
+        chipNavigationBar.setOnItemSelectedListener(onItemSelectedListener);
+        //open tab home first
+        chipNavigationBar.setItemSelected(R.id.navHome, true);
     }
+
+    private void hideTitleToolbar() {
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("");
+    }
+
 
     private void init() {
         chipNavigationBar = findViewById(R.id.navAdminCase);
-        chipNavigationBar.setOnItemSelectedListener(onItemSelectedListener);
-        chipNavigationBar.setItemSelected(R.id.navHome, true);
+
+        toolbar = findViewById(R.id.toolbarAdminCase);
+
     }
 
     private ChipNavigationBar.OnItemSelectedListener onItemSelectedListener = new

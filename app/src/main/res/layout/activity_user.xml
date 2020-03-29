@@ -5,11 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite">
+    <include
+        android:id="@+id/toolbarUserCase"
+        layout="@layout/toolbar"/>
     <FrameLayout
         android:id="@+id/nav_host_user_case"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/navUserCase"
+        android:layout_below="@+id/toolbarUserCase"
         />
     <com.ismaeldivita.chipnavigation.ChipNavigationBar
         android:id="@+id/navUserCase"
