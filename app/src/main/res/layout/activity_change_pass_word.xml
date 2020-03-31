@@ -33,7 +33,7 @@
         android:orientation="vertical">
 
         <EditText
-
+            android:id="@+id/et_old_pass"
             android:layout_width="330dp"
             android:layout_height="65dp"
             android:layout_marginTop="30dp"
@@ -42,12 +42,13 @@
             android:drawablePadding="20dp"
             android:elevation="5dp"
             android:hint="Mật khẩu cũ"
+            android:inputType="textPassword"
             android:padding="15dp"
             android:paddingLeft="20dp"
             android:textSize="20dp" />
 
         <EditText
-
+            android:id="@+id/et_new_pass"
             android:layout_width="331dp"
             android:layout_height="65dp"
             android:layout_marginTop="20dp"
@@ -56,12 +57,13 @@
             android:drawablePadding="20dp"
             android:elevation="5dp"
             android:hint="Mật khẩu mới"
+            android:inputType="textPassword"
             android:padding="15dp"
             android:paddingLeft="20dp"
             android:textSize="20dp" />
 
         <EditText
-
+            android:id="@+id/et_confirm_pass"
             android:layout_width="330dp"
             android:layout_height="65dp"
             android:layout_marginTop="20dp"
@@ -70,6 +72,7 @@
             android:drawablePadding="20dp"
             android:elevation="5dp"
             android:hint="Nhập lại mật khẩu"
+            android:inputType="textPassword"
             android:padding="15dp"
             android:paddingLeft="20dp"
             android:textSize="20dp" />
@@ -80,7 +83,7 @@
             android:layout_marginTop="100dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/shape"
-            android:onClick="moveToChangePass"
+            android:onClick="checkChangePass"
             android:fontFamily="@font/segoe_ui_bold"
             android:text="Xác nhận"
             android:textColor="@color/colorWhite"

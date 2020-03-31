@@ -1,4 +1,4 @@
-package com.pro1121.foodorder.activity;
+package com.pro1121.foodorder.activity.SignInOut;
 
 import androidx.appcompat.app.AppCompatActivity;
 

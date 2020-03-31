@@ -65,12 +65,13 @@ public class AdminCaseActivity extends AppCompatActivity {
                         case R.id.navCategory:
                             fm.beginTransaction().replace(R.id.nav_host_admin_case, new CategoryAdminFragment()).commit();
                             break;
+                        /* Không cần cái này
                         case R.id.navBill:
                             fm.beginTransaction().replace(R.id.nav_host_admin_case, new BillFragment()).commit();
                             break;
                         case R.id.navStatistic:
                             fm.beginTransaction().replace(R.id.nav_host_admin_case, new StatisticFragment()).commit();
-                            break;
+                            break;*/
                         case R.id.navUserManager:
                             fm.beginTransaction().replace(R.id.nav_host_admin_case, new UserManagerFragment()).commit();
                             break;

@@ -7,7 +7,7 @@
     android:background="@drawable/background_login"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".activity.SignInActivity">
+    tools:context=".activity.SignInOut.SignInActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,6 +36,7 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/et_sdt"
             android:layout_width="330dp"
             android:layout_height="66dp"
             android:layout_marginTop="38dp"
@@ -46,21 +47,23 @@
             android:hint="Số điện thoại"
             android:inputType="number"
             android:padding="11dp"
-            android:textColor="#FBF8EF"
+            android:textColor="@color/Black"
             android:textSize="20dp"
 
             />
-
+        <!--android:drawableRight="@drawable/ic_visibility_black_24dp"
+                    Không làm chức năng show password ở EditText Password-->
         <EditText
+            android:id="@+id/et_password"
             android:layout_width="330dp"
             android:layout_height="66dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/shape_fe"
             android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
-            android:drawableRight="@drawable/ic_visibility_black_24dp"
             android:drawablePadding="20dp"
             android:elevation="5dp"
             android:hint="Mật khẩu"
+            android:inputType="textPassword"
             android:padding="15dp"
             android:textSize="20dp" />
 

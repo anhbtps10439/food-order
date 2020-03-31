@@ -12,6 +12,7 @@
         android:title="@string/nav_category"
         android:icon="@drawable/ic_category"
         app:cnb_iconColor="@color/colorWhite"/>
+    <!-- Không cần cái này
     <item
         android:id="@+id/navBill"
         android:title="@string/nav_bill"
@@ -22,6 +23,7 @@
         android:title="@string/nav_statistic"
         android:icon="@drawable/ic_statistic"
         app:cnb_iconColor="@color/colorWhite"/>
+        -->
     <item
         android:id="@+id/navUserManager"
         android:title="@string/nav_user_manager"

@@ -16,8 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.pro1121.foodorder.R;
-import com.pro1121.foodorder.activity.AdminCase.AdminCaseActivity;
-import com.pro1121.foodorder.activity.LoginActivity;
+
 
 public class HomeAdminFragment extends Fragment {
 

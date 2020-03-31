@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_login"
-    tools:context=".activity.LoginActivity">
+    >
 
 
     <LinearLayout
@@ -51,6 +51,6 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/xxx"
         android:layout_marginTop="100dp"
-        android:layout_marginBottom="212dp"
+        android:layout_marginBottom="250dp"
         app:srcCompat="@drawable/logo2_remake" />
 </RelativeLayout>
