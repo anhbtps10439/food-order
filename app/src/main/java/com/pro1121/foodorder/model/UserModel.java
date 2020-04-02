@@ -8,19 +8,21 @@ public class UserModel {
     private String email;
     private String password;
     private String role;
+    private String image;
 
     public UserModel()
     {
 
     }
 
-    public UserModel(String name, String birthday, String id, String email, String password, String role) {
+    public UserModel(String id, String name, String birthday, String email, String password, String role, String image) {
+        this.id = id;
         this.name = name;
         this.birthday = birthday;
-        this.id = id;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.image = image;
     }
 
     public String getName() {
@@ -69,5 +71,13 @@ public class UserModel {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

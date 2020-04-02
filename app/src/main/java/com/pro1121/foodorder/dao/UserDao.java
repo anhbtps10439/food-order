@@ -23,9 +23,9 @@ public class UserDao {
         this.context = context;
     }
 
-    public void insert(String id, String name, String birthday, String email, String password, String role)
+    public void insert(String id, String name, String birthday, String email, String password, String role, String image)
     {
-        UserModel userModel = new UserModel(id, name, birthday, email, password, role);
+        UserModel userModel = new UserModel(id, name, birthday, email, password, role, image);
         db.child("user").child(id).setValue(userModel);
     }
 

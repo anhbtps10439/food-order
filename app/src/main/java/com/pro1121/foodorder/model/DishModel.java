@@ -6,7 +6,7 @@ public class DishModel {
     private String name;
     private int price;
     private String des;
-    private String image; //temporary
+    private String image;
 
     public DishModel()
     {
