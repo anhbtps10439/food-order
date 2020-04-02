@@ -15,8 +15,11 @@ import androidx.fragment.app.Fragment;
 
 import com.pro1121.foodorder.R;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ProfileFragment extends Fragment {
     private Toolbar toolbar;
+    CircleImageView circleImageView;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -28,6 +31,7 @@ public class ProfileFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         toolbar = getActivity().findViewById(R.id.toolbarUserCase);
+        circleImageView = getActivity().findViewById(R.id.profile_image);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         toolbar.setTitle("Thông tin cá nhân");
     }
