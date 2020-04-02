@@ -5,16 +5,18 @@ public class DishCategoryModel {
     private String id;
     private String name;
     private String des;
+    private String image;
 
     public DishCategoryModel()
     {
 
     }
 
-    public DishCategoryModel(String id, String name, String des) {
+    public DishCategoryModel(String id, String name, String des, String image) {
         this.id = id;
         this.name = name;
         this.des = des;
+        this.image = image;
     }
 
     public String getId() {
@@ -39,5 +41,13 @@ public class DishCategoryModel {
 
     public void setDes(String des) {
         this.des = des;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

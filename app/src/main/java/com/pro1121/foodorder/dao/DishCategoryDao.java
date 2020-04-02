@@ -25,9 +25,9 @@ public class DishCategoryDao {
         this.context = context;
     }
 
-    public void insert(String id, String name, String des)
+    public void insert(String id, String name, String des, String image)
     {
-        DishCategoryModel dishCategoryModel = new DishCategoryModel(id, name, des);
+        DishCategoryModel dishCategoryModel = new DishCategoryModel(id, name, des, image);
         db.child("dishCategory").child(id).setValue(dishCategoryModel);
     }
 
