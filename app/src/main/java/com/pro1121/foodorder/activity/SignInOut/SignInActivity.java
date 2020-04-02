@@ -22,7 +22,6 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
         et_sdt = findViewById(R.id.et_sdt);
         et_password = findViewById(R.id.et_password);
-        Toast.makeText(this, LibraryClass.userModelList.get(LibraryClass.userModelList.size()-1).getRole()+" user", Toast.LENGTH_SHORT).show();
 
     }
 

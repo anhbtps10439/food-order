@@ -25,7 +25,7 @@ public class ForgotPassword extends AppCompatActivity {
             return;
         }
         for (int i = 0; i<LibraryClass.userModelList.size();i++){
-            if (LibraryClass.userModelList.get(i).getId().equalsIgnoreCase(et_id.getText().toString())){
+            if (LibraryClass.userModelList.get(i).getId().equalsIgnoreCase(et_id.getText().toString()+"")){
                 Intent intent = new Intent(ForgotPassword.this, ChangePassWord.class);
                 intent.putExtra("isForgot",true);
                 startActivity(intent);

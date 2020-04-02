@@ -40,11 +40,11 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
         for (int i=0; i<list.size();i++){
-            if (list.get(i).getId().equalsIgnoreCase(et_id.getText().toString())){
+            if (list.get(i).getId().equalsIgnoreCase(et_id.getText().toString()+"")){
                 Toast.makeText(this, "Số điện thoại đã được sử dụng", Toast.LENGTH_SHORT).show();
                 return;
             }else {
-                if (et_pass.getText().toString().equalsIgnoreCase(et_confirm_pass.getText().toString())){
+                if (et_pass.getText().toString().equalsIgnoreCase(et_confirm_pass.getText().toString()+"")){
                 dao.insert(et_id.getText().toString()+"",
                         et_display_name.getText().toString()+"",
                         "",
@@ -52,7 +52,6 @@ public class SignUpActivity extends AppCompatActivity {
                         et_pass.getText().toString()+"",
                         "user",
                         "image tạm");
-                    Toast.makeText(this, LibraryClass.userModelList.size()+" user", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this,SignInActivity.class);
                     startActivity(intent);
                     finish();// không cho người dùng back lại sau khi đăng ký thành công

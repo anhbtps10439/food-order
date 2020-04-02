@@ -35,7 +35,7 @@ public class ChangePassWord extends AppCompatActivity {
 
     public void checkChangePass(View view) {
         if (check == true) {
-            if (et_new_pass.getText().toString().equalsIgnoreCase(et_confirm_pass.getText().toString())) {
+            if (et_new_pass.getText().toString().equalsIgnoreCase(et_confirm_pass.getText().toString()+"")) {
                 // Set mật khẩu của sdt thành mật khẩu mới
                 // -> Ở đây
 
