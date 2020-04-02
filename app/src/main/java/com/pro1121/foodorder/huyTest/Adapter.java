@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.pro1121.foodorder.LibraryClass;
 import com.pro1121.foodorder.R;
 import com.pro1121.foodorder.model.DishModel;
 
@@ -66,7 +67,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DishModel dish = dishModels.get(position);
-        holder.imageView.setBackground(new BitmapDrawable(context.getResources(),ClickKindFood.convertStringToImg(dish.getImage())));
+        holder.imageView.setBackground(new BitmapDrawable(context.getResources(), LibraryClass.convertStringToImg(dish.getImage())));
         holder.tv_dishName.setText(dish.getName());
         holder.tv_dishDes.setText(dish.getDes());
         holder.tv_dishPrice.setText(dish.getPrice()+" VND");

@@ -22,7 +22,6 @@ public class SignUpActivity extends AppCompatActivity {
     ArrayList<UserModel>list =LibraryClass.userModelList;
     EditText et_id, et_pass, et_confirm_pass, et_display_name;
     Button btn_sign_up;
-    boolean condition = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,18 +36,22 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void checkSignUp(View view) {
+        if (!LibraryClass.isOnline(this)){
+            return;
+        }
         for (int i=0; i<list.size();i++){
             if (list.get(i).getId().equalsIgnoreCase(et_id.getText().toString())){
                 Toast.makeText(this, "Số điện thoại đã được sử dụng", Toast.LENGTH_SHORT).show();
-                break;
+                return;
             }else {
                 if (et_pass.getText().toString().equalsIgnoreCase(et_confirm_pass.getText().toString())){
-                dao.insert(et_display_name.getText().toString(),
+                dao.insert(et_id.getText().toString(),
+                        et_display_name.getText().toString(),
                         "",
-                        et_id.getText().toString(),
                         "",
                         et_pass.getText().toString(),
-                        "user");
+                        "user",
+                        "image tạm");
                     Toast.makeText(this, LibraryClass.userModelList.size()+" user", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this,SignInActivity.class);
                     startActivity(intent);

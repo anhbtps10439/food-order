@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.pro1121.foodorder.LibraryClass;
 import com.pro1121.foodorder.R;
 import com.pro1121.foodorder.model.DishModel;
 
@@ -33,7 +34,7 @@ public class ClickKindFood extends AppCompatActivity {
         recyclerView = findViewById(R.id.rv_dishes);
 
         // Chuyển ảnh trong drawable thành dạng chuỗi mã hóa
-        String enconded = convertImgToString(this,R.drawable.pizza);
+        String enconded = LibraryClass.convertImgToString(this, R.drawable.pizza);
 
         dishModels.add(new DishModel("1","1","Pizza",1000000,"Một cái phần mô tả dàiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii vcl",enconded));
         dishModels.add(new DishModel("1","1","Pizza",1000000,"Một cái phần mô tả dàiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii vcl",enconded));
@@ -49,18 +50,5 @@ public class ClickKindFood extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
     }
-    public static String convertImgToString(Context context, int id){
-        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), id);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte[] b = baos.toByteArray();
-        String encoded = Base64.encodeToString(b,Base64.DEFAULT);
-        return encoded;
-    }
 
-    public static Bitmap convertStringToImg(String s){
-        byte[] b = Base64.decode(s,Base64.DEFAULT);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(b,0,b.length);
-        return bitmap;
-    }
 }

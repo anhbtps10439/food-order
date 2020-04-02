@@ -27,17 +27,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         userDao = new UserDao(this);
         userDao.getAllRuntime();
+        orderDao = new OrderDao(this);
+        orderDao.getAllRuntime();
+        dishDao = new DishDao(this);
+        dishDao.getAllRuntime();
+        dishCategoryDao = new DishCategoryDao(this);
+        dishCategoryDao.getAllRuntime();
+        detailOrderDao = new DetailOrderDao(this);
+
 
     }
     public void moveToSignUp(View view) {
-        if (LibraryClass.checkConnection(this)){
+        if (!LibraryClass.isOnline(this)){
             return;
         }
         startActivity(new Intent(this, SignUpActivity.class));
     }
 
     public void moveToSignIn(View view) {
-        if (LibraryClass.checkConnection(this)){
+        if (!LibraryClass.isOnline(this)){
             return;
         }
         startActivity(new Intent(this, SignInActivity.class));
