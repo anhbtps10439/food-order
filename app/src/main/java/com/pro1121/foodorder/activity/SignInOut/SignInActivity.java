@@ -40,8 +40,8 @@ public class SignInActivity extends AppCompatActivity {
         if (!LibraryClass.isOnline(this)){
             return;
         }
-        String sdt = et_sdt.getText().toString();
-        String pass = et_password.getText().toString();
+        String sdt = et_sdt.getText().toString()+"";
+        String pass = et_password.getText().toString()+"";
         // Kiểm tra tài khoản bao gồm sdt, password, role
         for (int i =0; i<LibraryClass.userModelList.size();i++){
             //Admin
@@ -52,6 +52,7 @@ public class SignInActivity extends AppCompatActivity {
                 et_sdt.setText("");
                 et_password.setText("");
                 Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                return;
             }
             //User
             if (LibraryClass.userModelList.get(i).getId().equalsIgnoreCase(sdt)
@@ -61,6 +62,7 @@ public class SignInActivity extends AppCompatActivity {
                 et_sdt.setText("");
                 et_password.setText("");
                 Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                return;
             }
         }
         // Nếu kiểm tra không có ai có thông tin trùng khớp

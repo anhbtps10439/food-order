@@ -45,11 +45,11 @@ public class SignUpActivity extends AppCompatActivity {
                 return;
             }else {
                 if (et_pass.getText().toString().equalsIgnoreCase(et_confirm_pass.getText().toString())){
-                dao.insert(et_id.getText().toString(),
-                        et_display_name.getText().toString(),
+                dao.insert(et_id.getText().toString()+"",
+                        et_display_name.getText().toString()+"",
                         "",
                         "",
-                        et_pass.getText().toString(),
+                        et_pass.getText().toString()+"",
                         "user",
                         "image tạm");
                     Toast.makeText(this, LibraryClass.userModelList.size()+" user", Toast.LENGTH_SHORT).show();
