@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TestActivity">
+    //cái này là Trang dùng để test những file Fragment.xml mà Trang làm,nó ko có gây ảnh hưởng gì tới project này đâu,mọi người thông cảm nhé
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.pro1121.foodorder.activity.AdminCase.fragment.StatisticFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="271dp"
+        tools:layout_editor_absoluteY="241dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
