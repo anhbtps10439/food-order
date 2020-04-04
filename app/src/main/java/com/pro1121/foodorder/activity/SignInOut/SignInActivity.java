@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,8 +23,15 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
         et_sdt = findViewById(R.id.et_sdt);
         et_password = findViewById(R.id.et_password);
-        Toast.makeText(this, LibraryClass.userModelList.get(LibraryClass.userModelList.size()-1).getRole()+" user", Toast.LENGTH_SHORT).show();
 
+        et_sdt.setText("0966644939");
+        et_password.setText("luan");
+
+        try {
+            Toast.makeText(this, LibraryClass.userModelList.get(LibraryClass.userModelList.size() - 1).getRole() + " user", Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
+            Log.d("Toast Error", e.toString()+"");
+        }
     }
 
 
@@ -40,8 +48,14 @@ public class SignInActivity extends AppCompatActivity {
         if (!LibraryClass.isOnline(this)){
             return;
         }
+
+
+
         String sdt = et_sdt.getText().toString()+"";
         String pass = et_password.getText().toString()+"";
+
+
+
         // Kiểm tra tài khoản bao gồm sdt, password, role
         for (int i =0; i<LibraryClass.userModelList.size();i++){
             //Admin

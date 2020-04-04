@@ -1,5 +1,6 @@
 package com.pro1121.foodorder.activity.UserCase.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,6 +22,9 @@ public class HomeUserFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container,false);
+
+
+
         setHasOptionsMenu(true);
         return view;
     }

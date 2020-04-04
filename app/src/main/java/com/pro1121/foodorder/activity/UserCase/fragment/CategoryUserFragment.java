@@ -1,5 +1,6 @@
 package com.pro1121.foodorder.activity.UserCase.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,14 +14,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pro1121.foodorder.R;
 
 public class CategoryUserFragment extends Fragment {
     private Toolbar toolbar;
+    private FloatingActionButton fbCategory;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category, container,false);
+        fbCategory = view.findViewById(R.id.fbCategory);
+        fbCategory.hide();
+
         setHasOptionsMenu(true);
         return view;
     }
