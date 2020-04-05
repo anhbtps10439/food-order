@@ -1,5 +1,6 @@
 package com.pro1121.foodorder.activity.UserCase.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,17 +24,20 @@ public class ProfileFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        getActivity().getWindow().setStatusBarColor(Color.parseColor("#FF3737"));
         View view = inflater.inflate(R.layout.fragment_profile, container,false);
         setHasOptionsMenu(true);
+
         return view;
     }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         toolbar = getActivity().findViewById(R.id.toolbarUserCase);
+        toolbar.setBackgroundColor(Color.parseColor("#FF3737"));
         circleImageView = getActivity().findViewById(R.id.profile_image);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        toolbar.setTitle("Thông tin cá nhân");
+        toolbar.setTitle("");
     }
 
     @Override
@@ -41,5 +45,12 @@ public class ProfileFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
         inflater.inflate(R.menu.toolbar_statistic,menu);
+    }
+
+    @Override
+    public void onDestroyView() {
+        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        getActivity().getWindow().setStatusBarColor(Color.parseColor("#FFFFFF"));
+        super.onDestroyView();
     }
 }

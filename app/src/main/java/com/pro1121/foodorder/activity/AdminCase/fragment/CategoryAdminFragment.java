@@ -33,7 +33,7 @@ public class CategoryAdminFragment extends Fragment {
         super.onCreate(savedInstanceState);
         toolbar = getActivity().findViewById(R.id.toolbarAdminCase);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        toolbar.setTitle("");
+        toolbar.setTitle("Loại thức ăn");
     }
 
     @Override

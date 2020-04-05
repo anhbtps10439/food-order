@@ -7,6 +7,15 @@
         <item name="colorPrimaryDark">@color/colorRedMain</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="HomeTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorWhite</item>
+        <item name="colorPrimaryDark">@color/colorWhite</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:navigationBarColor">@color/colorRedMain</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
     <style name="Widget.AppCompat.SearchView.Custom" parent="Widget.AppCompat.SearchView">
         <item name="android:background">@null</item>
     </style>

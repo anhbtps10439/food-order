@@ -3,6 +3,7 @@ package com.pro1121.foodorder.activity.UserCase;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,10 +28,12 @@ public class UserCaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.HomeTheme);
         setContentView(R.layout.activity_user);
+
+
         init();
         hideToolbarTitle();
-
         //create bottom nav
         chipNavigationBar.setOnItemSelectedListener(onItemSelectedListener);
         chipNavigationBar.setItemSelected(R.id.navHomeUser,true);

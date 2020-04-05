@@ -15,12 +15,12 @@ import androidx.fragment.app.Fragment;
 
 import com.pro1121.foodorder.R;
 
-public class UserManagerFragment extends Fragment {
+public class StoreFragment extends Fragment {
     private Toolbar toolbar;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user_manager,container,false);
+        View view = inflater.inflate(R.layout.fragment_store_manager,container,false);
         setHasOptionsMenu(true);
         return view;
     }
@@ -30,7 +30,7 @@ public class UserManagerFragment extends Fragment {
         super.onCreate(savedInstanceState);
         toolbar = getActivity().findViewById(R.id.toolbarAdminCase);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        toolbar.setTitle("Quản lí người dùng");
+        toolbar.setTitle("");
     }
 
     @Override

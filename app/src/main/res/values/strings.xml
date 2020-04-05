@@ -7,5 +7,9 @@
     <string name="nav_statistic">Thống kê</string>
     <string name="nav_user_manager">Cửa hàng</string>
     <string name="nav_profile">Người dùng</string>
+    <string name="title_home" />
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
