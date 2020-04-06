@@ -18,17 +18,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pro1121.foodorder.LibraryClass;
 import com.pro1121.foodorder.R;
+import com.pro1121.foodorder.activity.SignInOut.MainActivity;
 import com.pro1121.foodorder.model.DishModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.pro1121.foodorder.activity.SignInOut.MainActivity.dishs_img;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     static Context context;
     List<DishModel> dishModels;
 
-    Adapter(Context context, List<DishModel> dishModels){
+    public Adapter(Context context, List<DishModel> dishModels){
         this.context=context;
         this.dishModels=dishModels;
     }
@@ -67,7 +70,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DishModel dish = dishModels.get(position);
-        holder.imageView.setBackground(new BitmapDrawable(context.getResources(), LibraryClass.convertStringToImg(dish.getImage())));
+        dishs_img.clear();
+        for (int i=0; i<LibraryClass.dishModelList.size(); i++){
+            dishs_img.add(new BitmapDrawable(context.getResources(), LibraryClass.convertStringToImg(LibraryClass.dishModelList.get(position).getImage())));
+        }
+        holder.imageView.setBackground(dishs_img.get(position));
         holder.tv_dishName.setText(dish.getName());
         holder.tv_dishDes.setText(dish.getDes());
         holder.tv_dishPrice.setText(dish.getPrice()+" VND");

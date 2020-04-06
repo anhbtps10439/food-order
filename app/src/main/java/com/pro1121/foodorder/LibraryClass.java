@@ -1,6 +1,7 @@
 package com.pro1121.foodorder;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
@@ -51,4 +52,5 @@ public class LibraryClass {
         Bitmap bitmap = BitmapFactory.decodeByteArray(b,0,b.length);
         return bitmap;
     }
+
 }

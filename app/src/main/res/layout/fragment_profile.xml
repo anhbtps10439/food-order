@@ -14,6 +14,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_greeting"
             android:layout_marginLeft="33dp"
             android:layout_marginTop="60dp"
             android:layout_width="wrap_content"
@@ -46,6 +47,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_gravity="center_horizontal" />
             <TextView
+                android:id="@+id/tv_display_name"
                 android:textStyle="bold"
                 android:textColor="#000000"
                 android:textSize="20dp"
@@ -68,6 +70,7 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/tv_order_history"
         android:textStyle="bold"
         android:textColor="#000000"
         android:layout_marginLeft="42dp"
@@ -80,6 +83,7 @@
     </TextView>
 
     <TextView
+        android:id="@+id/tv_profile"
         android:textStyle="bold"
         android:textColor="#000000"
         android:layout_marginLeft="42dp"
@@ -87,17 +91,31 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="445dp"
         android:layout_width="wrap_content"
-        android:text="Đổi mật khẩu"
+        android:text="Thông tin cá nhân"
         android:layout_height="wrap_content">
     </TextView>
 
     <TextView
+        android:id="@+id/tv_change_password"
         android:textStyle="bold"
         android:textColor="#000000"
         android:layout_marginLeft="42dp"
         android:textSize="20dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="510dp"
+        android:layout_width="wrap_content"
+        android:text="Đổi mật khẩu"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <TextView
+        android:id="@+id/tv_sign_out"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginLeft="42dp"
+        android:textSize="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="575dp"
         android:layout_width="wrap_content"
         android:text="Đăng xuất"
         android:layout_height="wrap_content">

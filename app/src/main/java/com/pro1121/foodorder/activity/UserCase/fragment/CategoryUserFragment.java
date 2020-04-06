@@ -7,27 +7,45 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.pro1121.foodorder.LibraryClass;
 import com.pro1121.foodorder.R;
+import com.pro1121.foodorder.huyTest.Adapter;
+import com.pro1121.foodorder.model.DishModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CategoryUserFragment extends Fragment {
     private Toolbar toolbar;
     private FloatingActionButton fbCategory;
+    RecyclerView recyclerView;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category, container,false);
         fbCategory = view.findViewById(R.id.fbCategory);
         fbCategory.hide();
-
         setHasOptionsMenu(true);
+
+        recyclerView = view.findViewById(R.id.rv_dish);
+
+
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
+        recyclerView.setLayoutManager(layoutManager);
+        Adapter adapter = new Adapter(getActivity(),LibraryClass.dishModelList);
+        recyclerView.setAdapter(adapter);
+
         return view;
     }
     @Override

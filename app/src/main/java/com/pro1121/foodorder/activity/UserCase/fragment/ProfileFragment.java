@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,18 +17,33 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.pro1121.foodorder.R;
+import com.pro1121.foodorder.activity.SignInOut.MainActivity;
+import com.pro1121.foodorder.activity.SignInOut.SignInActivity;
+import com.pro1121.foodorder.model.UserModel;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
     private Toolbar toolbar;
     CircleImageView circleImageView;
+    TextView tv_greeting, tv_display_name, tv_order_history, tv_profile, tv_change_password, tv_sign_out;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().getWindow().setStatusBarColor(Color.parseColor("#FF3737"));
         View view = inflater.inflate(R.layout.fragment_profile, container,false);
         setHasOptionsMenu(true);
+        circleImageView = view.findViewById(R.id.profile_image);
+        tv_greeting =view.findViewById(R.id.tv_greeting);
+        tv_display_name = view.findViewById(R.id.tv_display_name);
+        tv_order_history = view.findViewById(R.id.tv_order_history);
+        tv_profile = view.findViewById(R.id.tv_profile);
+        tv_change_password = view.findViewById(R.id.tv_change_password);
+        tv_sign_out = view.findViewById(R.id.tv_sign_out);
+
+        UserModel user = SignInActivity.currentUser;
+        tv_greeting.setText("Xin chào "+user.getName());
+        tv_display_name.setText(user.getName());
 
         return view;
     }
@@ -35,7 +52,8 @@ public class ProfileFragment extends Fragment {
         super.onCreate(savedInstanceState);
         toolbar = getActivity().findViewById(R.id.toolbarUserCase);
         toolbar.setBackgroundColor(Color.parseColor("#FF3737"));
-        circleImageView = getActivity().findViewById(R.id.profile_image);
+
+
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         toolbar.setTitle("");
     }
