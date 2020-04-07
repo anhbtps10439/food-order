@@ -30,6 +30,8 @@ public class DishDao {
 
         DishModel dishModel = new DishModel(id, categoryId, name,price, des, image);
         db.child("dish").child(id).setValue(dishModel);
+       // Thêm 1 tí
+        dishModelList.add(dishModel);
     }
 
     public void getAllRuntime()
