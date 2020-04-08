@@ -10,15 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.SignInOut.MainActivity">
+
+        </activity>
+        <!-- HEAD -->
+        <activity android:name=".huyTest.ClickKindFood">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!-- HEAD -->
-        <activity android:name=".huyTest.ClickKindFood">
-
             <!-- <activity android:name=".huyTest.ClickKindFood"> -->
             <!-- ed079f76c4964467b66f8e26706177674d8bcd2e -->
 
@@ -30,6 +30,9 @@
         <activity android:name=".activity.SignInOut.IsYourAccount" />
         <activity android:name=".activity.UserCase.UserCaseActivity"/>
         <activity android:name=".activity.AdminCase.AdminCaseActivity"></activity>
+        <activity android:name=".TestActivity">
+
+        </activity>
     </application>
 
 </manifest>
