@@ -74,11 +74,12 @@ public class UserNotifyService extends Service {
 //        create Noti
 
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID_USER_NOTI);
-                builder.setSmallIcon(R.drawable.logo_remake);
+                builder.setSmallIcon(R.drawable.logo);
                 builder.setContentTitle("Menu mới cập nhật");
                 builder.setContentText("Đặt ngay vài món ăn thôi nào!");
                 builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
                 builder.setContentIntent(pendingIntent);
+                builder.setAutoCancel(true);
 
                 NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
                 notificationManagerCompat.notify(NOTIFICATION_ID_USER_NOTI, builder.build());

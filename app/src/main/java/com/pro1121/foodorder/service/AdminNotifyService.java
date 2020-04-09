@@ -79,11 +79,12 @@ public class AdminNotifyService extends Service {
 //        create Noti
 
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID_ADMIN_NOTI);
-                builder.setSmallIcon(R.drawable.logo_remake);
+                builder.setSmallIcon(R.drawable.logo);
                 builder.setContentTitle("Có đơn hàng mới");
                 builder.setContentText("Hãy vào kiểm tra!");
                 builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
                 builder.setContentIntent(pendingIntent);
+                builder.setAutoCancel(true);
 
                 NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
                 notificationManagerCompat.notify(NOTIFICATION_ID_ADMIN, builder.build());
