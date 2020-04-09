@@ -41,6 +41,7 @@ public class ProfileFragment extends Fragment {
         tv_change_password = view.findViewById(R.id.tv_change_password);
         tv_sign_out = view.findViewById(R.id.tv_sign_out);
 
+        //
         UserModel user = SignInActivity.currentUser;
         tv_greeting.setText("Xin chào "+user.getName());
         tv_display_name.setText(user.getName());

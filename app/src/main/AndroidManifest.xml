@@ -9,41 +9,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service
-            android:name=".service.UserNotifyService"
-            android:enabled="true"
-            android:exported="true"></service>
-
-        <receiver
-            android:name=".RestartServiceReceiver"
-            android:enabled="true"
-            android:exported="true" />
-
-        <service
-            android:name=".service.AdminNotifyService"
-            android:enabled="true"
-            android:exported="true" />
-
         <activity android:name=".activity.SignInOut.MainActivity">
+
+        </activity>
+        <!-- HEAD -->
+        <activity android:name=".huyTest.ClickKindFood">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- HEAD -->
-        <activity android:name=".huyTest.ClickKindFood">
-
             <!-- <activity android:name=".huyTest.ClickKindFood"> -->
             <!-- ed079f76c4964467b66f8e26706177674d8bcd2e -->
 
         </activity>
-        <activity android:name=".activity.SignInOut.SignInActivity" />
+        <activity android:name=".activity.SignInOut.SignInActivity"></activity>
         <activity android:name=".activity.SignInOut.SignUpActivity" />
         <activity android:name=".activity.SignInOut.ChangePassWord" />
         <activity android:name=".activity.SignInOut.ForgotPassword" />
         <activity android:name=".activity.SignInOut.IsYourAccount" />
-        <activity android:name=".activity.UserCase.UserCaseActivity" />
-        <activity android:name=".activity.AdminCase.AdminCaseActivity" />
+        <activity android:name=".activity.UserCase.UserCaseActivity"/>
+        <activity android:name=".activity.AdminCase.AdminCaseActivity"></activity>
+        <activity android:name=".TestActivity">
+
+        </activity>
     </application>
 
 </manifest>

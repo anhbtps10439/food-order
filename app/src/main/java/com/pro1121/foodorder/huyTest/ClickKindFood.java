@@ -29,7 +29,7 @@ public class ClickKindFood extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_click_kind_food);
+//        setContentView(R.layout.fragment_click_kind_food);
 
         recyclerView = findViewById(R.id.rv_dishes);
 

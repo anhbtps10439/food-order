@@ -8,7 +8,7 @@
     //cái này là Trang dùng để test những file Fragment.xml mà Trang làm,nó ko có gây ảnh hưởng gì tới project này đâu,mọi người thông cảm nhé
     <fragment
         android:id="@+id/fragment"
-        android:name="com.pro1121.foodorder.activity.AdminCase.fragment.StatisticFragment"
+        android:name="com.pro1121.foodorder.activity.UserCase.fragment.ClickFoodFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="271dp"
