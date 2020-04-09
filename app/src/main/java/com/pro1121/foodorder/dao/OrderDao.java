@@ -1,15 +1,25 @@
 package com.pro1121.foodorder.dao;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.pro1121.foodorder.R;
+import com.pro1121.foodorder.activity.SignInOut.MainActivity;
 import com.pro1121.foodorder.model.DetailOrderModel;
 import com.pro1121.foodorder.model.DishModel;
 import com.pro1121.foodorder.model.OrderModel;
@@ -82,7 +92,6 @@ public class OrderDao {
                     //add orderModel vào List
                     orderModelList.add(orderModel);
                 }
-
                 Log.d("orderList", orderModelList.size()+"");
             }
 
@@ -94,4 +103,5 @@ public class OrderDao {
 
         db.child("order").addListenerForSingleValueEvent(valueEventListener);
     }
+
 }
