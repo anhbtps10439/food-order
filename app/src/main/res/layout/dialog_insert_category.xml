@@ -1,19 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorRedMain"
     android:orientation="vertical">
-    
-    <EditText
-        android:id="@+id/dialog_et_dishKind"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Tên món ăn"/>
-    <EditText
-        android:id="@+id/dialog_et_dishKindDes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Mô tả"/>
+        android:layout_height="match_parent"
+        android:layout_margin="25dp"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="178dp">
+
+            <View
+                android:id="@+id/dialog_gallery"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/shape_border_20dp_white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintCircleRadius="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                android:clickable="true"/>
+
+            <ImageView
+                android:id="@+id/dialog_camera"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/ic_open_camera"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                android:clickable="true"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <EditText
+            android:id="@+id/dialog_et_dishKindId"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_dialog"
+            android:elevation="5dp"
+            android:hint="Mã loại"
+            android:paddingStart="30dp" />
+
+        <EditText
+            android:id="@+id/dialog_et_dishKind"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_dialog"
+            android:elevation="5dp"
+            android:hint="Tên loại"
+            android:paddingStart="30dp" />
+
+        <EditText
+            android:id="@+id/dialog_et_dishKindDes"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_dialog"
+            android:elevation="5dp"
+            android:hint="Mô tả"
+            android:paddingStart="30dp" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -2,12 +2,14 @@ package com.pro1121.foodorder.activity.AdminCase.fragment;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -36,9 +38,10 @@ public class CategoryAdminFragment extends Fragment {
     Adapter adapter;
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category,container,false);
         setHasOptionsMenu(true);
+
         recyclerView = view.findViewById(R.id.rv_dish);
         fbCategory = view.findViewById(R.id.fbCategory);
 
@@ -47,21 +50,46 @@ public class CategoryAdminFragment extends Fragment {
         adapter = new Adapter(getActivity(), LibraryClass.dishModelList);
         recyclerView.setAdapter(adapter);
 
+        //Floating button
         fbCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 final LayoutInflater inflater1 = getActivity().getLayoutInflater();
-                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Thêm món")
-                        .setView(inflater1.inflate(R.layout.dialog_insert_category,null))
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.CustomAlertDialog);
+                View view = inflater.inflate(R.layout.dialog_insert_category,null);
+
+                View dialog_gallery = view.findViewById(R.id.dialog_gallery);
+                ImageView dialog_camera = view.findViewById(R.id.dialog_camera);
+                final EditText dialog_et_dishKind = view.findViewById(R.id.dialog_et_dishKind);
+                final EditText dialog_et_dishKindDes = view.findViewById(R.id.dialog_et_dishKindDes);
+
+                //Click to open gallery
+                dialog_gallery.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getActivity(), "Mở Gallery !!!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                //Click to open Camera
+                dialog_camera.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Open Camera
+                        Toast.makeText(getActivity(), "Mở Camera !!!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                builder.setTitle("Thêm loại")
+                        .setView(view)
                         .setPositiveButton("Thêm", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                AlertDialog alertDialog = (AlertDialog) dialog;
-                                EditText dialog_et_dishKind = alertDialog.findViewById(R.id.dialog_et_dishKind);
-                                EditText dialog_et_dishKindDes = alertDialog.findViewById(R.id.dialog_et_dishKindDes);
+
+                                //Get data
                                 String name = dialog_et_dishKind.getText()+"";
                                 String des = dialog_et_dishKindDes.getText()+"";
+
+                                //Insert
                                 DishDao dao = new DishDao(getActivity());
                                 dao.insert("MTL001",name,100100,des,"");
 
@@ -80,6 +108,8 @@ public class CategoryAdminFragment extends Fragment {
 
             }
         });
+
+
         return view;
     }
 
