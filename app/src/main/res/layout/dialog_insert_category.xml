@@ -17,8 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="178dp">
 
-            <View
-                android:id="@+id/dialog_gallery"
+            <ImageView
+                android:id="@+id/ivCategoryAvatarDialog"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:background="@drawable/shape_border_20dp_white"
@@ -31,8 +31,8 @@
                 app:layout_constraintVertical_bias="0.0"
                 android:clickable="true"/>
 
-            <ImageView
-                android:id="@+id/dialog_camera"
+            <Button
+                android:id="@+id/btnOpenCamDialog"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:background="@drawable/ic_open_camera"
@@ -46,7 +46,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <EditText
-            android:id="@+id/dialog_et_dishKindId"
+            android:id="@+id/etCategoryCodeDialog"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
@@ -56,7 +56,7 @@
             android:paddingStart="30dp" />
 
         <EditText
-            android:id="@+id/dialog_et_dishKind"
+            android:id="@+id/etCategoryNameDialog"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
@@ -66,7 +66,7 @@
             android:paddingStart="30dp" />
 
         <EditText
-            android:id="@+id/dialog_et_dishKindDes"
+            android:id="@+id/etCategoryDesDialog"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
