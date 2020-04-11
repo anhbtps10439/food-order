@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         detailOrderDao = new DetailOrderDao(this);
 
 
-        if (permissionCheck(MainActivity.this))
+        if (!permissionCheck(MainActivity.this))
         {
             permisssionResquest(MainActivity.this);
         }

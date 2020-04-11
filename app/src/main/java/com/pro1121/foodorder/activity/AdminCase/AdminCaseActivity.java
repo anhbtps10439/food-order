@@ -54,7 +54,7 @@ public class AdminCaseActivity extends AppCompatActivity {
                             fm.beginTransaction().replace(R.id.nav_host_admin_case, new HomeAdminFragment()).commit();
                             break;
                         case R.id.navCategory:
-                            fm.beginTransaction().replace(R.id.nav_host_admin_case, new CategoryAdminFragment()).commit();
+                            fm.beginTransaction().replace(R.id.nav_host_admin_case, new CategoryAdminFragment(AdminCaseActivity.this)).commit();
                             break;
                         case R.id.navUserManager:
                             fm.beginTransaction().replace(R.id.nav_host_admin_case, new StoreFragment()).commit();

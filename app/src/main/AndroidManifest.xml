@@ -28,6 +28,18 @@
             android:enabled="true"
             android:exported="true" />
 
+<!--        data provider for take a photo-->
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.android.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
+
         <activity android:name=".activity.SignInOut.MainActivity">
 
             <intent-filter>

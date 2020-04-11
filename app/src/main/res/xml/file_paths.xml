@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <external-files-path name="my_images" path="Pictures"/>
+    <!--        nếu để path như trong comment, thì đó là path đầy đủ, nên phải dùng thuộc tính fullpath cho nó-->
+    <!--        vì mình đã gọi getExternalFilesDir rồi nên chỉ cần thêm folder muốn tạo bên trong Android/data/com.pro1121.foodorder/files/-->
+    <!--        path="Android/data/com.pro1121.foodorder/files/Pictures" -->
+
+
+</paths>
