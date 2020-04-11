@@ -45,6 +45,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.pro1121.foodorder.LibraryClass.convertToBitmap;
+import static com.pro1121.foodorder.LibraryClass.convertToBytes;
+import static com.pro1121.foodorder.LibraryClass.openCam;
+import static com.pro1121.foodorder.LibraryClass.photoUpload;
+
 
 public class CategoryAdminFragment extends Fragment {
 
@@ -101,9 +106,9 @@ public class CategoryAdminFragment extends Fragment {
                 ivCategoryAvatar = alertDialog.findViewById(R.id.ivCategoryAvatarDialog);
                 Button btnOpenCam = alertDialog.findViewById(R.id.btnOpenCamDialog);
                 Button btnPositive = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                EditText etCategoryCode = alertDialog.findViewById(R.id.etCategoryCodeDialog);
-                EditText etCategoryName = alertDialog.findViewById(R.id.etCategoryNameDialog);
-                EditText etCategoryDes = alertDialog.findViewById(R.id.etCategoryDesDialog);
+                final EditText etCategoryCode = alertDialog.findViewById(R.id.etCategoryCodeDialog);
+                final EditText etCategoryName = alertDialog.findViewById(R.id.etCategoryNameDialog);
+                final EditText etCategoryDes = alertDialog.findViewById(R.id.etCategoryDesDialog);
         
                 //Click to open gallery
                 ivCategoryAvatar.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +127,7 @@ public class CategoryAdminFragment extends Fragment {
                     public void onClick(View v) {
                         //Open Camera
                         Toast.makeText(getActivity(), "Mở Camera !!!", Toast.LENGTH_SHORT).show();
-                        openCam();
+                        openCam(getContext(), photoUri, REQUEST_IMAGE_CAPTURE, getActivity(), photoPath);
                     }
                 });
                 
@@ -130,6 +135,13 @@ public class CategoryAdminFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(getActivity(), "Nút thêm!", Toast.LENGTH_SHORT).show();
+
+                        DishCategoryDao dao = new DishCategoryDao(getContext());
+                        dao.insert(etCategoryCode.getText().toString(),
+                                etCategoryName.getText().toString(),
+                                etCategoryDes.getText().toString(),
+                                photoUpload(getContext(), convertToBytes(currrentPhoto)));
+
                     }
                 });
                 
@@ -140,90 +152,6 @@ public class CategoryAdminFragment extends Fragment {
 
 
         return view;
-    }
-
-    //hàm lưu file ảnh, đặt tên bằng ngày giờ chụp
-    //File này chưa có data ảnh, chỉ có tên, đường dẫn
-    //hàm này sẽ được gọi để tạo ra một file chứa thống tin trên, sau đó để vào Uri rồi cho vào intent
-    private File createPhotoFile() throws IOException
-    {
-        String takenDate = new SimpleDateFormat("ddMMyyyy_hhmmss_").format(new Date());
-
-        //lấy đường dẫn của riêng app, app khác sẽ không truy cập được
-        File storageDir = getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-
-        //tạo file
-        //các tham số là (tên file, định dạng, đường dẫn)
-        File photoFile = File.createTempFile(takenDate, ".jpg", storageDir);
-
-        //lưu đường dẫn của file
-        photoPath = photoFile.getAbsolutePath();
-
-        return photoFile;
-    }
-
-    private void openCam()
-    {
-        //Khai báo một Intent thực hiện việc gọi một activity chụp ảnh
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        // câu lệnh if này để kiểm tra xem hệ thống có Activity nào để chụp ảnh không
-        //vì nếu gọi intent mà không có activity nào hoạt động thì ứng dụng sẽ bị crash
-        if (intent.resolveActivity(getContext().getPackageManager()) != null )
-        {
-            //tạo một file trước
-            File photoFile = null;
-
-            try
-            {
-                //sau khi gọi createPhotoFile, photoPath đã có data đường dẫn
-                photoFile = createPhotoFile();
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            //nếu photoFile đã được tạo thành công
-            if (photoFile != null)
-            {
-                //gán Uri cho currentPhotoUri
-                photoUri = FileProvider.getUriForFile(getContext(), "com.example.android.fileprovider", photoFile);
-
-                //đặt Uri vào intent
-                //vì action của intent là ACTION_IMAGE_CAPTURE
-                //nên cái extra có key EXTRA_OUTPUT này sẽ giúp camera lưu hình ảnh vào currentPhotoUri
-                //và Intent data ở onActivityResult sẽ null, vì file ảnh đã được lưu trong path rồi
-
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-                startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
-            }
-
-
-        }
-    }
-
-    //convert bitmap sang byte để upload
-    private byte[] convertToBytes(Bitmap inputBitmap)
-    {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        inputBitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
-        return byteArrayOutputStream.toByteArray();
-    }
-
-    //convert uri sang bitmap để set vào imageview
-    private Bitmap convertToBitmap(Uri inputUri)
-    {
-        try
-        {
-
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), inputUri);
-            return bitmap;
-
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     @Override
@@ -251,13 +179,13 @@ public class CategoryAdminFragment extends Fragment {
             {
                 case REQUEST_CHOOSE_PHOTO_FROM_GALLERY:
                 {
-                    currrentPhoto = convertToBitmap(data.getData());
+                    currrentPhoto = convertToBitmap(getContext(), data.getData());
                     ivCategoryAvatar.setImageBitmap(currrentPhoto);
                 }
 
                 case REQUEST_IMAGE_CAPTURE:
                 {
-                    currrentPhoto = convertToBitmap(photoUri);
+                    currrentPhoto = convertToBitmap(getContext(), photoUri);
                     ivCategoryAvatar.setImageBitmap(currrentPhoto);
                 }
             }

@@ -1,9 +1,13 @@
 package com.pro1121.foodorder.dao;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,7 +32,17 @@ public class DishCategoryDao {
     public void insert(String id, String name, String des, String image)
     {
         DishCategoryModel dishCategoryModel = new DishCategoryModel(id, name, des, image);
-        db.child("dishCategory").child(id).setValue(dishCategoryModel);
+        db.child("dishCategory").child(id).setValue(dishCategoryModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(context, "Thêm thành công!", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context, "Có lỗi xảy ra! Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void getAllRuntime()
