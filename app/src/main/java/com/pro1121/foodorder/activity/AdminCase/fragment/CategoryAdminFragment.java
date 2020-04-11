@@ -91,16 +91,20 @@ public class CategoryAdminFragment extends Fragment {
             public void onClick(final View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.CustomAlertDialog);
                 builder.setView(LayoutInflater.from(context).inflate(R.layout.dialog_insert_category, null, false));
-
+                builder.setTitle("Thêm loại");
+                builder.setPositiveButton("Thêm", null);
+                
+                
                 final AlertDialog alertDialog = builder.create();
                 alertDialog.show();
 
                 ivCategoryAvatar = alertDialog.findViewById(R.id.ivCategoryAvatarDialog);
                 Button btnOpenCam = alertDialog.findViewById(R.id.btnOpenCamDialog);
+                Button btnPositive = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
                 EditText etCategoryCode = alertDialog.findViewById(R.id.etCategoryCodeDialog);
                 EditText etCategoryName = alertDialog.findViewById(R.id.etCategoryNameDialog);
                 EditText etCategoryDes = alertDialog.findViewById(R.id.etCategoryDesDialog);
-
+        
                 //Click to open gallery
                 ivCategoryAvatar.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -121,6 +125,15 @@ public class CategoryAdminFragment extends Fragment {
                         openCam();
                     }
                 });
+                
+                btnPositive.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getActivity(), "Nút thêm!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                
+                
 
             }
         });
