@@ -5,10 +5,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,6 +37,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pro1121.foodorder.LibraryClass;
 import com.pro1121.foodorder.R;
+import com.pro1121.foodorder.adapter.DishCategoryAdapter;
 import com.pro1121.foodorder.dao.DishCategoryDao;
 import com.pro1121.foodorder.dao.DishDao;
 import com.pro1121.foodorder.huyTest.Adapter;
@@ -59,6 +62,7 @@ public class CategoryAdminFragment extends Fragment {
     private FloatingActionButton fbCategory;
     private Toolbar toolbar;
     Adapter adapter;
+    private DishCategoryAdapter dishCategoryAdapter;
 
     //chụp ảnh và gallery
     private Bitmap currrentPhoto;
@@ -79,6 +83,7 @@ public class CategoryAdminFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_category,container,false);
         setHasOptionsMenu(true);
 
@@ -87,8 +92,9 @@ public class CategoryAdminFragment extends Fragment {
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new Adapter(getActivity(), LibraryClass.dishModelList);
-        recyclerView.setAdapter(adapter);
+
+        dishCategoryAdapter = new DishCategoryAdapter(getActivity(), LibraryClass.dishCategoryModelList);
+        recyclerView.setAdapter(dishCategoryAdapter);
 
         //Floating button
         fbCategory.setOnClickListener(new View.OnClickListener() {
@@ -136,11 +142,26 @@ public class CategoryAdminFragment extends Fragment {
                     public void onClick(View v) {
                         Toast.makeText(getActivity(), "Nút thêm!", Toast.LENGTH_SHORT).show();
 
-                        DishCategoryDao dao = new DishCategoryDao(getContext());
-                        dao.insert(etCategoryCode.getText().toString(),
-                                etCategoryName.getText().toString(),
-                                etCategoryDes.getText().toString(),
-                                photoUpload(getContext(), convertToBytes(currrentPhoto)));
+                        //Check empty
+                        if (etCategoryCode.getText().equals("") ||
+                                etCategoryName.getText().equals("") ||
+                                etCategoryDes.getText().equals("")){
+                            Toast.makeText(getActivity(), "Chưa đủ thông tin", Toast.LENGTH_SHORT).show();
+                        }else {
+                            try {
+                                DishCategoryDao dao = new DishCategoryDao(getContext());
+                                dao.insert(etCategoryCode.getText().toString(),
+                                        etCategoryName.getText().toString(),
+                                        etCategoryDes.getText().toString(),
+                                        photoUpload(getContext(), convertToBytes(currrentPhoto)));
+
+                                dishCategoryAdapter.notifyDataSetChanged();
+                            }catch (Exception e){
+                                Toast.makeText(getActivity(), "Lỗi Thêm. Vào log d check !!!", Toast.LENGTH_SHORT).show();
+                                Log.d("Insert Error >>>>>>>>>>>>>>>>>>>>>>>", e.toString());
+                            }
+                        }
+
 
                     }
                 });
@@ -160,6 +181,7 @@ public class CategoryAdminFragment extends Fragment {
         toolbar = getActivity().findViewById(R.id.toolbarAdminCase);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         toolbar.setTitle("Loại thức ăn");
+        setColorToolbarAndStatusBar(toolbar);
     }
 
     @Override
@@ -191,5 +213,16 @@ public class CategoryAdminFragment extends Fragment {
             }
         }
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        toolbar.setTitle("Loại thức ăn");
+        setColorToolbarAndStatusBar(toolbar);
+    }
+    public void setColorToolbarAndStatusBar(Toolbar toolbar){
+        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        getActivity().getWindow().setStatusBarColor(Color.parseColor("#FFFFFF"));
     }
 }

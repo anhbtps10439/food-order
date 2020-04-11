@@ -61,10 +61,12 @@ public class StoreFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_order_manager:
-                //Show tab quản lí order
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .add(R.id.nav_host_admin_case, new OrderManagerFragment(),"order_manager").commit();
                 break;
             case R.id.tv_statistic:
-                //Show tab thống kê
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .add(R.id.nav_host_admin_case, new StatisticFragment(),"statistic").commit();
                 break;
             case R.id.tv_change_password:
                 startActivity(new Intent(getActivity(), ChangePassWord.class));
@@ -81,9 +83,9 @@ public class StoreFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onDestroyView() {
-        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        getActivity().getWindow().setStatusBarColor(Color.parseColor("#FFFFFF"));
-        super.onDestroyView();
+    public void onResume() {
+        super.onResume();
+        toolbar.setBackgroundColor(Color.parseColor("#FF3737"));
+        getActivity().getWindow().setStatusBarColor(Color.parseColor("#FF3737"));
     }
 }

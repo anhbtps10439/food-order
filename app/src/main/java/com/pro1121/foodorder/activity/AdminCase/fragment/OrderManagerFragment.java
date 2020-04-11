@@ -3,12 +3,8 @@ package com.pro1121.foodorder.activity.AdminCase.fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,15 +14,12 @@ import androidx.fragment.app.Fragment;
 
 import com.pro1121.foodorder.R;
 
-
-public class HomeAdminFragment extends Fragment {
-
-    Toolbar toolbar;
+public class OrderManagerFragment extends Fragment {
+    private Toolbar toolbar;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home,container,false);
-        setHasOptionsMenu(true);
+        View view = inflater.inflate(R.layout.fragment_order_manager,container,false);
         return view;
     }
 
@@ -37,6 +30,14 @@ public class HomeAdminFragment extends Fragment {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         toolbar.setTitle("");
         setColorToolbarAndStatusBar(toolbar);
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_close_white,null));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = getFragmentManager().findFragmentByTag("order_manager");
+                getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+            }
+        });
     }
 
     @Override
@@ -45,14 +46,14 @@ public class HomeAdminFragment extends Fragment {
         setColorToolbarAndStatusBar(toolbar);
     }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        menu.clear();
-        inflater.inflate(R.menu.toolbar_home_admin_case,menu);
-    }
     public void setColorToolbarAndStatusBar(Toolbar toolbar){
-        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        getActivity().getWindow().setStatusBarColor(Color.parseColor("#FFFFFF"));
+        toolbar.setBackgroundColor(getResources().getColor(R.color.colorRedMain,null));
+        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.colorRedMain,null));
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        toolbar.setNavigationIcon(null);
     }
 }
