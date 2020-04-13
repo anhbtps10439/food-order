@@ -61,20 +61,20 @@ public class LibraryClass {
         }
         return true;
     }
-    public static String convertImgToString(Context context, Bitmap image){
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.PNG, 50, baos);
-        byte[] b = baos.toByteArray();
-        String encoded = Base64.encodeToString(b,Base64.DEFAULT);
-        return encoded;
-    }
-
-    public static Bitmap convertStringToImg(String s){
-        byte[] b = Base64.decode(s,Base64.DEFAULT);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(b,0,b.length);
-        return bitmap;
-    }
+//    public static String convertImgToString(Context context, Bitmap image){
+//
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        image.compress(Bitmap.CompressFormat.PNG, 50, baos);
+//        byte[] b = baos.toByteArray();
+//        String encoded = Base64.encodeToString(b,Base64.DEFAULT);
+//        return encoded;
+//    }
+//
+//    public static Bitmap convertStringToImg(String s){
+//        byte[] b = Base64.decode(s,Base64.DEFAULT);
+//        Bitmap bitmap = BitmapFactory.decodeByteArray(b,0,b.length);
+//        return bitmap;
+//    }
 
     public static String createFileName()
     {

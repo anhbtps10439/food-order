@@ -33,17 +33,6 @@ public class ClickKindFood extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.rv_dishes);
 
-        // Chuyển ảnh trong drawable thành dạng chuỗi mã hóa
-        String enconded = LibraryClass.convertImgToString(this, R.drawable.pizza);
-
-        dishModels.add(new DishModel("1","1","Pizza",1000000,"Một cái phần mô tả dàiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii vcl",enconded));
-        dishModels.add(new DishModel("1","1","Pizza",1000000,"Một cái phần mô tả dàiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii vcl",enconded));
-        dishModels.add(new DishModel("1","1","Pizza",1000000,"Một cái phần mô tả dàiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii vcl",enconded));
-        dishModels.add(new DishModel("1","1","Pizza",1000000,"Một cái phần mô tả dàiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii vcl",enconded));
-        dishModels.add(new DishModel("1","1","Pizza",1000000,"Một cái phần mô tả dàiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii vcl",enconded));
-
-
-
         GridLayoutManager layoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(layoutManager);
         Adapter adapter = new Adapter(this,dishModels);
