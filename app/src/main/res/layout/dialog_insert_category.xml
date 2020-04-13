@@ -29,7 +29,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:scaleType="centerCrop"/>
+
 
             <Button
                 android:id="@+id/btnOpenCamDialog"

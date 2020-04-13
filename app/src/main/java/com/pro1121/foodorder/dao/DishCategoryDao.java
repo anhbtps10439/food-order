@@ -1,6 +1,7 @@
 package com.pro1121.foodorder.dao;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,7 @@ public class DishCategoryDao {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                Log.e("UploadError", "onFailure: " + e.getMessage());
                 Toast.makeText(context, "Có lỗi xảy ra! Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
             }
         });
