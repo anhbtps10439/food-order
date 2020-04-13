@@ -26,8 +26,8 @@ public class SignInActivity extends AppCompatActivity {
         et_sdt = findViewById(R.id.et_sdt);
         et_password = findViewById(R.id.et_password);
 
-        et_sdt.setText("0989666922");
-        et_password.setText("000000");
+        et_sdt.setText("0966644939");
+        et_password.setText("l");
     }
 
 

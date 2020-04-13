@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     DetailOrderDao detailOrderDao;
     DishCategoryDao dishCategoryDao;
     public static ArrayList<Drawable> dishs_img = new ArrayList<>();
+    public static ArrayList<Drawable> category_dish_img = new ArrayList<>();
     public static final int REQUEST_PERMISSION_CODE = 5;
 
 

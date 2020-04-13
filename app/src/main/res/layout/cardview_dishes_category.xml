@@ -1,37 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="300dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="180dp"
+    android:layout_height="150dp">
+
     <ImageView
+        android:id="@+id/iv_dish_category"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/pizza"
-        android:alpha="0.3"/>
+        android:background="@drawable/shape"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="25dp" />
 
     <TextView
+        android:id="@+id/tv_dish_category_name"
         android:layout_width="match_parent"
-        android:layout_height="224dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Pizza"
-        android:textColor="@color/Black"
-        android:textSize="60dp"
-        android:textStyle="bold"/>
+        android:layout_marginTop="30dp"
+        android:textColor="@color/colorWhite"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        />
+
     <ImageButton
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:id="@+id/ib_show_all_dish"
+        android:layout_width="38dp"
+        android:layout_height="36dp"
         android:layout_gravity="bottom|end"
-        android:layout_margin="30dp"
+        android:layout_margin="20dp"
         android:background="@drawable/circle_button"
-        android:clickable="true"/>
+        android:clickable="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_margin="50dp"
+        android:layout_margin="25dp"
         android:text="20 phần"
-        android:textColor="@color/Black"
-        android:textSize="20dp"
+        android:textColor="@color/colorWhite"
+        android:textSize="13dp"
         android:textStyle="bold" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
