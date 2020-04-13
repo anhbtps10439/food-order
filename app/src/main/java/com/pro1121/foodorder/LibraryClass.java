@@ -43,6 +43,7 @@ public class LibraryClass {
     public static ArrayList<DishModel> dishModelList = new ArrayList<>();
     public static ArrayList<DishCategoryModel> dishCategoryModelList = new ArrayList<>();
     public static ArrayList<OrderModel> orderModelList = new ArrayList<>();
+    public static ArrayList<Bitmap> categoryPicList = new ArrayList<>();
     public static String downloadURL;
 
     //chụp ảnh và gallery
@@ -154,6 +155,37 @@ public class LibraryClass {
         return null;
     }
 
+    private static Bitmap downloadPhoto(String url)
+    {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageReference = storage.getReferenceFromUrl(url);
 
+        final Bitmap[] bitmap = new Bitmap[1];
+
+        //convert bytes sang bitmap
+        final long LIMITSIZE = 10 * 1024 * 1024;//10mb
+        storageReference.getBytes(LIMITSIZE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+
+                //offset là chỉ số index bắt đầu decode, length là độ dài của mảng bytes
+                bitmap[0] = BitmapFactory.decodeByteArray(bytes,0, bytes.length);
+            }
+        });
+
+        return bitmap[0];
+    }
+
+    public static void downloadPhoto()
+    {
+        if (dishCategoryModelList.size() > 0)
+        {
+            for (int i = 0; i < dishCategoryModelList.size(); i++)
+            {
+                categoryPicList.add(downloadPhoto(dishCategoryModelList.get(i).getImage()));
+            }
+        }
+        Log.d("PicListSize", "" + categoryPicList.size());
+    }
 
 }
