@@ -176,7 +176,7 @@ public class LibraryClass {
         return bitmap[0];
     }
 
-    public static void downloadPhoto()
+    public static void downloadPhotoToArrayList()
     {
         if (dishCategoryModelList.size() > 0)
         {
