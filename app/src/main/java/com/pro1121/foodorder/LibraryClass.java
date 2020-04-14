@@ -23,8 +23,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.pro1121.foodorder.activity.SignInOut.MainActivity;
 import com.pro1121.foodorder.model.DishCategoryModel;
 import com.pro1121.foodorder.model.DishModel;
 import com.pro1121.foodorder.model.OrderModel;
@@ -175,7 +177,41 @@ public class LibraryClass {
 
         return bitmap[0];
     }
-
+    // Load toàn bộ ảnh của DishCategory -> Huy
+    public static void loadAllImg(final Context context) {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference reference = storage.getReferenceFromUrl("gs://food-order-34040.appspot.com");
+        // Làm mới mảng chứa bitmap
+        categoryPicList.clear();
+        // Gọi reference đến thư mục images trên firebase
+        StorageReference imgRef = reference.child("images");
+        // List All file trong images
+        imgRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
+            // Khi load hết thành công sẽ trả về listResult chứa các file
+            @Override
+            public void onSuccess(ListResult listResult) {
+                // Trỏ đến từng item trong listResult
+                for (StorageReference item : listResult.getItems()){
+                    // getBytes của từng item để dùng BitmapFactory parse ra Bitmap
+                    item.getBytes(10 * 1024 * 1024)
+                            .addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                        @Override
+                        public void onSuccess(byte[] bytes) {
+                            // Parse ra Bitmap
+                            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                            categoryPicList.add(bitmap);
+                        }
+                    });
+                }
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(context, "Fail", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
     public static void downloadPhotoToArrayList()
     {
         Log.d("DishCate Listtttttttttttttttttttt", dishCategoryModelList.size()+"") ;

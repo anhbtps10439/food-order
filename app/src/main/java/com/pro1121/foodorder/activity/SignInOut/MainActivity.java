@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Loading
         userDao = new UserDao(this);
         userDao.getAllRuntime();
         orderDao = new OrderDao(this);
@@ -54,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
         dishCategoryDao = new DishCategoryDao(this);
         dishCategoryDao.getAllRuntime();
         detailOrderDao = new DetailOrderDao(this);
-
-
+        LibraryClass.loadAllImg(this);
+        //
         if (!permissionCheck(MainActivity.this))
         {
             permisssionResquest(MainActivity.this);

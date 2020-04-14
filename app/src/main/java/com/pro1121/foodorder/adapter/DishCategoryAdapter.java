@@ -81,11 +81,12 @@ public class DishCategoryAdapter extends RecyclerView.Adapter<DishCategoryAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DishCategoryModel list = categoryModelList.get(position);
         try{
-        category_dish_img.clear();
+        /*category_dish_img.clear();
         for (int i = 0; i< LibraryClass.categoryPicList.size(); i++){
             category_dish_img.add(new BitmapDrawable(context.getResources(), LibraryClass.categoryPicList.get(position)));
-        }
-            holder.iv_category.setBackground(category_dish_img.get(position));
+        }*/
+        // Duyệt từng index của mảng chứa Bitmap sau đó parse qua Drawable để làm background
+            holder.iv_category.setBackground(new BitmapDrawable(context.getResources(),LibraryClass.categoryPicList.get(position)));
         }catch (Exception e){
             Toast.makeText(context, "Lỗi gán ảnh", Toast.LENGTH_SHORT).show();
             Log.d("Set Image Error >>>>>>>>>>>>>>>>>>", e.toString());
