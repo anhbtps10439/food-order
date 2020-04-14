@@ -7,7 +7,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -22,11 +24,21 @@ import com.pro1121.foodorder.R;
 public class HomeAdminFragment extends Fragment {
 
     Toolbar toolbar;
+    private ImageButton btn_dish_likest;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home,container,false);
         setHasOptionsMenu(true);
+
+        btn_dish_likest = view.findViewById(R.id.btn_dish_likest);
+        btn_dish_likest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Updating !!!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return view;
     }
 

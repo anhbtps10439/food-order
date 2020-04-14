@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
+import com.pro1121.foodorder.LibraryClass;
 import com.pro1121.foodorder.R;
 
 import com.pro1121.foodorder.activity.AdminCase.fragment.CategoryAdminFragment;
@@ -39,7 +40,6 @@ public class AdminCaseActivity extends AppCompatActivity {
 
     private void init() {
         chipNavigationBar = findViewById(R.id.navAdminCase);
-
         toolbar = findViewById(R.id.toolbarAdminCase);
 
     }
@@ -62,4 +62,5 @@ public class AdminCaseActivity extends AppCompatActivity {
                     }
                 }
             };
+
 }

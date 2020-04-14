@@ -82,8 +82,8 @@ public class DishCategoryAdapter extends RecyclerView.Adapter<DishCategoryAdapte
         DishCategoryModel list = categoryModelList.get(position);
         try{
         category_dish_img.clear();
-        for (int i = 0; i< LibraryClass.dishCategoryModelList.size(); i++){
-            category_dish_img.add(new BitmapDrawable(context.getResources(), LibraryClass.convertStringToImg(LibraryClass.dishCategoryModelList.get(position).getImage())));
+        for (int i = 0; i< LibraryClass.categoryPicList.size(); i++){
+            category_dish_img.add(new BitmapDrawable(context.getResources(), LibraryClass.categoryPicList.get(position)));
         }
             holder.iv_category.setBackground(category_dish_img.get(position));
         }catch (Exception e){

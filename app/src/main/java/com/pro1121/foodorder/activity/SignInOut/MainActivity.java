@@ -15,6 +15,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -66,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
 //            Intent intent = new Intent(MainActivity.this, AdminNotifyService.class);
 //            startService(intent);
 //        }
+
+        LibraryClass.downloadPhoto();
+        Log.d("Checkkkkkkkkkkkkkkkkkkkkkkkkkk", LibraryClass.categoryPicList.size()+"");
     }
 
     private boolean isServiceRunning(Class<?> serviceClass)

@@ -27,7 +27,7 @@ public class StoreFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getActivity().getWindow().setStatusBarColor(Color.parseColor("#FF3737"));
+
         View view = inflater.inflate(R.layout.fragment_store_manager,container,false);
         setHasOptionsMenu(true);
 
@@ -55,6 +55,7 @@ public class StoreFragment extends Fragment implements View.OnClickListener {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         toolbar.setTitle("");
         toolbar.setBackgroundColor(Color.parseColor("#FF3737"));
+        getActivity().getWindow().setStatusBarColor(Color.parseColor("#FF3737"));
     }
 
     @Override

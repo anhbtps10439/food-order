@@ -178,8 +178,10 @@ public class LibraryClass {
 
     public static void downloadPhoto()
     {
+        Log.d("DishCate Listtttttttttttttttttttt", dishCategoryModelList.size()+"") ;
         if (dishCategoryModelList.size() > 0)
-        {
+
+    {
             for (int i = 0; i < dishCategoryModelList.size(); i++)
             {
                 categoryPicList.add(downloadPhoto(dishCategoryModelList.get(i).getImage()));

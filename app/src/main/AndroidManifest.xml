@@ -16,7 +16,7 @@
         <service
             android:name=".service.UserNotifyService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true"/>
 
         <receiver
             android:name=".RestartServiceReceiver"
@@ -37,7 +37,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths"/>
         </provider>
 
         <activity android:name=".activity.SignInOut.MainActivity">

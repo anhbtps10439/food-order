@@ -3,6 +3,7 @@ package com.pro1121.foodorder.huyTest;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Base64;
@@ -70,11 +71,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DishModel dish = dishModels.get(position);
-        dishs_img.clear();
-        for (int i=0; i<LibraryClass.dishModelList.size(); i++){
-            dishs_img.add(new BitmapDrawable(context.getResources(), LibraryClass.convertStringToImg(LibraryClass.dishModelList.get(position).getImage())));
-        }
-        holder.imageView.setBackground(dishs_img.get(position));
+        holder.imageView.setBackgroundColor(Color.RED);
         holder.tv_dishName.setText(dish.getName());
         holder.tv_dishDes.setText(dish.getDes());
         holder.tv_dishPrice.setText(dish.getPrice()+" VND");

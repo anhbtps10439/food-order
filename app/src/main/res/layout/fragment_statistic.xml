@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -14,78 +15,103 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="155dp"
+            android:layout_height="100dp"
             android:layout_weight="2"
             android:background="@color/colorRedMain">
-
-            <ImageView
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="155dp"
-                android:layout_width="35dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_arrow_back_black_24dp"
-                />
 
             <TextView
                 android:id="@+id/textGrid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="65dp"
                 android:text="Thống kê"
-
                 android:textColor="@android:color/white"
                 android:textSize="35sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="170dp"
-                android:layout_height="70dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="135dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@+id/textGrid"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-                android:background="@drawable/shape_fe"
-                android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:text="Từ ngày"
-                android:textColor="#000000" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
-            <TextView
-                android:layout_width="150dp"
-                android:layout_height="58dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="155dp"
-                android:padding="@dimen/activity_horizontal_margin"
-                android:text="dd/mm/yyyy"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/shape_fe"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="10dp"
+                        android:text="Từ ngày"
+                        android:textColor="#000000"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.444"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.551" />
 
-            <TextView
-                android:layout_width="170dp"
-                android:layout_height="70dp"
-                android:layout_marginLeft="220dp"
-                android:layout_marginTop="135dp"
-                android:background="@drawable/shape_fe"
-                android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:text="Đến ngày"
-                android:textColor="#000000"
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="58dp"
+                        android:padding="@dimen/activity_horizontal_margin"
+                        android:text="dd/mm/yyyy"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textView"
+                        app:layout_constraintVertical_bias="1.0" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
-            <TextView
-                android:layout_width="150dp"
-                android:layout_height="58dp"
-                android:layout_marginLeft="220dp"
-                android:layout_marginTop="155dp"
-                android:padding="@dimen/activity_horizontal_margin"
-                android:text="dd/mm/yyyy"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/shape_fe"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="10dp"
+                        android:text="Đến ngày"
+                        android:textColor="#000000"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.444"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.551" />
+
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="58dp"
+                        android:padding="@dimen/activity_horizontal_margin"
+                        android:text="dd/mm/yyyy"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textView"
+                        app:layout_constraintVertical_bias="1.0" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+
         </RelativeLayout>
 
 

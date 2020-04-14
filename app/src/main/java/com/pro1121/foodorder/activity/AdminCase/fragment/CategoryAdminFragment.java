@@ -31,7 +31,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.pro1121.foodorder.LibraryClass;
 import com.pro1121.foodorder.R;
+import com.pro1121.foodorder.adapter.DishCategoryAdapter;
 import com.pro1121.foodorder.dao.DishCategoryDao;
 import com.pro1121.foodorder.huyTest.Adapter;
 
@@ -40,10 +42,10 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.pro1121.foodorder.LibraryClass.convertImgToString;
 import static com.pro1121.foodorder.LibraryClass.convertToBitmap;
 import static com.pro1121.foodorder.LibraryClass.convertToBytes;
 import static com.pro1121.foodorder.LibraryClass.currrentPhoto;
+import static com.pro1121.foodorder.LibraryClass.dishCategoryModelList;
 import static com.pro1121.foodorder.LibraryClass.dishModelList;
 import static com.pro1121.foodorder.LibraryClass.downloadURL;
 import static com.pro1121.foodorder.LibraryClass.photoPath;
@@ -59,6 +61,7 @@ public class CategoryAdminFragment extends Fragment {
     private FloatingActionButton fbCategory;
     private Toolbar toolbar;
     Adapter adapter;
+    private DishCategoryAdapter dishCategoryAdapter;
 
     //dialog
     private ImageView ivCategoryAvatar;
@@ -85,10 +88,13 @@ public class CategoryAdminFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rv_dish);
         fbCategory = view.findViewById(R.id.fbCategory);
 
+   //     LibraryClass.downloadPhoto();
+
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new Adapter(getActivity(), dishModelList);
-        recyclerView.setAdapter(adapter);
+      //  adapter = new Adapter(getActivity(), dishModelList);
+        dishCategoryAdapter = new DishCategoryAdapter(getActivity(), dishCategoryModelList);
+        recyclerView.setAdapter(dishCategoryAdapter);
 
         //Floating button
         fbCategory.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +141,7 @@ public class CategoryAdminFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(getActivity(), "Nút thêm!", Toast.LENGTH_SHORT).show();
+
                         categoryID = etCategoryCode.getText().toString();
                         categoryName = etCategoryName.getText().toString();
                         categoryDes = etCategoryDes.getText().toString();
@@ -142,8 +149,13 @@ public class CategoryAdminFragment extends Fragment {
                         byte[] photo = convertToBytes(currrentPhoto);
 
                         DishCategoryDao dao = new DishCategoryDao(context);
+
                         downloadURL = photoUpload(context, photo);
                         dao.insert(categoryID, categoryName, categoryDes, downloadURL);
+
+
+                        dishCategoryAdapter.notifyDataSetChanged();
+
                         alertDialog.dismiss();
                     }
                 });
