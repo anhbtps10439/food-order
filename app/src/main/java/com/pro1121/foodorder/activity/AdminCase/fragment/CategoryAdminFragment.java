@@ -88,7 +88,7 @@ public class CategoryAdminFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rv_dish);
         fbCategory = view.findViewById(R.id.fbCategory);
 
-   //     LibraryClass.downloadPhoto();
+
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
         recyclerView.setLayoutManager(layoutManager);

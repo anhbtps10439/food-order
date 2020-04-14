@@ -68,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
 //            startService(intent);
 //        }
 
-        LibraryClass.downloadPhoto();
-        Log.d("Checkkkkkkkkkkkkkkkkkkkkkkkkkk", LibraryClass.categoryPicList.size()+"");
     }
 
     private boolean isServiceRunning(Class<?> serviceClass)
