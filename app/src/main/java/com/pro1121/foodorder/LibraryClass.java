@@ -85,7 +85,7 @@ public class LibraryClass {
 
     //upload bằng bytes[]
     //return một downloadURL
-    public static String  photoUpload(final Context context, byte[] photo)
+    public static String  photoUpload(final Context context, Bitmap photo)
     {
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -93,9 +93,10 @@ public class LibraryClass {
         //getLastPathSegment để lấy địa chỉ cuối cùng của file, ở đây là file name
         final StorageReference storageReference = storage.getReference("images/"+createFileName()+".jpg");
 
+        byte[] convertedPhoto = convertToBytes(photo);
 
         //upload
-        UploadTask uploadTask = storageReference.putBytes(photo);
+        UploadTask uploadTask = storageReference.putBytes(convertedPhoto);
 
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -128,8 +129,7 @@ public class LibraryClass {
                 }
             }
         });
-
-
+        
         return photoUri.toString();
     }
 

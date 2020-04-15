@@ -146,11 +146,9 @@ public class CategoryAdminFragment extends Fragment {
                         categoryName = etCategoryName.getText().toString();
                         categoryDes = etCategoryDes.getText().toString();
 
-                        byte[] photo = convertToBytes(currrentPhoto);
-
                         DishCategoryDao dao = new DishCategoryDao(context);
 
-                        downloadURL = photoUpload(context, photo);
+                        downloadURL = photoUpload(context, currrentPhoto);
                         dao.insert(categoryID, categoryName, categoryDes, downloadURL);
 
 
