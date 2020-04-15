@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -74,10 +75,10 @@ public class DishCategoryDao {
 
     public void delete(String id)
     {
-        db.child("dishCategory").child(id).setValue(null).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.child("dishCategory").child(id).removeValue(new DatabaseReference.CompletionListener() {
             @Override
-            public void onSuccess(Void aVoid) {
-                Toast.makeText(context, "Delete Successfully!", Toast.LENGTH_SHORT).show();
+            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                Toast.makeText(context, "Xóa thành công!", Toast.LENGTH_SHORT).show();
             }
         });
     }
