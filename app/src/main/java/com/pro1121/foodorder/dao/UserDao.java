@@ -54,4 +54,30 @@ public class UserDao {
         db.child("user").addListenerForSingleValueEvent(valueEventListener);
 
     }
+
+    public void getAll()
+    {
+
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userModelList.clear();
+                //mỗi child trong dataSnapshot
+                for (DataSnapshot data : dataSnapshot.getChildren())
+                {
+                    //tạo đối tượng User và thêm vào List
+                    userModelList.add(data.getValue(UserModel.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+
+        //hàm này chỉ được gọi một lần duy nhất vào lúc app chạy
+        db.child("user").addValueEventListener(valueEventListener);
+
+    }
 }

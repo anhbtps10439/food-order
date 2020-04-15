@@ -1,9 +1,12 @@
 package com.pro1121.foodorder.dao;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -56,4 +59,39 @@ public class DishDao {
 
         db.child("dish").addListenerForSingleValueEvent(valueEventListener);
     }
+
+    public void delete(String id)
+    {
+        db.child("dish").child(id).removeValue(new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                Toast.makeText(context, "Xóa thành công!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getAll()
+    {
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dishModelList.clear();
+                //mỗi child trong dataSnapshot
+                for (DataSnapshot data : dataSnapshot.getChildren())
+                {
+                    //tạo đối tượng User và thêm vào List
+                    dishModelList.add(data.getValue(DishModel.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+
+        db.child("dish").addValueEventListener(valueEventListener);
+    }
+
+
 }
