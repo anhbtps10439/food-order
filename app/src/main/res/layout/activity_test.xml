@@ -5,12 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TestActivity">
-    //cái này là Trang dùng để test những file Fragment.xml mà Trang làm,nó ko có gây ảnh hưởng gì tới project này đâu,mọi người thông cảm nhé
+    <!--cái này là Trang dùng để test những file Fragment.xml mà Trang làm,nó ko có gây ảnh hưởng gì tới project này đâu,mọi người thông cảm nhé-->
     <fragment
         android:id="@+id/fragment"
-        android:name="com.pro1121.foodorder.activity.UserCase.fragment.ClickFoodFragment"
+        android:name="com.pro1121.foodorder.activity.AdminCase.fragment.InformationFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="271dp"
         tools:layout_editor_absoluteY="241dp" />
+
+<!--    <Button-->
+<!--        android:id="@+id/btn"-->
+<!--        android:layout_marginTop="600dp"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:padding="25dp"-->
+<!--        android:text="show Dialog"-->
+<!--        android:textSize="20dp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        tools:layout_editor_absoluteY="565dp" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
