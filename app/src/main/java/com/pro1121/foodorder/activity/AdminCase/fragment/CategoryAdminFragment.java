@@ -147,11 +147,7 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
                         categoryName = etCategoryName.getText().toString();
                         categoryDes = etCategoryDes.getText().toString();
 
-                        byte[] photo = convertToBytes(currrentPhoto);
-
-
-
-                        downloadURL = photoUpload(context, photo);
+                        downloadURL = photoUpload(context, currrentPhoto);
                         dao.insert(categoryID, categoryName, categoryDes, downloadURL);
 
 
