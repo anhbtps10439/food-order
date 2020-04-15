@@ -42,11 +42,7 @@
 
         <activity android:name=".activity.SignInOut.MainActivity">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <!-- HEAD -->
         <activity android:name=".huyTest.ClickKindFood">
@@ -62,6 +58,13 @@
         <activity android:name=".activity.SignInOut.IsYourAccount" />
         <activity android:name=".activity.UserCase.UserCaseActivity"/>
         <activity android:name=".activity.AdminCase.AdminCaseActivity"></activity>
+        <activity android:name=".TestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

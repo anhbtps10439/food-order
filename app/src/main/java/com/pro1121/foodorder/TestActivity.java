@@ -22,20 +22,20 @@ public class TestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
-//        Button show = findViewById(R.id.btn);
-//        show.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                AlertDialog.Builder alertDialog = new AlertDialog.Builder(TestActivity.this);
-//                LayoutInflater inflater = getLayoutInflater();
-//                v = inflater.inflate(R.layout.dialog_click_kind_food,null );
-//                alertDialog.setView(v);
-//
-//                AlertDialog b = alertDialog.create();
-//                b.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                b.show();
-//            }
-//        });
+        Button show = findViewById(R.id.button);
+        show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(TestActivity.this);
+                LayoutInflater inflater = getLayoutInflater();
+                v = inflater.inflate(R.layout.dialog_click_kind_food,null );
+                alertDialog.setView(v);
+
+                AlertDialog b = alertDialog.create();
+                b.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                b.show();
+            }
+        });
 
     }
 
