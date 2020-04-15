@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -69,5 +70,15 @@ public class DishCategoryDao {
         };
 
         db.child("dishCategory").addListenerForSingleValueEvent(valueEventListener);
+    }
+
+    public void delete(String id)
+    {
+        db.child("dishCategory").child(id).setValue(null).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(context, "Delete Successfully!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

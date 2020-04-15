@@ -1,9 +1,11 @@
 package com.pro1121.foodorder.dao;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,5 +57,15 @@ public class DishDao {
         };
 
         db.child("dish").addListenerForSingleValueEvent(valueEventListener);
+    }
+
+    public void delete(String id)
+    {
+        db.child("dish").child(id).setValue(null).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(context, "Delete Successfully!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
