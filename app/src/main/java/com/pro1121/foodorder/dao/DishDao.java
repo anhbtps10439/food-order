@@ -69,4 +69,29 @@ public class DishDao {
             }
         });
     }
+
+    public void getAll()
+    {
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dishModelList.clear();
+                //mỗi child trong dataSnapshot
+                for (DataSnapshot data : dataSnapshot.getChildren())
+                {
+                    //tạo đối tượng User và thêm vào List
+                    dishModelList.add(data.getValue(DishModel.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+
+        db.child("dish").addValueEventListener(valueEventListener);
+    }
+
+
 }

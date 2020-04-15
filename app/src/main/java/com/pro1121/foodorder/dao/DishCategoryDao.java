@@ -73,6 +73,29 @@ public class DishCategoryDao {
         db.child("dishCategory").addListenerForSingleValueEvent(valueEventListener);
     }
 
+    public void getAll()
+    {
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dishCategoryModelList.clear();
+                //mỗi child trong dataSnapshot
+                for (DataSnapshot data : dataSnapshot.getChildren())
+                {
+                    //tạo đối tượng User và thêm vào List
+                    dishCategoryModelList.add(data.getValue(DishCategoryModel.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+
+        db.child("dishCategory").addValueEventListener(valueEventListener);
+    }
+
     public void delete(String id)
     {
         db.child("dishCategory").child(id).removeValue(new DatabaseReference.CompletionListener() {
