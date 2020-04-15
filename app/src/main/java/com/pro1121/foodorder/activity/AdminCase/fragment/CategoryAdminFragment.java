@@ -3,20 +3,20 @@ package com.pro1121.foodorder.activity.AdminCase.fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 
@@ -31,7 +31,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.pro1121.foodorder.LibraryClass;
 import com.pro1121.foodorder.R;
 import com.pro1121.foodorder.adapter.DishCategoryAdapter;
 import com.pro1121.foodorder.dao.DishCategoryDao;
@@ -46,14 +45,13 @@ import static com.pro1121.foodorder.LibraryClass.convertToBitmap;
 import static com.pro1121.foodorder.LibraryClass.convertToBytes;
 import static com.pro1121.foodorder.LibraryClass.currrentPhoto;
 import static com.pro1121.foodorder.LibraryClass.dishCategoryModelList;
-import static com.pro1121.foodorder.LibraryClass.dishModelList;
 import static com.pro1121.foodorder.LibraryClass.downloadURL;
 import static com.pro1121.foodorder.LibraryClass.photoPath;
 import static com.pro1121.foodorder.LibraryClass.photoUpload;
 import static com.pro1121.foodorder.LibraryClass.photoUri;
 
 
-public class CategoryAdminFragment extends Fragment {
+public class CategoryAdminFragment extends Fragment implements DishCategoryAdapter.OnItemClick {
 
     private Context context;
 
@@ -71,9 +69,10 @@ public class CategoryAdminFragment extends Fragment {
     private String categoryName;
     private String categoryDes;
 
+    private DishCategoryDao dao;
+
     public static final int REQUEST_CHOOSE_PHOTO_FROM_GALLERY = 2;
     public static final int REQUEST_IMAGE_CAPTURE = 1;
-
 
     public CategoryAdminFragment(Context context) {
         this.context = context;
@@ -88,13 +87,15 @@ public class CategoryAdminFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rv_dish);
         fbCategory = view.findViewById(R.id.fbCategory);
 
+        dao = new DishCategoryDao(context);
 
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
         recyclerView.setLayoutManager(layoutManager);
       //  adapter = new Adapter(getActivity(), dishModelList);
-        dishCategoryAdapter = new DishCategoryAdapter(getActivity(), dishCategoryModelList);
+        dishCategoryAdapter = new DishCategoryAdapter(getActivity(), dishCategoryModelList,this);
         recyclerView.setAdapter(dishCategoryAdapter);
+
 
         //Floating button
         fbCategory.setOnClickListener(new View.OnClickListener() {
@@ -104,8 +105,8 @@ public class CategoryAdminFragment extends Fragment {
                 builder.setView(LayoutInflater.from(context).inflate(R.layout.dialog_insert_category, null, false));
                 builder.setTitle("Thêm loại");
                 builder.setPositiveButton("Thêm", null);
-                
-                
+
+
                 alertDialog = builder.create();
                 alertDialog.show();
 
@@ -115,7 +116,7 @@ public class CategoryAdminFragment extends Fragment {
                 final EditText etCategoryCode = alertDialog.findViewById(R.id.etCategoryCodeDialog);
                 final EditText etCategoryName = alertDialog.findViewById(R.id.etCategoryNameDialog);
                 final EditText etCategoryDes = alertDialog.findViewById(R.id.etCategoryDesDialog);
-        
+
                 //Click to open gallery
                 ivCategoryAvatar.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -136,7 +137,7 @@ public class CategoryAdminFragment extends Fragment {
                         openCam();
                     }
                 });
-                
+
                 btnPositive.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -146,9 +147,11 @@ public class CategoryAdminFragment extends Fragment {
                         categoryName = etCategoryName.getText().toString();
                         categoryDes = etCategoryDes.getText().toString();
 
-                        DishCategoryDao dao = new DishCategoryDao(context);
+                        byte[] photo = convertToBytes(currrentPhoto);
 
-                        downloadURL = photoUpload(context, currrentPhoto);
+
+
+                        downloadURL = photoUpload(context, photo);
                         dao.insert(categoryID, categoryName, categoryDes, downloadURL);
 
 
@@ -269,4 +272,102 @@ public class CategoryAdminFragment extends Fragment {
         }
 
     }
+
+    // Onclick Item DishRecycle View
+    @Override
+    public void onClick(View view, int position) {
+
+    }
+
+    // Onclick long Item DishRecycle View
+    @Override
+    public void onLongClick(View view, final int position) {
+        PopupMenu popupMenu = new PopupMenu(getActivity(),view);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_on_long_click_dish_category, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+
+                    //Edit Dish Category
+                    case R.id.it_edit_cate_dish:
+
+                        //Show AlertDialog
+                        editDishCategory(position);
+                        break;
+
+                    case R.id.it_delete_cate_dish:
+                       //Delete DishCategory
+                        try{
+                            dao.delete(dishCategoryModelList.get(position).getId());
+                            dishCategoryAdapter.notifyDataSetChanged();
+                            Toast.makeText(getActivity(), "Đã xoá", Toast.LENGTH_SHORT).show();
+                        }catch (Exception ex){
+                            Toast.makeText(getActivity(), "Something wrong", Toast.LENGTH_SHORT).show();
+                            Log.d("Delete CateDis Error............", ex.toString());
+                        }
+                        break;
+
+                }
+                return false;
+            }
+        });
+        popupMenu.show();
+    }
+
+    private void editDishCategory(int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.CustomAlertDialog);
+        builder.setView(LayoutInflater.from(context).inflate(R.layout.dialog_insert_category, null, false));
+        builder.setTitle("Thêm loại");
+        builder.setPositiveButton("Thêm", null);
+
+        alertDialog = builder.create();
+        alertDialog.show();
+
+        ivCategoryAvatar = alertDialog.findViewById(R.id.ivCategoryAvatarDialog);
+        Button btnOpenCam = alertDialog.findViewById(R.id.btnOpenCamDialog);
+        Button btnPositive = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        final EditText etCategoryCode = alertDialog.findViewById(R.id.etCategoryCodeDialog);
+        final EditText etCategoryName = alertDialog.findViewById(R.id.etCategoryNameDialog);
+        final EditText etCategoryDes = alertDialog.findViewById(R.id.etCategoryDesDialog);
+
+
+        //setData
+        etCategoryCode.setText(dishCategoryModelList.get(position).getId());
+        etCategoryDes.setText(dishCategoryModelList.get(position).getDes());
+        etCategoryName.setText(dishCategoryModelList.get(position).getName());
+
+        //Click to open gallery
+        ivCategoryAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Mở Gallery !!!", Toast.LENGTH_SHORT).show();
+                //intent mở gallery
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent, REQUEST_CHOOSE_PHOTO_FROM_GALLERY);
+            }
+        });
+        //Click to open Camera
+        btnOpenCam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Open Camera
+                Toast.makeText(getActivity(), "Mở Camera !!!", Toast.LENGTH_SHORT).show();
+                openCam();
+            }
+        });
+
+        btnPositive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Updating!!!", Toast.LENGTH_SHORT).show();
+
+                alertDialog.dismiss();
+            }
+        });
+
+    }
+
+
 }

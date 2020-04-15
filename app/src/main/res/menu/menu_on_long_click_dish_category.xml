@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/it_edit_cate_dish"
+        android:title="Sửa"/>
+    <item
+        android:id="@+id/it_delete_cate_dish"
+        android:title="Xoá"/>
+</menu>

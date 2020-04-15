@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pro1121.foodorder.LibraryClass;
@@ -24,29 +23,32 @@ import com.pro1121.foodorder.model.DishCategoryModel;
 
 import java.util.List;
 
-import static com.pro1121.foodorder.activity.SignInOut.MainActivity.category_dish_img;
-import static com.pro1121.foodorder.activity.SignInOut.MainActivity.dishs_img;
-
 public class DishCategoryAdapter extends RecyclerView.Adapter<DishCategoryAdapter.ViewHolder> {
 
     static Context context;
-    List<DishCategoryModel> categoryModelList;
 
-    public DishCategoryAdapter(Context context,  List<DishCategoryModel> categoryModelLists){
+    private List<DishCategoryModel> categoryModelList;
+    private OnItemClick onItemClick;
+
+
+    public DishCategoryAdapter(Context context,  List<DishCategoryModel> categoryModelLists,OnItemClick onItemClick){
         this.context=context;
         this.categoryModelList= categoryModelLists;
+        this.onItemClick = onItemClick;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
         public ImageView iv_category;
         public TextView tv_category_name, tv_category_des;
         public ImageButton ib_show_all_dish;
+        private OnItemClick onItemClick;
 
-        public ViewHolder(final View itemView){
+        public ViewHolder(final View itemView, OnItemClick onItemClick){
             super(itemView);
             iv_category = itemView.findViewById(R.id.iv_dish_category);
             tv_category_name = itemView.findViewById(R.id.tv_dish_category_name);
             ib_show_all_dish = itemView.findViewById(R.id.ib_show_all_dish);
+            this.onItemClick = onItemClick;
             ib_show_all_dish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -56,6 +58,8 @@ public class DishCategoryAdapter extends RecyclerView.Adapter<DishCategoryAdapte
                             .commit();
                 }
             });
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
         void bindData() {
             RecyclerView.LayoutParams params =(RecyclerView.LayoutParams) itemView.getLayoutParams();
@@ -67,6 +71,17 @@ public class DishCategoryAdapter extends RecyclerView.Adapter<DishCategoryAdapte
             }
             itemView.setLayoutParams(params);
         }
+
+        @Override
+        public boolean onLongClick(View v) {
+            onItemClick.onLongClick(v,getAdapterPosition());
+            return true;
+        }
+
+        @Override
+        public void onClick(View v) {
+            onItemClick.onClick(v, getAdapterPosition());
+        }
     }
 
     @NonNull
@@ -74,7 +89,7 @@ public class DishCategoryAdapter extends RecyclerView.Adapter<DishCategoryAdapte
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context)
                 .inflate(R.layout.cardview_dishes_category, parent,false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, onItemClick);
     }
 
     @Override
@@ -92,8 +107,6 @@ public class DishCategoryAdapter extends RecyclerView.Adapter<DishCategoryAdapte
             Log.d("Set Image Error >>>>>>>>>>>>>>>>>>", e.toString());
             holder.iv_category.setBackgroundColor(Color.parseColor("#ff3737"));
         }
-
-
         holder.tv_category_name.setText(list.getName());
         holder.bindData();
     }
@@ -101,5 +114,10 @@ public class DishCategoryAdapter extends RecyclerView.Adapter<DishCategoryAdapte
     @Override
     public int getItemCount() {
         return categoryModelList.size();
+    }
+
+    public interface OnItemClick{
+        void onClick(View view, int position);
+        void onLongClick(View view, int position);
     }
 }
