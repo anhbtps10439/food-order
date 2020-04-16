@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+//dialog chỉnh sửa thông tin cá nhân
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+
+    </LinearLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="390dp"
+        android:layout_weight="2"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ảnh đại diện"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="50dp"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chỉnh sửa"
+
+            android:layout_marginLeft="310dp"
+            android:layout_marginTop="52dp"
+            android:textColor="#2E2EFE"
+            android:textSize="18dp"
+            />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="150dp"
+            android:layout_height="140dp"
+            app:siShape="@drawable/shape6"
+            android:src="@drawable/trang"
+            android:layout_marginTop="100dp"
+            android:scaleType="centerCrop"
+            android:layout_marginLeft="131dp"
+            app:siSquare="true"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_marginTop="260dp"
+        android:layout_width="match_parent"
+        android:layout_height="480dp"
+        android:layout_weight="2"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thông tin cá  nhân"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="50dp"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chỉnh sửa"
+
+            android:layout_marginLeft="310dp"
+            android:layout_marginTop="52dp"
+            android:textColor="#2E2EFE"
+            android:textSize="18dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ngày sinh"
+
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="120dp"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="28/12/2000"
+
+            android:layout_marginLeft="295dp"
+            android:layout_marginTop="122dp"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Số điện thoại"
+
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="175dp"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0393267994"
+
+            android:layout_marginLeft="295dp"
+            android:layout_marginTop="178dp"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email"
+
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="230dp"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="trangvnkps08516@fpt.edu.vn"
+
+            android:layout_marginLeft="160dp"
+            android:layout_marginTop="233dp"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>
