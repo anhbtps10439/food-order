@@ -78,6 +78,22 @@ public class LibraryClass {
 //        return bitmap;
 //    }
 
+    public static ArrayList<DishModel> dishFilter(String categoryID)
+    {
+        ArrayList<DishModel> data = new ArrayList<>();
+        for (int i = 0; i < dishModelList.size(); i++)
+        {
+            for (int k = 0; k < dishCategoryModelList.size(); k++)
+            {
+                if (dishModelList.get(i).getDishCategoryId().equals(dishCategoryModelList.get(i).getId()))
+                {
+                    data.add(dishModelList.get(i));
+                }
+            }
+        }
+        return data;
+    }
+
     public static String createFileName()
     {
         return new SimpleDateFormat("ddMMyyyy_hhmmss_").format(new Date());
