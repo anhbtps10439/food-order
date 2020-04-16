@@ -24,6 +24,7 @@ public class UserCaseActivity extends AppCompatActivity {
 
     private ChipNavigationBar chipNavigationBar;
     private Toolbar toolbar;
+    private long backTime;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,5 +71,16 @@ public class UserCaseActivity extends AppCompatActivity {
             }
         }
     };
+    @Override
+    public void onBackPressed() {
+        if(backTime + 3000 > System.currentTimeMillis()){
+            super.onBackPressed();
+            onDestroy();
+            return;
+        }else {
+            Toast.makeText(this, "Bấm thêm lần nữa để thoát", Toast.LENGTH_SHORT).show();
+        }
+        backTime = System.currentTimeMillis();
+    }
 
 }

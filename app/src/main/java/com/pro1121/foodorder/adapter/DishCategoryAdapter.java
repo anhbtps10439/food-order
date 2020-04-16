@@ -26,7 +26,6 @@ import java.util.List;
 public class DishCategoryAdapter extends RecyclerView.Adapter<DishCategoryAdapter.ViewHolder> {
 
     static Context context;
-
     private List<DishCategoryModel> categoryModelList;
     private OnItemClick onItemClick;
 
@@ -38,27 +37,18 @@ public class DishCategoryAdapter extends RecyclerView.Adapter<DishCategoryAdapte
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
-        public ImageView iv_category;
-        public TextView tv_category_name, tv_category_des;
-        public ImageButton ib_show_all_dish;
+        private ImageView iv_category_image;
+        private TextView name, des;
+        private ImageButton ib_show_all_dish;
         private OnItemClick onItemClick;
 
         public ViewHolder(final View itemView, OnItemClick onItemClick){
             super(itemView);
-            iv_category = itemView.findViewById(R.id.iv_dish_category);
-            tv_category_name = itemView.findViewById(R.id.tv_dish_category_name);
+            iv_category_image = itemView.findViewById(R.id.iv_dish_category);
+            name = itemView.findViewById(R.id.tv_dish_category_name);
             ib_show_all_dish = itemView.findViewById(R.id.ib_show_all_dish);
             this.onItemClick = onItemClick;
-            ib_show_all_dish.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context, "Clicked!!!", Toast.LENGTH_SHORT).show();
-                    ((AdminCaseActivity)v.getContext()).getSupportFragmentManager().beginTransaction()
-                            .add(R.id.nav_host_admin_case, new DishFragment(),"dish")
-                            .commit();
-                }
-            });
-            itemView.setOnClickListener(this);
+            ib_show_all_dish.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
         }
         void bindData() {
@@ -101,13 +91,13 @@ public class DishCategoryAdapter extends RecyclerView.Adapter<DishCategoryAdapte
             category_dish_img.add(new BitmapDrawable(context.getResources(), LibraryClass.categoryPicList.get(position)));
         }*/
         // Duyệt từng index của mảng chứa Bitmap sau đó parse qua Drawable để làm background
-            holder.iv_category.setBackground(new BitmapDrawable(context.getResources(),LibraryClass.categoryPicList.get(position)));
+            holder.iv_category_image.setBackground(new BitmapDrawable(context.getResources(),LibraryClass.categoryPicList.get(position)));
         }catch (Exception e){
             Toast.makeText(context, "Lỗi gán ảnh", Toast.LENGTH_SHORT).show();
             Log.d("Set Image Error >>>>>>>>>>>>>>>>>>", e.toString());
-            holder.iv_category.setBackgroundColor(Color.parseColor("#ff3737"));
+            holder.iv_category_image.setBackgroundColor(Color.parseColor("#ff3737"));
         }
-        holder.tv_category_name.setText(list.getName());
+        holder.name.setText(list.getName());
         holder.bindData();
     }
 

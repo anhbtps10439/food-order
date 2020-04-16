@@ -1,6 +1,7 @@
 package com.pro1121.foodorder.activity.AdminCase;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -18,6 +19,7 @@ public class AdminCaseActivity extends AppCompatActivity {
 
     private ChipNavigationBar chipNavigationBar;
     private Toolbar toolbar;
+    private long backTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,5 +64,15 @@ public class AdminCaseActivity extends AppCompatActivity {
                     }
                 }
             };
-
+    @Override
+    public void onBackPressed() {
+        if(backTime + 3000 > System.currentTimeMillis()){
+            super.onBackPressed();
+            onDestroy();
+            return;
+        }else {
+            Toast.makeText(this, "Bấm thêm lần nữa để thoát", Toast.LENGTH_SHORT).show();
+        }
+        backTime = System.currentTimeMillis();
+    }
 }

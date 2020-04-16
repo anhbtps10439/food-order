@@ -1,13 +1,11 @@
 package com.pro1121.foodorder.activity.UserCase.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,13 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pro1121.foodorder.LibraryClass;
 import com.pro1121.foodorder.R;
-import com.pro1121.foodorder.huyTest.Adapter;
-import com.pro1121.foodorder.model.DishModel;
+import com.pro1121.foodorder.adapter.DishCategoryAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class CategoryUserFragment extends Fragment {
+public class CategoryUserFragment extends Fragment implements DishCategoryAdapter.OnItemClick {
     private Toolbar toolbar;
     private FloatingActionButton fbCategory;
     RecyclerView recyclerView;
@@ -43,8 +37,8 @@ public class CategoryUserFragment extends Fragment {
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
         recyclerView.setLayoutManager(layoutManager);
-        Adapter adapter = new Adapter(getActivity(),LibraryClass.dishModelList);
-        recyclerView.setAdapter(adapter);
+        DishCategoryAdapter dishCategoryAdapter = new DishCategoryAdapter(getActivity(), LibraryClass.dishCategoryModelList, this);
+        recyclerView.setAdapter(dishCategoryAdapter);
 
         return view;
     }
@@ -61,5 +55,15 @@ public class CategoryUserFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
         inflater.inflate(R.menu.toolbar_category,menu);
+    }
+
+    @Override
+    public void onClick(View view, int position) {
+
+    }
+
+    @Override
+    public void onLongClick(View view, int position) {
+
     }
 }

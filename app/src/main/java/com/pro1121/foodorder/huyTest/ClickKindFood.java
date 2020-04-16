@@ -32,12 +32,12 @@ public class ClickKindFood extends AppCompatActivity {
 //        setContentView(R.layout.fragment_click_kind_food);
 
         recyclerView = findViewById(R.id.rv_dishes);
-
+/*
         GridLayoutManager layoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(layoutManager);
         Adapter adapter = new Adapter(this,dishModels);
         recyclerView.setAdapter(adapter);
-
+*/
     }
 
 }
