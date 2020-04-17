@@ -86,19 +86,7 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
         set_dish_category_name.setText(nameCategory+"");
 
         //============= Lọc list by id
-
-        dishModels = new ArrayList<DishModel>();
-        //Lấy id xong get dish theo id add vào list
-        if (dishModels.size() > 0) {
-            dishModels.clear();
-        } else {
-            for (int i = 0; i < LibraryClass.dishModelList.size(); i++) {
-                if (LibraryClass.dishModelList.get(i).getDishCategoryId().equals(idCategory)) {
-                    dishModels.add(LibraryClass.dishModelList.get(i));
-                }
-            }
-        }
-
+        dishModels = LibraryClass.dishFilter(idCategory);
         //=============
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);

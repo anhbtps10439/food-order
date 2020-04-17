@@ -302,7 +302,6 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
                         try{
                             dao.delete(dishCategoryModelList.get(position).getId());
                             dishCategoryAdapter.notifyDataSetChanged();
-                            Toast.makeText(getActivity(), "Đã xoá", Toast.LENGTH_SHORT).show();
                         }catch (Exception ex){
                             Toast.makeText(getActivity(), "Something wrong", Toast.LENGTH_SHORT).show();
                             Log.d("Delete CateDis Error............", ex.toString());

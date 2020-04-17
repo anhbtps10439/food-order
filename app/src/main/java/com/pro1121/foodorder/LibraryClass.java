@@ -81,14 +81,10 @@ public class LibraryClass {
     public static ArrayList<DishModel> dishFilter(String categoryID)
     {
         ArrayList<DishModel> data = new ArrayList<>();
-        for (int i = 0; i < dishModelList.size(); i++)
-        {
-            for (int k = 0; k < dishCategoryModelList.size(); k++)
-            {
-                if (dishModelList.get(i).getDishCategoryId().equals(dishCategoryModelList.get(i).getId()))
+        for (int i = 0; i < dishModelList.size(); i++) {
+                if (dishModelList.get(i).getDishCategoryId().equals(categoryID))
                 {
                     data.add(dishModelList.get(i));
-                }
             }
         }
         return data;
