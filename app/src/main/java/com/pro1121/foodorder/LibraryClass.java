@@ -103,46 +103,21 @@ public class LibraryClass {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         //storageReferece đóng vai trò như đường dẫn đến file
         //getLastPathSegment để lấy địa chỉ cuối cùng của file, ở đây là file name
+        String location = "images/"+createFileName()+".jpg";
         final StorageReference storageReference = storage.getReference("images/"+createFileName()+".jpg");
 
         byte[] convertedPhoto = convertToBytes(photo);
 
         //upload
         UploadTask uploadTask = storageReference.putBytes(convertedPhoto);
-
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(context, "Upload Succeed!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-            @Override
-            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-
-                if (!task.isSuccessful())
-                {
-                    throw task.getException();
-                }
-
-                return storageReference.getDownloadUrl();
-            }
-        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                if (task.isSuccessful())
-                {
-                    photoUri = task.getResult();
-                }
-                else
-                {
-                    Toast.makeText(context, "Can't get the URL!", Toast.LENGTH_SHORT).show();
-                }
+                Log.e("downloadlink", "onSuccess: Link: " + taskSnapshot.getStorage().getDownloadUrl().getResult().toString());
             }
         });
         
-        return photoUri.toString();
+        return "gs://food-order-2-e2475.appspot.com/"+location;
     }
 
     //convert bitmap sang byte để upload

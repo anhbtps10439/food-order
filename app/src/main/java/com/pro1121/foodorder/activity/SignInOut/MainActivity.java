@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         dishCategoryDao.getAllRuntime();
         detailOrderDao = new DetailOrderDao(this);
 
-        LibraryClass.loadAllImg(this);
+//        LibraryClass.loadAllImg(this);
         //
         if (!permissionCheck(MainActivity.this))
         {
