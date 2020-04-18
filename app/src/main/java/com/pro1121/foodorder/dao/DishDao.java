@@ -16,6 +16,7 @@ import com.pro1121.foodorder.model.DishModel;
 
 import static com.pro1121.foodorder.LibraryClass.dishCategoryModelList;
 import static com.pro1121.foodorder.LibraryClass.dishModelList;
+import static com.pro1121.foodorder.LibraryClass.downloadPhoto;
 
 public class DishDao {
     private DatabaseReference db;
@@ -48,6 +49,15 @@ public class DishDao {
                 {
                     //tạo đối tượng User và thêm vào List
                     dishModelList.add(data.getValue(DishModel.class));
+                }
+
+                if (dishModelList.size() > 0)
+
+                {
+                    for (int i = 0; i < dishModelList.size(); i++)
+                    {
+                         downloadPhoto(dishModelList.get(i).getImage(), context, "dish");
+                    }
                 }
             }
 

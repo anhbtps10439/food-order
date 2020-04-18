@@ -46,6 +46,10 @@ public class LibraryClass {
     public static ArrayList<DishCategoryModel> dishCategoryModelList = new ArrayList<>();
     public static ArrayList<OrderModel> orderModelList = new ArrayList<>();
     public static ArrayList<Bitmap> categoryPicList = new ArrayList<>();
+    public static ArrayList<Bitmap> dishPicList = new ArrayList<>();
+    public static  ArrayList<Bitmap> userPicList = new ArrayList<>();
+
+
     public static String downloadURL;
 
     //chụp ảnh và gallery
@@ -147,22 +151,47 @@ public class LibraryClass {
         return null;
     }
 
-    private static void downloadPhoto(String url, final Context context)
+    public static void downloadPhoto(String url, final Context context, final String whereToAdd)
     {
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageReference = storage.getReferenceFromUrl(url);
-        //convert bytes sang bitmap
-        final long LIMITSIZE = 10 * 1024 * 1024;//10mb
-        storageReference.getBytes(LIMITSIZE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-            @Override
-            public void onSuccess(byte[] bytes) {
+        try
+        {
+            //Reference
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            StorageReference storageReference = storage.getReferenceFromUrl(url);
+            //convert bytes sang bitmap
+            final long LIMITSIZE = 10 * 1024 * 1024;//10mb
+            storageReference.getBytes(LIMITSIZE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
 
-                //offset là chỉ số index bắt đầu decode, length là độ dài của mảng bytes
-                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0, bytes.length);
-                categoryPicList.add(bitmap);
-                Toast.makeText(context, "Download Successfully!", Toast.LENGTH_SHORT).show();
-            }
-        });
+                    //offset là chỉ số index bắt đầu decode, length là độ dài của mảng bytes
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0, bytes.length);
+                    switch (whereToAdd)
+                    {
+                        case "category":{
+                            categoryPicList.add(bitmap);
+                            break;
+                        }
+
+                        case "dish":{
+                            dishPicList.add(bitmap);
+                            break;
+                        }
+
+                        case "user":{
+                            userPicList.add(bitmap);
+                            break;
+                        }
+                    }
+
+                    Toast.makeText(context, "Download Successfully!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
     // Load toàn bộ ảnh của DishCategory -> Huy
     public static void loadAllImg(final Context context) {
@@ -198,19 +227,6 @@ public class LibraryClass {
                         Toast.makeText(context, "Fail", Toast.LENGTH_SHORT).show();
                     }
                 });
-    }
-    public static void downloadPhotoToArrayList(Context context)
-    {
-        Log.d("DishCate Listtttttttttttttttttttt", dishCategoryModelList.size()+"") ;
-        if (dishCategoryModelList.size() > 0)
-
-        {
-            for (int i = 0; i < dishCategoryModelList.size(); i++)
-            {
-                downloadPhoto(dishCategoryModelList.get(i).getImage(), context);
-            }
-        }
-        Log.d("PicListSize", "" + categoryPicList.size());
     }
 
 }

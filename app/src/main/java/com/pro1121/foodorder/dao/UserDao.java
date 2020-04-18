@@ -12,6 +12,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.pro1121.foodorder.LibraryClass;
 import com.pro1121.foodorder.model.UserModel;
 
+import static com.pro1121.foodorder.LibraryClass.dishModelList;
+import static com.pro1121.foodorder.LibraryClass.downloadPhoto;
 import static com.pro1121.foodorder.LibraryClass.userModelList;
 
 public class UserDao {
@@ -41,6 +43,15 @@ public class UserDao {
                 {
                     //tạo đối tượng User và thêm vào List
                     userModelList.add(data.getValue(UserModel.class));
+                }
+
+                if (userModelList.size() > 0)
+
+                {
+                    for (int i = 0; i < userModelList.size(); i++)
+                    {
+                        downloadPhoto(userModelList.get(i).getImage(), context, "user");
+                    }
                 }
             }
 

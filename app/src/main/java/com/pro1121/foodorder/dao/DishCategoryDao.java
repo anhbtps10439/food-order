@@ -22,7 +22,7 @@ import com.pro1121.foodorder.model.DishCategoryModel;
 import com.pro1121.foodorder.model.UserModel;
 
 import static com.pro1121.foodorder.LibraryClass.dishCategoryModelList;
-import static com.pro1121.foodorder.LibraryClass.downloadPhotoToArrayList;
+import static com.pro1121.foodorder.LibraryClass.downloadPhoto;
 import static com.pro1121.foodorder.LibraryClass.userModelList;
 
 public class DishCategoryDao {
@@ -65,7 +65,15 @@ public class DishCategoryDao {
                     //tạo đối tượng User và thêm vào List
                     dishCategoryModelList.add(data.getValue(DishCategoryModel.class));
                 }
-                downloadPhotoToArrayList(context);
+
+                if (dishCategoryModelList.size() > 0)
+
+                {
+                    for (int i = 0; i < dishCategoryModelList.size(); i++)
+                    {
+                        downloadPhoto(dishCategoryModelList.get(i).getImage(), context, "category");
+                    }
+                }
             }
 
             @Override
