@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/navAdminCase"
-        android:layout_below="@+id/toolbarAdminCase"
+        android:layout_below="@id/toolbarAdminCase"
         />
 
     <com.ismaeldivita.chipnavigation.ChipNavigationBar

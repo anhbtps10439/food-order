@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.pro1121.foodorder.LibraryClass;
 import com.pro1121.foodorder.R;
 import com.pro1121.foodorder.model.DishModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,15 +45,13 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {//        try{
-//            // Duyệt từng index của mảng chứa Bitmap sau đó parse qua Drawable để làm background
-//            holder.dis_image.setBackground(new BitmapDrawable(context.getResources(),LibraryClass.categoryPicList.get(position)));
-//        }catch (Exception e){
-//            Toast.makeText(context, "Lỗi gán ảnh", Toast.LENGTH_SHORT).show();
-//            Log.d("Set Image Error >>>>>>>>>>>>>>>>>>", e.toString());
-//            holder.dis_image.setBackgroundColor(Color.parseColor("#ff3737"));
-//        }
-        holder.dis_image.setImageBitmap(picList.get(position));
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        try{
+            holder.dis_image.setImageBitmap(picList.get(position));
+        }catch (Exception e){
+            holder.dis_image.setBackgroundColor(Color.parseColor("#ff3737"));
+
+        }
         holder.name.setText(dishList.get(position).getName());
         holder.des.setText(dishList.get(position).getDes());
         holder.price.setText(dishList.get(position).getPrice()+"");
@@ -77,9 +76,9 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
             price = itemView.findViewById(R.id.tv_dish_prices);
             des = itemView.findViewById(R.id.tv_dish_des);
             show = itemView.findViewById(R.id.tv_show);
-            
+            this.onItemClick=onItemClick;
             show.setOnClickListener(this);
-            show.setOnLongClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
         @Override
         public void onClick(View v) {
@@ -87,8 +86,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
         }
         @Override
         public boolean onLongClick(View v) {
-            onItemClick.onLongClick(v, getAdapterPosition());
-            return true;
+            return false;
         }
 
         public void bindData() {

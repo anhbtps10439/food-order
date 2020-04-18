@@ -1,6 +1,7 @@
 package com.pro1121.foodorder.activity.UserCase;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -58,15 +59,13 @@ public class UserCaseActivity extends AppCompatActivity {
             switch (i){
                 case R.id.navHomeUser:
                     fm.beginTransaction().replace(R.id.nav_host_user_case, new HomeUserFragment()).commit();
-                    Toast.makeText(UserCaseActivity.this, "Trang chính", Toast.LENGTH_SHORT).show();
+
                     break;
                 case R.id.navCategoryUser:
                     fm.beginTransaction().replace(R.id.nav_host_user_case, new CategoryUserFragment()).commit();
-                    Toast.makeText(UserCaseActivity.this, "Danh mục", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.navProfile:
                     fm.beginTransaction().replace(R.id.nav_host_user_case, new ProfileFragment()).commit();
-                    Toast.makeText(UserCaseActivity.this, "Người dùng", Toast.LENGTH_SHORT).show();
                     break;
             }
         }

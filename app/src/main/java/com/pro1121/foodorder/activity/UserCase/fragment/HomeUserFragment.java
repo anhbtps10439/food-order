@@ -23,8 +23,6 @@ public class HomeUserFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container,false);
 
-
-
         setHasOptionsMenu(true);
         return view;
     }
@@ -42,4 +40,6 @@ public class HomeUserFragment extends Fragment {
         menu.clear();
         inflater.inflate(R.menu.toolbar_home_user_case,menu);
     }
+
+
 }

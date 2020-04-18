@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.pro1121.foodorder.R;
+import com.pro1121.foodorder.activity.AdminCase.AdminCaseActivity;
 
 public class StatisticFragment extends Fragment {
     private Toolbar toolbar;
@@ -54,5 +55,6 @@ public class StatisticFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         toolbar.setNavigationIcon(null);
+
     }
 }

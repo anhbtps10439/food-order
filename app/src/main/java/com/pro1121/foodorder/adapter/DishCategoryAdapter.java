@@ -85,23 +85,14 @@ public class DishCategoryAdapter extends RecyclerView.Adapter<DishCategoryAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        /*
         try{
-        category_dish_img.clear();
-        for (int i = 0; i< LibraryClass.categoryPicList.size(); i++){
-            category_dish_img.add(new BitmapDrawable(context.getResources(), LibraryClass.categoryPicList.get(position)));
-        }
-        // Duyệt từng index của mảng chứa Bitmap sau đó parse qua Drawable để làm background
-            holder.iv_category_image.setBackground(new BitmapDrawable(context.getResources(),LibraryClass.categoryPicList.get(position)));
-        }catch (Exception e){
-            Toast.makeText(context, "Lỗi gán ảnh", Toast.LENGTH_SHORT).show();
-            Log.d("Set Image Error >>>>>>>>>>>>>>>>>>", e.toString());
+            holder.iv_category_image.setImageBitmap(categoryPicList.get(position));
 
+        }catch (Exception e) {
+          holder.iv_category_image.setBackgroundColor(Color.parseColor("#ff3737"));
         }
-        */
-//        holder.iv_category_image.setBackgroundColor(Color.parseColor("#ff3737"));
         holder.name.setText(dishCategoryModelList.get(position).getName());
-        holder.iv_category_image.setImageBitmap(categoryPicList.get(position));
+
         holder.bindData();
     }
 

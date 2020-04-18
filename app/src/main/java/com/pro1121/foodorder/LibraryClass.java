@@ -38,6 +38,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class LibraryClass {
 
@@ -47,7 +48,7 @@ public class LibraryClass {
     public static ArrayList<OrderModel> orderModelList = new ArrayList<>();
     public static ArrayList<Bitmap> categoryPicList = new ArrayList<>();
     public static ArrayList<Bitmap> dishPicList = new ArrayList<>();
-    public static  ArrayList<Bitmap> userPicList = new ArrayList<>();
+    public static ArrayList<Bitmap> userPicList = new ArrayList<>();
 
 
     public static String downloadURL;
@@ -94,16 +95,15 @@ public class LibraryClass {
         return data;
     }
 
-    public static  ArrayList<Bitmap> dishPicFilter(String categoryID)
-    {
+    public static  ArrayList<Bitmap> dishPicFilter(String categoryID) {
         ArrayList<Bitmap> data = new ArrayList<>();
+
         for (int i = 0; i < dishModelList.size(); i++) {
-            if (dishModelList.get(i).getDishCategoryId().equals(categoryID))
-            {
+            if (dishModelList.get(i).getDishCategoryId().equals(categoryID)) {
                 data.add(dishPicList.get(i));
             }
         }
-        return data;
+            return data;
     }
 
     public static String createFileName()
@@ -135,7 +135,6 @@ public class LibraryClass {
                 Toast.makeText(context, "Upload Completely", Toast.LENGTH_SHORT).show();
             }
         });
-        
         return "gs://food-order-2-e2475.appspot.com/"+location;
     }
 

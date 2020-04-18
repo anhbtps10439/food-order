@@ -33,7 +33,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getActivity().getWindow().setStatusBarColor(Color.parseColor("#FF3737"));
+        setColorToolbarAndStatusBar(toolbar);
         View view = inflater.inflate(R.layout.fragment_profile, container,false);
         setHasOptionsMenu(true);
 
@@ -60,7 +60,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_profile:
-                //Show thông tin cá nhân
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.nav_host_user_case, new EditProfileUserFragment()).commit();
                 break;
             case R.id.tv_order_history:
                 //Show lịch sử order
@@ -77,8 +78,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         toolbar = getActivity().findViewById(R.id.toolbarUserCase);
         toolbar.setBackgroundColor(Color.parseColor("#FF3737"));
-
-
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         toolbar.setTitle("");
     }
@@ -99,12 +98,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onDestroyView() {
-        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        getActivity().getWindow().setStatusBarColor(Color.parseColor("#FFFFFF"));
-        super.onDestroyView();
+    public void setColorToolbarAndStatusBar(Toolbar toolbar) {
+        toolbar.setBackgroundColor(Color.parseColor("#FF3737"));
+        getActivity().getWindow().setStatusBarColor(Color.parseColor("#FF3737"));
     }
-
 
 }

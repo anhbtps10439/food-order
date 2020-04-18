@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@color/colorRedMain">
+    <EditText
+        android:id="@+id/et_birth"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_dialog"
+        android:elevation="5dp"
+        android:hint="Ngày sinh"
+        android:paddingStart="30dp" />
+
+    <EditText
+        android:id="@+id/et_phone_number"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_dialog"
+        android:elevation="5dp"
+        android:inputType="number"
+        android:hint="Số điện thoại"
+        android:paddingStart="30dp" />
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/shape_dialog"
+        android:elevation="5dp"
+        android:hint="Email"
+        android:paddingStart="30dp" />
+</LinearLayout>

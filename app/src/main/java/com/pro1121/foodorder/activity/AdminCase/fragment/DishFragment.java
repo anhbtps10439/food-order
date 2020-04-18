@@ -68,7 +68,7 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
     private AlertDialog alertDialog;
     private ImageView ivCategoryAvatar;
     private String mDishPrice, mDishName, mDishDes, nameCategory,idCategory; //id category; //nameCategory
-    private TextView set_dish_category_name;
+    private TextView tv_set_dish_category_name;
     private DishDao dishDao;
     private FloatingActionButton flb_add_dish;
     private DishAdapter dishAdapter;
@@ -82,17 +82,16 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
 
         dishDao = new DishDao(getActivity());
 
-        set_dish_category_name = view.findViewById(R.id.tv_set_dish_category_name);
+        tv_set_dish_category_name = view.findViewById(R.id.tv_set_dish_category_name);
         ryc_dish = view.findViewById(R.id.ryc_dish);
         flb_add_dish = view.findViewById(R.id.flb_add_dish);
 
-        set_dish_category_name.setText(nameCategory + "");
+        tv_set_dish_category_name.setText(nameCategory + "");
 
         //============= Lọc list by id
         dishList = LibraryClass.dishFilter(idCategory);
-        picList = LibraryClass.dishPicFilter(idCategory);
+         picList = LibraryClass.dishPicFilter(idCategory);
 
-        Log.d("Listttttttttttttttttttttttttttttttttttttttttttt", dishList.size() + "  "+ picList.size());
         //=============
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
@@ -202,13 +201,13 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
     }
 
 
-    //Onclick item
+    //Onclick item == ko dùng
     @Override
     public void onClick(View view, int position) {
 
     }
 
-    //OnLongClick item
+    //OnLongClick item to edit
     @Override
     public void onLongClick(View view, int position) {
 
