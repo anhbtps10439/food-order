@@ -1,6 +1,7 @@
 package com.pro1121.foodorder.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
@@ -23,13 +24,15 @@ import java.util.List;
 
 public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
 
-    private List<DishModel> dishModels;
+    private ArrayList<DishModel> dishList;
+    private ArrayList<Bitmap> picList;
     private Context context;
     private OnItemClick onItemClick;
 
-    public DishAdapter(Context context, List<DishModel> dishModels, OnItemClick onItemClick){
+    public DishAdapter(Context context, ArrayList<DishModel> dishList, ArrayList<Bitmap> picList, OnItemClick onItemClick){
         this.context=context;
-        this.dishModels=dishModels;
+        this.dishList=dishList;
+        this.picList = picList;
         this.onItemClick=onItemClick;
     }
 
@@ -41,26 +44,25 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        DishModel list = dishModels.get(position);
-        try{
-            // Duyệt từng index của mảng chứa Bitmap sau đó parse qua Drawable để làm background
-            holder.dis_image.setBackground(new BitmapDrawable(context.getResources(),LibraryClass.categoryPicList.get(position)));
-        }catch (Exception e){
-            Toast.makeText(context, "Lỗi gán ảnh", Toast.LENGTH_SHORT).show();
-            Log.d("Set Image Error >>>>>>>>>>>>>>>>>>", e.toString());
-            holder.dis_image.setBackgroundColor(Color.parseColor("#ff3737"));
-        }
-        holder.name.setText(list.getName());
-        holder.des.setText(list.getDes());
-        holder.price.setText(list.getPrice()+"");
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {//        try{
+//            // Duyệt từng index của mảng chứa Bitmap sau đó parse qua Drawable để làm background
+//            holder.dis_image.setBackground(new BitmapDrawable(context.getResources(),LibraryClass.categoryPicList.get(position)));
+//        }catch (Exception e){
+//            Toast.makeText(context, "Lỗi gán ảnh", Toast.LENGTH_SHORT).show();
+//            Log.d("Set Image Error >>>>>>>>>>>>>>>>>>", e.toString());
+//            holder.dis_image.setBackgroundColor(Color.parseColor("#ff3737"));
+//        }
+        holder.dis_image.setImageBitmap(picList.get(position));
+        holder.name.setText(dishList.get(position).getName());
+        holder.des.setText(dishList.get(position).getDes());
+        holder.price.setText(dishList.get(position).getPrice()+"");
         holder.bindData();
 
     }
 
     @Override
     public int getItemCount() {
-        return dishModels.size();
+        return dishList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnLongClickListener, View.OnClickListener{
@@ -75,7 +77,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
             price = itemView.findViewById(R.id.tv_dish_prices);
             des = itemView.findViewById(R.id.tv_dish_des);
             show = itemView.findViewById(R.id.tv_show);
-
+            
             show.setOnClickListener(this);
             show.setOnLongClickListener(this);
         }

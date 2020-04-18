@@ -28,7 +28,7 @@ public class DishDao {
         this.db = FirebaseDatabase.getInstance().getReference();
     }
 
-    public void insert (String categoryId, String name, int price, String des, String image)
+    public String insert (String categoryId, String name, int price, String des, String image)
     {
         String id = categoryId + db.child("dish").push().getKey();
 
@@ -36,6 +36,8 @@ public class DishDao {
         db.child("dish").child(id).setValue(dishModel);
        // Thêm 1 tí
         dishModelList.add(dishModel);
+
+        return id;
     }
 
     public void getAllRuntime()

@@ -94,6 +94,18 @@ public class LibraryClass {
         return data;
     }
 
+    public static  ArrayList<Bitmap> dishPicFilter(String categoryID)
+    {
+        ArrayList<Bitmap> data = new ArrayList<>();
+        for (int i = 0; i < dishModelList.size(); i++) {
+            if (dishModelList.get(i).getDishCategoryId().equals(categoryID))
+            {
+                data.add(dishPicList.get(i));
+            }
+        }
+        return data;
+    }
+
     public static String createFileName()
     {
         return new SimpleDateFormat("ddMMyyyy_hhmmss_").format(new Date());

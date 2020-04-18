@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -50,6 +51,8 @@ import java.util.List;
 
 import static com.pro1121.foodorder.LibraryClass.convertToBitmap;
 import static com.pro1121.foodorder.LibraryClass.currrentPhoto;
+import static com.pro1121.foodorder.LibraryClass.dishModelList;
+import static com.pro1121.foodorder.LibraryClass.dishPicList;
 import static com.pro1121.foodorder.LibraryClass.downloadURL;
 import static com.pro1121.foodorder.LibraryClass.photoPath;
 import static com.pro1121.foodorder.LibraryClass.photoUpload;
@@ -70,7 +73,8 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
     private FloatingActionButton flb_add_dish;
     private DishAdapter dishAdapter;
     public static String idCategory = null;              //id category
-    public List<DishModel> dishModels;
+    public ArrayList<DishModel> dishList;
+    public ArrayList<Bitmap> picList;
 
     @Nullable
     @Override
@@ -86,12 +90,13 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
         set_dish_category_name.setText(nameCategory+"");
 
         //============= Lọc list by id
-        dishModels = LibraryClass.dishFilter(idCategory);
+        dishList = LibraryClass.dishFilter(idCategory);
+        picList = LibraryClass.dishPicFilter(idCategory);
         //=============
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
         ryc_dish.setLayoutManager(layoutManager);
-        dishAdapter = new DishAdapter(getActivity(), dishModels, this);
+        dishAdapter = new DishAdapter(getActivity(), dishList, picList,this);
         ryc_dish.setAdapter(dishAdapter);
 
         flb_add_dish.setOnClickListener(new View.OnClickListener() {
@@ -128,12 +133,22 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
 
                         downloadURL = photoUpload(getActivity(), currrentPhoto);
 
-                        try {
-                            dishDao.insert(idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, downloadURL);
+                        try
+                        {
+                            //insert vào db và add vào các list hiện có
+                            String id = dishDao.insert(idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, downloadURL);
+                            dishModelList.add(new DishModel(id, idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, downloadURL));
+                            dishList.add(new DishModel(id, idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, downloadURL));
+                            dishPicList.add(currrentPhoto);
+                            picList.add(currrentPhoto);
                             dishAdapter.notifyDataSetChanged();
+
                         } catch (Exception e) {
                             Toast.makeText(getActivity(), "Lỗi thêm", Toast.LENGTH_SHORT).show();
                         }
+
+
+
                         Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                     }
                 });
