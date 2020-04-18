@@ -34,12 +34,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pro1121.foodorder.R;
 import com.pro1121.foodorder.adapter.DishCategoryAdapter;
 import com.pro1121.foodorder.dao.DishCategoryDao;
+import com.pro1121.foodorder.model.DishCategoryModel;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.pro1121.foodorder.LibraryClass.categoryPicList;
 import static com.pro1121.foodorder.LibraryClass.convertToBitmap;
 import static com.pro1121.foodorder.LibraryClass.currrentPhoto;
 import static com.pro1121.foodorder.LibraryClass.dishCategoryModelList;
@@ -52,13 +54,12 @@ import static com.pro1121.foodorder.LibraryClass.photoUri;
 public class CategoryAdminFragment extends Fragment implements DishCategoryAdapter.OnItemClick {
 
     private Context context;
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
     private FloatingActionButton fbCategory;
     private Toolbar toolbar;
     private DishCategoryAdapter dishCategoryAdapter;
     //dialog
     private ImageView ivCategoryAvatar;
-    private String url;
     private AlertDialog alertDialog;
     private String categoryID, categoryName,categoryDes;
     private DishCategoryDao dao;
@@ -67,6 +68,7 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
 
     public CategoryAdminFragment(Context context) {
         this.context = context;
+        this.dao = new DishCategoryDao(context);
     }
     public CategoryAdminFragment() {
     }
@@ -79,14 +81,11 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
 
         recyclerView = view.findViewById(R.id.rv_dish);
         fbCategory = view.findViewById(R.id.fbCategory);
-        dao = new DishCategoryDao(context);
-
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
         recyclerView.setLayoutManager(layoutManager);
         dishCategoryAdapter = new DishCategoryAdapter(context, this);
         recyclerView.setAdapter(dishCategoryAdapter);
-
 
         //Floating button
         fbCategory.setOnClickListener(new View.OnClickListener() {
@@ -140,7 +139,10 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
                         downloadURL = photoUpload(getActivity(), currrentPhoto);
                         try{
                             dao.insert(categoryID, categoryName, categoryDes, downloadURL);
+                            dishCategoryModelList.add(new DishCategoryModel(categoryID, categoryName, categoryDes, downloadURL));
+                            categoryPicList.add(currrentPhoto);
                             dishCategoryAdapter.notifyDataSetChanged();
+
                         }catch (Exception e){
                             Toast.makeText(getActivity(), "Lỗi thêm", Toast.LENGTH_SHORT).show();
                         }
@@ -301,7 +303,6 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
                        //Delete DishCategory
                         try{
                             dao.delete(dishCategoryModelList.get(position).getId());
-                            dishCategoryAdapter.notifyDataSetChanged();
                         }catch (Exception ex){
                             Toast.makeText(getActivity(), "Something wrong", Toast.LENGTH_SHORT).show();
                             Log.d("Delete CateDis Error............", ex.toString());

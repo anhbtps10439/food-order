@@ -17,11 +17,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
+import com.pro1121.foodorder.activity.AdminCase.fragment.CategoryAdminFragment;
 import com.pro1121.foodorder.adapter.DishCategoryAdapter;
 import com.pro1121.foodorder.model.DishCategoryModel;
 import com.pro1121.foodorder.model.UserModel;
 
+import static com.pro1121.foodorder.LibraryClass.categoryPicList;
 import static com.pro1121.foodorder.LibraryClass.dishCategoryModelList;
+import static com.pro1121.foodorder.LibraryClass.dishModelList;
 import static com.pro1121.foodorder.LibraryClass.downloadPhoto;
 import static com.pro1121.foodorder.LibraryClass.userModelList;
 
@@ -50,7 +53,6 @@ public class DishCategoryDao {
                 Toast.makeText(context, "Có lỗi xảy ra! Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
             }
         });
-        getAllRuntime();
     }
 
     public void getAllRuntime()
@@ -59,6 +61,7 @@ public class DishCategoryDao {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 dishCategoryModelList.clear();
+                categoryPicList.clear();
                 //mỗi child trong dataSnapshot
                 for (DataSnapshot data : dataSnapshot.getChildren())
                 {
@@ -67,11 +70,11 @@ public class DishCategoryDao {
                 }
 
                 if (dishCategoryModelList.size() > 0)
-
                 {
                     for (int i = 0; i < dishCategoryModelList.size(); i++)
                     {
                         downloadPhoto(dishCategoryModelList.get(i).getImage(), context, "category");
+                        categoryPicList.size();
                     }
                 }
             }
@@ -85,29 +88,6 @@ public class DishCategoryDao {
         db.child("dishCategory").addListenerForSingleValueEvent(valueEventListener);
     }
 
-    public void getAll()
-    {
-        ValueEventListener valueEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                dishCategoryModelList.clear();
-                //mỗi child trong dataSnapshot
-                for (DataSnapshot data : dataSnapshot.getChildren())
-                {
-                    //tạo đối tượng User và thêm vào List
-                    dishCategoryModelList.add(data.getValue(DishCategoryModel.class));
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        };
-
-        db.child("dishCategory").addValueEventListener(valueEventListener);
-    }
-
     public void delete(String id)
     {
         db.child("dishCategory").child(id).removeValue(new DatabaseReference.CompletionListener() {
@@ -116,6 +96,5 @@ public class DishCategoryDao {
                 Toast.makeText(context, "Xóa thành công!", Toast.LENGTH_SHORT).show();
             }
         });
-        getAllRuntime();
     }
 }
