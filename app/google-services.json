@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "936722464498",
-    "firebase_url": "https://food-order-34040.firebaseio.com",
-    "project_id": "food-order-34040",
-    "storage_bucket": "food-order-34040.appspot.com"
+    "project_number": "427610190766",
+    "firebase_url": "https://food-order-2-e2475.firebaseio.com",
+    "project_id": "food-order-2-e2475",
+    "storage_bucket": "food-order-2-e2475.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:936722464498:android:fb964cffa2f31ec8ae9a6b",
+        "mobilesdk_app_id": "1:427610190766:android:002428511ffd4f31d3ce3f",
         "android_client_info": {
           "package_name": "com.pro1121.foodorder"
         }
       },
       "oauth_client": [
         {
-          "client_id": "936722464498-e2sonbdbalotal8jslki1su0b95lvdh4.apps.googleusercontent.com",
+          "client_id": "427610190766-vif32uet8737gi2dc6t7bj831bb3ef4p.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAjdkbSjLowEpjB7y7DNCDFM3sQVecEWiU"
+          "current_key": "AIzaSyCvV2bQsaSrwQ79e24sqpoQDM4VRWyLRGo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "936722464498-e2sonbdbalotal8jslki1su0b95lvdh4.apps.googleusercontent.com",
+              "client_id": "427610190766-vif32uet8737gi2dc6t7bj831bb3ef4p.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

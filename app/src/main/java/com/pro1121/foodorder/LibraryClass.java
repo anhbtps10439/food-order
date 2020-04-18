@@ -104,16 +104,19 @@ public class LibraryClass {
         //storageReferece đóng vai trò như đường dẫn đến file
         //getLastPathSegment để lấy địa chỉ cuối cùng của file, ở đây là file name
         String location = "images/"+createFileName()+".jpg";
-        final StorageReference storageReference = storage.getReference("images/"+createFileName()+".jpg");
+        final StorageReference storageReference = storage.getReference(location);
 
         byte[] convertedPhoto = convertToBytes(photo);
 
-        //upload
-        UploadTask uploadTask = storageReference.putBytes(convertedPhoto);
-        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        storageReference.putBytes(convertedPhoto).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Log.e("downloadlink", "onSuccess: Link: " + taskSnapshot.getStorage().getDownloadUrl().getResult().toString());
+                Toast.makeText(context, "Upload Successfully", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                Toast.makeText(context, "Upload Completely", Toast.LENGTH_SHORT).show();
             }
         });
         
@@ -144,13 +147,10 @@ public class LibraryClass {
         return null;
     }
 
-    private static Bitmap downloadPhoto(String url)
+    private static void downloadPhoto(String url, final Context context)
     {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReferenceFromUrl(url);
-
-        final Bitmap[] bitmap = new Bitmap[1];
-
         //convert bytes sang bitmap
         final long LIMITSIZE = 10 * 1024 * 1024;//10mb
         storageReference.getBytes(LIMITSIZE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
@@ -158,11 +158,11 @@ public class LibraryClass {
             public void onSuccess(byte[] bytes) {
 
                 //offset là chỉ số index bắt đầu decode, length là độ dài của mảng bytes
-                bitmap[0] = BitmapFactory.decodeByteArray(bytes,0, bytes.length);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0, bytes.length);
+                categoryPicList.add(bitmap);
+                Toast.makeText(context, "Download Successfully!", Toast.LENGTH_SHORT).show();
             }
         });
-
-        return bitmap[0];
     }
     // Load toàn bộ ảnh của DishCategory -> Huy
     public static void loadAllImg(final Context context) {
@@ -199,15 +199,15 @@ public class LibraryClass {
                     }
                 });
     }
-    public static void downloadPhotoToArrayList()
+    public static void downloadPhotoToArrayList(Context context)
     {
         Log.d("DishCate Listtttttttttttttttttttt", dishCategoryModelList.size()+"") ;
         if (dishCategoryModelList.size() > 0)
 
-    {
+        {
             for (int i = 0; i < dishCategoryModelList.size(); i++)
             {
-                categoryPicList.add(downloadPhoto(dishCategoryModelList.get(i).getImage()));
+                downloadPhoto(dishCategoryModelList.get(i).getImage(), context);
             }
         }
         Log.d("PicListSize", "" + categoryPicList.size());

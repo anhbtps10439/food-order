@@ -23,22 +23,23 @@ import com.pro1121.foodorder.model.DishCategoryModel;
 
 import java.util.List;
 
+import static com.pro1121.foodorder.LibraryClass.categoryPicList;
+import static com.pro1121.foodorder.LibraryClass.dishCategoryModelList;
+
 public class DishCategoryAdapter extends RecyclerView.Adapter<DishCategoryAdapter.ViewHolder> {
 
     static Context context;
-    private List<DishCategoryModel> categoryModelList;
     private OnItemClick onItemClick;
 
 
-    public DishCategoryAdapter(Context context,  List<DishCategoryModel> categoryModelLists,OnItemClick onItemClick){
+    public DishCategoryAdapter(Context context, OnItemClick onItemClick){
         this.context=context;
-        this.categoryModelList= categoryModelLists;
         this.onItemClick = onItemClick;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
         private ImageView iv_category_image;
-        private TextView name, des;
+        private TextView name;
         private ImageButton ib_show_all_dish;
         private OnItemClick onItemClick;
 
@@ -84,7 +85,6 @@ public class DishCategoryAdapter extends RecyclerView.Adapter<DishCategoryAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        DishCategoryModel list = categoryModelList.get(position);
         /*
         try{
         category_dish_img.clear();
@@ -99,14 +99,15 @@ public class DishCategoryAdapter extends RecyclerView.Adapter<DishCategoryAdapte
 
         }
         */
-        holder.iv_category_image.setBackgroundColor(Color.parseColor("#ff3737"));
-        holder.name.setText(list.getName());
+//        holder.iv_category_image.setBackgroundColor(Color.parseColor("#ff3737"));
+        holder.name.setText(dishCategoryModelList.get(position).getName());
+        holder.iv_category_image.setImageBitmap(categoryPicList.get(position));
         holder.bindData();
     }
 
     @Override
     public int getItemCount() {
-        return categoryModelList.size();
+        return dishCategoryModelList.size();
     }
 
     public interface OnItemClick{

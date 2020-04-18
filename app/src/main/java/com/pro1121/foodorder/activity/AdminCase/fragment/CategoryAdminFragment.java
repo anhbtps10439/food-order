@@ -84,7 +84,7 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
         recyclerView.setLayoutManager(layoutManager);
-        dishCategoryAdapter = new DishCategoryAdapter(getActivity(), dishCategoryModelList,this);
+        dishCategoryAdapter = new DishCategoryAdapter(context, this);
         recyclerView.setAdapter(dishCategoryAdapter);
 
 
