@@ -48,8 +48,11 @@ public class MainActivity extends AppCompatActivity {
         //Loading
         userDao = new UserDao(this);
         userDao.getAllRuntime();
-        DishCategoryDao dishCategoryDao = new DishCategoryDao(this);
+        dishCategoryDao = new DishCategoryDao(this);
         dishCategoryDao.getAllRuntime();
+        dishDao = new DishDao(this);
+        dishDao.getAllRuntime();
+
 
 //        LibraryClass.loadAllImg(this);
         //

@@ -67,12 +67,11 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
     private RecyclerView ryc_dish;
     private AlertDialog alertDialog;
     private ImageView ivCategoryAvatar;
-    private String mDishPrice, mDishName, mDishDes, nameCategory; //nameCategory
+    private String mDishPrice, mDishName, mDishDes, nameCategory,idCategory; //id category; //nameCategory
     private TextView set_dish_category_name;
     private DishDao dishDao;
     private FloatingActionButton flb_add_dish;
     private DishAdapter dishAdapter;
-    public static String idCategory = null;              //id category
     public ArrayList<DishModel> dishList;
     public ArrayList<Bitmap> picList;
 
@@ -87,16 +86,18 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
         ryc_dish = view.findViewById(R.id.ryc_dish);
         flb_add_dish = view.findViewById(R.id.flb_add_dish);
 
-        set_dish_category_name.setText(nameCategory+"");
+        set_dish_category_name.setText(nameCategory + "");
 
         //============= Lọc list by id
         dishList = LibraryClass.dishFilter(idCategory);
         picList = LibraryClass.dishPicFilter(idCategory);
+
+        Log.d("Listttttttttttttttttttttttttttttttttttttttttttt", dishList.size() + "  "+ picList.size());
         //=============
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
         ryc_dish.setLayoutManager(layoutManager);
-        dishAdapter = new DishAdapter(getActivity(), dishList, picList,this);
+        dishAdapter = new DishAdapter(getActivity(), dishList, picList, this);
         ryc_dish.setAdapter(dishAdapter);
 
         flb_add_dish.setOnClickListener(new View.OnClickListener() {
@@ -131,22 +132,24 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
                         mDishDes = etDishDes.getText().toString();
                         mDishPrice = etDishPrice.getText().toString();
 
-                        downloadURL = photoUpload(getActivity(), currrentPhoto);
-
-                        try
-                        {
-                            //insert vào db và add vào các list hiện có
-                            String id = dishDao.insert(idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, downloadURL);
-                            dishModelList.add(new DishModel(id, idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, downloadURL));
-                            dishList.add(new DishModel(id, idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, downloadURL));
-                            dishPicList.add(currrentPhoto);
-                            picList.add(currrentPhoto);
-                            dishAdapter.notifyDataSetChanged();
-
+                        try {
+                            if (mDishName.equals("") || mDishDes.equals("") || mDishPrice.equals("")) {
+                                Toast.makeText(getActivity(), "Chưa đủ thông tin", Toast.LENGTH_SHORT).show();
+                            } else if (ivCategoryAvatar.getDrawable() == null) {
+                                Toast.makeText(getActivity(), "Chưa có ảnh", Toast.LENGTH_SHORT).show();
+                            } else {
+                                downloadURL = photoUpload(getActivity(), currrentPhoto);
+                                //insert vào db và add vào các list hiện có
+                                String id = dishDao.insert(idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, downloadURL);
+                                dishModelList.add(new DishModel(id, idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, downloadURL));
+                                dishList.add(new DishModel(id, idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, downloadURL));
+                                dishPicList.add(currrentPhoto);
+                                picList.add(currrentPhoto);
+                                dishAdapter.notifyDataSetChanged();
+                            }
                         } catch (Exception e) {
                             Toast.makeText(getActivity(), "Lỗi thêm", Toast.LENGTH_SHORT).show();
                         }
-
 
 
                         Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
@@ -189,14 +192,13 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_admin_case, new CategoryAdminFragment()).commit();
             }
         });
 
         idCategory = getArguments().getString("id");
         nameCategory = getArguments().getString("nameCategory");
-
+        Log.d("Checkkkkkkkkkkkkkkkkkkkk", idCategory + nameCategory);
     }
 
 

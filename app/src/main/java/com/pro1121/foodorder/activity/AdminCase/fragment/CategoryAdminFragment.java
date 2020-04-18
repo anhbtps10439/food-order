@@ -3,6 +3,7 @@ package com.pro1121.foodorder.activity.AdminCase.fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -31,6 +32,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.pro1121.foodorder.LibraryClass;
 import com.pro1121.foodorder.R;
 import com.pro1121.foodorder.adapter.DishCategoryAdapter;
 import com.pro1121.foodorder.dao.DishCategoryDao;
@@ -61,7 +63,7 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
     //dialog
     private ImageView ivCategoryAvatar;
     private AlertDialog alertDialog;
-    private String categoryID, categoryName,categoryDes;
+    private String categoryID, categoryName, categoryDes;
     private DishCategoryDao dao;
     public static final int REQUEST_CHOOSE_PHOTO_FROM_GALLERY = 2;
     public static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -70,28 +72,29 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
         this.context = context;
         this.dao = new DishCategoryDao(context);
     }
+
     public CategoryAdminFragment() {
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_category,container,false);
+        View view = inflater.inflate(R.layout.fragment_category, container, false);
         setHasOptionsMenu(true);
 
         recyclerView = view.findViewById(R.id.rv_dish);
         fbCategory = view.findViewById(R.id.fbCategory);
 
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(layoutManager);
-        dishCategoryAdapter = new DishCategoryAdapter(context, this);
+        dishCategoryAdapter = new DishCategoryAdapter(getActivity(), this);
         recyclerView.setAdapter(dishCategoryAdapter);
 
         //Floating button
         fbCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.CustomAlertDialog);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.CustomAlertDialog);
                 builder.setView(LayoutInflater.from(getActivity()).inflate(R.layout.dialog_insert_category, null, false));
                 builder.setTitle("Thêm loại");
                 builder.setPositiveButton("Thêm", null);
@@ -131,26 +134,30 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
                 btnPositive.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        try {
+                            categoryID = etCategoryCode.getText().toString();
+                            categoryName = etCategoryName.getText().toString();
+                            categoryDes = etCategoryDes.getText().toString();
 
-                        categoryID = etCategoryCode.getText().toString();
-                        categoryName = etCategoryName.getText().toString();
-                        categoryDes = etCategoryDes.getText().toString();
-
-                        downloadURL = photoUpload(getActivity(), currrentPhoto);
-                        try{
-                            dao.insert(categoryID, categoryName, categoryDes, downloadURL);
-                            dishCategoryModelList.add(new DishCategoryModel(categoryID, categoryName, categoryDes, downloadURL));
-                            categoryPicList.add(currrentPhoto);
-                            dishCategoryAdapter.notifyDataSetChanged();
-
-                        }catch (Exception e){
+                            //Check null
+                            if (categoryID.equals("") || categoryName.equals("") || categoryDes.equals("")) {
+                                Toast.makeText(getActivity(), "Chưa đủ dữ liệu", Toast.LENGTH_SHORT).show();
+                            } else if (ivCategoryAvatar.getDrawable() == null) {
+                                Toast.makeText(getActivity(), "Chưa có ảnh", Toast.LENGTH_SHORT).show();
+                            } else {
+                                downloadURL = photoUpload(getActivity(), currrentPhoto);
+                                dao.insert(categoryID, categoryName, categoryDes, downloadURL);
+                                dishCategoryModelList.add(new DishCategoryModel(categoryID, categoryName, categoryDes, downloadURL));
+                                categoryPicList.add(currrentPhoto);
+                                dishCategoryAdapter.notifyDataSetChanged();
+                            }
+                        } catch (Exception e) {
                             Toast.makeText(getActivity(), "Lỗi thêm", Toast.LENGTH_SHORT).show();
                         }
                         alertDialog.dismiss();
                     }
                 });
-                
-                
+
 
             }
         });
@@ -163,7 +170,7 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         toolbar = getActivity().findViewById(R.id.toolbarAdminCase);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         toolbar.setTitle("Loại thức ăn");
     }
 
@@ -171,15 +178,15 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
-        inflater.inflate(R.menu.toolbar_category,menu);
+        inflater.inflate(R.menu.toolbar_category, menu);
+        setColorToolbarAndStatusBar(toolbar);
     }
 
 
     //hàm lưu file ảnh, đặt tên bằng ngày giờ chụp
     //File này chưa có data ảnh, chỉ có tên, đường dẫn
     //hàm này sẽ được gọi để tạo ra một file chứa thống tin trên, sau đó để vào Uri rồi cho vào intent
-    private File createPhotoFile() throws IOException
-    {
+    private File createPhotoFile() throws IOException {
         String takenDate = new SimpleDateFormat("ddMMyyyy_hhmmss_").format(new Date());
 
         //lấy đường dẫn của riêng app, app khác sẽ không truy cập được
@@ -195,26 +202,22 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
         return photoFile;
     }
 
-    private void openCam()
-    {
+    private void openCam() {
         //Khai báo một Intent thực hiện việc gọi một activity chụp ảnh
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         // câu lệnh if này để kiểm tra xem hệ thống có Activity nào để chụp ảnh không
         //vì nếu gọi intent mà không có activity nào hoạt động thì ứng dụng sẽ bị crash
-        if (intent.resolveActivity(getContext().getPackageManager()) != null )
-        {
+        if (intent.resolveActivity(getContext().getPackageManager()) != null) {
             //tạo một file trước
             File photoFile;
 
-            try
-            {
+            try {
                 //sau khi gọi createPhotoFile, photoPath đã có data đường dẫn
                 photoFile = createPhotoFile();
 
                 //nếu photoFile đã được tạo thành công
-                if (photoFile != null)
-                {
+                if (photoFile != null) {
                     //gán Uri cho currentPhotoUri
                     photoUri = FileProvider.getUriForFile(context, "com.example.android.fileprovider", photoFile);
 
@@ -227,8 +230,7 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
                     startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
                 }
 
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
@@ -240,19 +242,15 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == Activity.RESULT_OK)
-        {
-            switch (requestCode)
-            {
-                case REQUEST_CHOOSE_PHOTO_FROM_GALLERY:
-                {
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case REQUEST_CHOOSE_PHOTO_FROM_GALLERY: {
                     currrentPhoto = convertToBitmap(getContext(), data.getData());
                     ivCategoryAvatar.setImageBitmap(currrentPhoto);
                     break;
                 }
 
-                case REQUEST_IMAGE_CAPTURE:
-                {
+                case REQUEST_IMAGE_CAPTURE: {
                     currrentPhoto = convertToBitmap(getContext(), photoUri);
                     ivCategoryAvatar.setImageBitmap(currrentPhoto);
                     break;
@@ -265,7 +263,7 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
     // Onclick button show all dish in new Fragment
     @Override
     public void onClick(View view, int position) {
-        try{
+        try {
             String id = dishCategoryModelList.get(position).getId();
             String name = dishCategoryModelList.get(position).getName();
             Bundle bundle = new Bundle();
@@ -274,8 +272,8 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
             Fragment fragment = new DishFragment();
             fragment.setArguments(bundle);
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.nav_host_admin_case, fragment,"dish").commit();
-        }catch (Exception e){
+                    .replace(R.id.nav_host_admin_case, fragment, "dish").commit();
+        } catch (Exception e) {
             Toast.makeText(getActivity(), "Lỗi lấy id", Toast.LENGTH_SHORT).show();
         }
 
@@ -285,12 +283,12 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
     // Onclick long Item DishRecycle View
     @Override
     public void onLongClick(View view, final int position) {
-        PopupMenu popupMenu = new PopupMenu(getActivity(),view);
+        PopupMenu popupMenu = new PopupMenu(getActivity(), view);
         popupMenu.getMenuInflater().inflate(R.menu.menu_on_long_click_dish_category, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
 
                     //Edit Dish Category
                     case R.id.it_edit_cate_dish:
@@ -300,10 +298,13 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
                         break;
 
                     case R.id.it_delete_cate_dish:
-                       //Delete DishCategory
-                        try{
+                        //Delete DishCategory
+                        try {
+                            if (LibraryClass.dishFilter(dishCategoryModelList.get(position).getId()).size()>0){
+                                Toast.makeText(getActivity(), "Ko thể xoá khi bên trong còn quá nhiều món ăn", Toast.LENGTH_SHORT).show();
+                            }
                             dao.delete(dishCategoryModelList.get(position).getId());
-                        }catch (Exception ex){
+                        } catch (Exception ex) {
                             Toast.makeText(getActivity(), "Something wrong", Toast.LENGTH_SHORT).show();
                             Log.d("Delete CateDis Error............", ex.toString());
                         }
@@ -317,7 +318,7 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
     }
 
     private void editDishCategory(int position) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.CustomAlertDialog);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.CustomAlertDialog);
         builder.setView(LayoutInflater.from(context).inflate(R.layout.dialog_insert_category, null, false));
         builder.setTitle("Thêm loại");
         builder.setPositiveButton("Thêm", null);
@@ -363,12 +364,20 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Updating!!!", Toast.LENGTH_SHORT).show();
-
                 alertDialog.dismiss();
             }
         });
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        setColorToolbarAndStatusBar(toolbar);
+    }
 
+    public void setColorToolbarAndStatusBar(Toolbar toolbar) {
+        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        getActivity().getWindow().setStatusBarColor(Color.parseColor("#FFFFFF"));
+    }
 }
