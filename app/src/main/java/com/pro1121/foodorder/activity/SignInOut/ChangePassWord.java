@@ -15,12 +15,13 @@ public class ChangePassWord extends AppCompatActivity {
     // Kiểm tra người dùng muốn đổi mật khẩu hay muốn tạo tài khoản mới
     // check = true => người dùng quên mật khẩu, không yêu cầu mật khẩu cũ
     // check = false => người dùng muốn đổi mật khẩu, yêu cầu mật khẩu cũ
-    boolean check = getIntent().getBooleanExtra("isForgot", false);
+    boolean check = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_pass_word);
+        boolean check = getIntent().getBooleanExtra("isForgot", false);
 
         if (check) {
             // người dùng quên mật khẩu, không yêu cầu mật khẩu cũ

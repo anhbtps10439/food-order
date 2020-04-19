@@ -30,6 +30,7 @@ public class ForgotPassword extends AppCompatActivity {
                 intent.putExtra("isForgot",true);
                 startActivity(intent);
                 finish();
+                return;
             }
         }
         Toast.makeText(this, "Số điện thoại chưa được đăng ký", Toast.LENGTH_SHORT).show();
