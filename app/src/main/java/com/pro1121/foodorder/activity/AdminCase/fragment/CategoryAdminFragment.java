@@ -303,7 +303,8 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
                             if (LibraryClass.dishFilter(dishCategoryModelList.get(position).getId()).size()>0){
                                 Toast.makeText(getActivity(), "Ko thể xoá khi bên trong còn quá nhiều món ăn", Toast.LENGTH_SHORT).show();
                             }
-                            dao.delete(dishCategoryModelList.get(position).getId());
+                            dao.delete(dishCategoryModelList.get(position).getId(),position,dishCategoryModelList.get(position).getImage());
+                            dishCategoryAdapter.notifyDataSetChanged();
                         } catch (Exception ex) {
                             Toast.makeText(getActivity(), "Something wrong", Toast.LENGTH_SHORT).show();
                             Log.d("Delete CateDis Error............", ex.toString());

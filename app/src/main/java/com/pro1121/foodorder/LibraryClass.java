@@ -204,40 +204,5 @@ public class LibraryClass {
             e.printStackTrace();
         }
     }
-    // Load toàn bộ ảnh của DishCategory -> Huy
-    public static void loadAllImg(final Context context) {
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference reference = storage.getReferenceFromUrl("gs://food-order-34040.appspot.com");
-        // Làm mới mảng chứa bitmap
-        categoryPicList.clear();
-        // Gọi reference đến thư mục images trên firebase
-        StorageReference imgRef = reference.child("images");
-        // List All file trong images
-        imgRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
-            // Khi load hết thành công sẽ trả về listResult chứa các file
-            @Override
-            public void onSuccess(ListResult listResult) {
-                // Trỏ đến từng item trong listResult
-                for (StorageReference item : listResult.getItems()){
-                    // getBytes của từng item để dùng BitmapFactory parse ra Bitmap
-                    item.getBytes(10 * 1024 * 1024)
-                            .addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                        @Override
-                        public void onSuccess(byte[] bytes) {
-                            // Parse ra Bitmap
-                            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                            categoryPicList.add(bitmap);
-                        }
-                    });
-                }
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context, "Fail", Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
 
 }

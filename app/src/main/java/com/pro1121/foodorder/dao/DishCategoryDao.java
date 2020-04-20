@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.pro1121.foodorder.activity.AdminCase.fragment.CategoryAdminFragment;
 import com.pro1121.foodorder.adapter.DishCategoryAdapter;
@@ -88,13 +89,17 @@ public class DishCategoryDao {
         db.child("dishCategory").addListenerForSingleValueEvent(valueEventListener);
     }
 
-    public void delete(String id)
-    {
+    public void delete(String id, int position, String url)
+    {   FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageReference = storage.getReferenceFromUrl(url);
+        storageReference.delete();
+        dishCategoryModelList.remove(position);
         db.child("dishCategory").child(id).removeValue(new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 Toast.makeText(context, "Xóa thành công!", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 }
