@@ -105,7 +105,8 @@ public class EditProfileUserFragment extends Fragment {
         tv_email.setText(user.getEmail());
 
         try {
-            iv_avatar.
+            Log.d("Set image errorrrrrrrrrrrrrrrrrrrrrrrrrrrrr", userModelList.size()+"");
+            Log.d("Set image errorrrrrrrrrrrrrrrrrrrrrrrrrrrrr", userPicList.size()+"");
         }catch (Exception e){
             //Set ảnh bị lỗi hoặc chưa có ảnh
             iv_avatar.setBackgroundColor(Color.BLACK);
