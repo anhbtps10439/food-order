@@ -1,9 +1,11 @@
 package com.pro1121.foodorder.dao;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -89,6 +91,15 @@ public class UserDao {
 
         //hàm này chỉ được gọi một lần duy nhất vào lúc app chạy
         db.child("user").addValueEventListener(valueEventListener);
+    }
 
+    public void update(String id, String name, String birthday, String email, String password, String role, String image)
+    {
+        db.child("user").child(id).setValue(new UserModel(id, name, birthday, email, password, role, image)).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(context, "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

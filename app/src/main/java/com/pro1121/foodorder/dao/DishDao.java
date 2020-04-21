@@ -105,5 +105,15 @@ public class DishDao {
         db.child("dish").addValueEventListener(valueEventListener);
     }
 
+    public void update(String id, String categoryId, String name, int price, String des, String image)
+    {
+        db.child("dish").child(id).setValue(new DishModel(id, categoryId, name, price, des, image)).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(context, "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
 }

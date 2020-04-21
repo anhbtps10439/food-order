@@ -102,4 +102,14 @@ public class DishCategoryDao {
         });
 
     }
+
+    public void update(String id, String name, String des, String image)
+    {
+        db.child("category").child(id).setValue(new DishCategoryModel(id, name, des, image)).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(context, "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
