@@ -137,13 +137,13 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
                             } else if (ivCategoryAvatar.getDrawable() == null) {
                                 Toast.makeText(getActivity(), "Chưa có ảnh", Toast.LENGTH_SHORT).show();
                             } else {
-                                downloadURL = photoUpload(getActivity(), currrentPhoto);
+//                                downloadURL = photoUpload(getActivity(), currrentPhoto);
                                 //insert vào db và add vào các list hiện có
-                                String id = dishDao.insert(idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, downloadURL);
-                                dishModelList.add(new DishModel(id, idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, downloadURL));
-                                dishList.add(new DishModel(id, idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, downloadURL));
+                                String id = dishDao.insert(idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, "none");
+                                dishModelList.add(new DishModel(id, idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, "none"));
+                                dishList.add(new DishModel(id, idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, "none"));
                                 dishPicList.add(currrentPhoto);
-                                picList.add(currrentPhoto);
+//                                picList.add(currrentPhoto);
                                 dishAdapter.notifyDataSetChanged();
                             }
                         } catch (Exception e) {
@@ -157,25 +157,25 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
 
 
         //Click to open gallery
-        ivCategoryAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "Mở Gallery !!!", Toast.LENGTH_SHORT).show();
-                //intent mở gallery
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, REQUEST_CHOOSE_PHOTO_FROM_GALLERY);
-            }
-        });
+//        ivCategoryAvatar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getActivity(), "Mở Gallery !!!", Toast.LENGTH_SHORT).show();
+//                //intent mở gallery
+//                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//                intent.setType("image/*");
+//                startActivityForResult(intent, REQUEST_CHOOSE_PHOTO_FROM_GALLERY);
+//            }
+//        });
         //Click to open Camera
-        btnOpenCam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Open Camera
-                Toast.makeText(getActivity(), "Mở Camera !!!", Toast.LENGTH_SHORT).show();
-                openCam();
-            }
-        });
+//        btnOpenCam.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //Open Camera
+//                Toast.makeText(getActivity(), "Mở Camera !!!", Toast.LENGTH_SHORT).show();
+//                openCam();
+//            }
+//        });
         builder.show();
     }
 

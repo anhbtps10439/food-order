@@ -53,14 +53,14 @@ public class DishDao {
                     dishModelList.add(data.getValue(DishModel.class));
                 }
 
-                if (dishModelList.size() > 0)
-
-                {
-                    for (int i = 0; i < dishModelList.size(); i++)
-                    {
-                         downloadPhoto(dishModelList.get(i).getImage(), context, "dish");
-                    }
-                }
+//                if (dishModelList.size() > 0)
+//
+//                {
+//                    for (int i = 0; i < dishModelList.size(); i++)
+//                    {
+//                         downloadPhoto(dishModelList.get(i).getImage(), context, "dish");
+//                    }
+//                }
             }
 
             @Override

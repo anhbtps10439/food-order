@@ -27,6 +27,7 @@ import com.pro1121.foodorder.model.OrderModel;
 import java.util.ArrayList;
 
 import static com.pro1121.foodorder.LibraryClass.orderModelList;
+import static com.pro1121.foodorder.LibraryClass.priceList;
 
 public class OrderDao {
 
@@ -83,7 +84,6 @@ public class OrderDao {
                         detailOrderModel.setId(detailOrderChild.child("id").getValue(String.class));
                         detailOrderModel.setAmount(detailOrderChild.child("amount").getValue(Integer.class));
                         detailOrderModel.setDish(detailOrderChild.child("dish").getValue(DishModel.class));
-
                         detailOrderList.add(detailOrderModel);
                     }
 
@@ -92,6 +92,7 @@ public class OrderDao {
                     //add orderModel vào List
                     orderModelList.add(orderModel);
                 }
+                priceCal();
                 Log.d("orderList", orderModelList.size()+"");
             }
 
@@ -104,57 +105,22 @@ public class OrderDao {
         db.child("order").addListenerForSingleValueEvent(valueEventListener);
     }
 
-    public void getAll()
+    //tính toán giá trị của mỗi đơn hàng
+    private void priceCal()
     {
-        ValueEventListener valueEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                orderModelList.clear();
-
-
-                //mỗi child trong order là một order
-                for (DataSnapshot orderChild: dataSnapshot.getChildren())
-                {
-                    //tao doi tuong model
-                    OrderModel orderModel = new OrderModel();
-                    //set các thuộc tính
-                    orderModel.setId(orderChild.child("id").getValue(String.class));
-                    orderModel.setDes(orderChild.child("des").getValue(String.class));
-                    orderModel.setUserId(orderChild.child("userId").getValue(String.class));
-                    orderModel.setOrderDate(orderChild.child("orderDate").getValue(String.class));
-
-                    //tao doi tuong ArrayList để chứa các detailOrder
-                    ArrayList<DetailOrderModel> detailOrderList = new ArrayList<>();
-
-                    //mỗi child trong child detailOrder làm một child
-
-                    for (DataSnapshot detailOrderChild: orderChild.child("detailOrder").getChildren())
-                    {
-                        //tạo đối tương detailOrder
-                        //set các thuộc tính
-                        DetailOrderModel detailOrderModel = new DetailOrderModel();
-                        detailOrderModel.setId(detailOrderChild.child("id").getValue(String.class));
-                        detailOrderModel.setAmount(detailOrderChild.child("amount").getValue(Integer.class));
-                        detailOrderModel.setDish(detailOrderChild.child("dish").getValue(DishModel.class));
-
-                        detailOrderList.add(detailOrderModel);
-                    }
-
-                    //set detailOrderList cho orderModel
-                    orderModel.setDetailOrderList(detailOrderList);
-                    //add orderModel vào List
-                    orderModelList.add(orderModel);
-                }
-                Log.d("orderList", orderModelList.size()+"");
+        int price = 0;
+        for (int i = 0; i < orderModelList.size(); i++)
+        {
+            OrderModel orderModel = orderModelList.get(i);
+            ArrayList<DetailOrderModel> detailOrderModels = orderModel.getDetailOrderList();
+            for (int k = 0; k < detailOrderModels.size(); k++)
+            {
+                //lấy số lượng, giá, nhân với nhau, sau đó add vào list
+                price+= (detailOrderModels.get(i).getAmount() * detailOrderModels.get(i).getDish().getPrice());
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        };
-
-        db.child("order").addValueEventListener(valueEventListener);
+            priceList.add(price);
+            price = 0;
+        }
+        Log.e("PriceList", "Size: " + priceList.size() );
     }
-
 }
