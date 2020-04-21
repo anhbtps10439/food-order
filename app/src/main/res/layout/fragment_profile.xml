@@ -50,7 +50,7 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/profile_image"
+                    android:id="@+id/crc_profile_image_user"
                     android:layout_width="98dp"
                     android:layout_height="96dp"
                     android:layout_gravity="center_horizontal"

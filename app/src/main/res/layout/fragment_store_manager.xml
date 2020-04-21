@@ -38,13 +38,14 @@
                 android:elevation="5dp"
                 app:cardCornerRadius="30dp">
 
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/profile_image"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/crc_profile_image"
                     android:layout_width="98dp"
                     android:layout_height="96dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="30dp"
-                    android:src="@drawable/trang" />
+                    android:src="@color/Black" />
 
                 <TextView
                     android:id="@+id/tv_display_name"
@@ -52,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="130dp"
-                    android:text="Trang'ss Kim"
+                    android:text="Null"
                     android:textColor="#000000"
                     android:textSize="20dp"
                     android:textStyle="bold"></TextView>

@@ -46,11 +46,11 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        //set background id ff3737 if picList
         try{
             holder.dis_image.setImageBitmap(picList.get(position));
         }catch (Exception e){
             holder.dis_image.setBackgroundColor(Color.parseColor("#ff3737"));
-
         }
         holder.name.setText(dishList.get(position).getName());
         holder.des.setText(dishList.get(position).getDes());

@@ -39,6 +39,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class LibraryClass {
 
@@ -77,11 +78,11 @@ public class LibraryClass {
 //        return encoded;
 //    }
 //
-//    public static Bitmap convertStringToImg(String s){
-//        byte[] b = Base64.decode(s,Base64.DEFAULT);
-//        Bitmap bitmap = BitmapFactory.decodeByteArray(b,0,b.length);
-//        return bitmap;
-//    }
+  //  public static Bitmap convertStringToImg(String s){
+  //      byte[] b = Base64.decode(s,Base64.DEFAULT);
+   //     Bitmap bitmap = BitmapFactory.decodeByteArray(b,0,b.length);
+  //      return bitmap;
+ //  }
 
     public static ArrayList<DishModel> dishFilter(String categoryID)
     {

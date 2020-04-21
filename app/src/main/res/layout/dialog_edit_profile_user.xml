@@ -6,6 +6,15 @@
     android:padding="20dp"
     android:background="@color/colorRedMain">
     <EditText
+        android:id="@+id/et_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_dialog"
+        android:elevation="5dp"
+        android:hint="Tên"
+        android:paddingStart="30dp" />
+    <EditText
         android:id="@+id/et_birth"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -13,17 +22,6 @@
         android:background="@drawable/shape_dialog"
         android:elevation="5dp"
         android:hint="Ngày sinh"
-        android:paddingStart="30dp" />
-
-    <EditText
-        android:id="@+id/et_phone_number"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/shape_dialog"
-        android:elevation="5dp"
-        android:inputType="number"
-        android:hint="Số điện thoại"
         android:paddingStart="30dp" />
 
     <EditText

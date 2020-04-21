@@ -32,8 +32,6 @@ public class UserCaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTheme(R.style.HomeTheme);
         setContentView(R.layout.activity_user);
-
-
         init();
         hideToolbarTitle();
         //create bottom nav

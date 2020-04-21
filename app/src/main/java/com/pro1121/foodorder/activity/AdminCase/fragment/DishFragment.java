@@ -72,8 +72,8 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
     private DishDao dishDao;
     private FloatingActionButton flb_add_dish;
     private DishAdapter dishAdapter;
-    public ArrayList<DishModel> dishList;
-    public ArrayList<Bitmap> picList;
+    private ArrayList<DishModel> dishList;
+    private ArrayList<Bitmap> picList;
 
     @Nullable
     @Override
@@ -89,9 +89,12 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
         tv_set_dish_category_name.setText(nameCategory + "");
 
         //============= Lọc list by id
-        dishList = LibraryClass.dishFilter(idCategory);
-         picList = LibraryClass.dishPicFilter(idCategory);
+        try {
+            dishList = LibraryClass.dishFilter(idCategory);
+            picList = LibraryClass.dishPicFilter(idCategory);
+        }catch (Exception e){
 
+        }
         //=============
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
@@ -197,7 +200,7 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
 
         idCategory = getArguments().getString("id");
         nameCategory = getArguments().getString("nameCategory");
-        Log.d("Checkkkkkkkkkkkkkkkkkkkk", idCategory + nameCategory);
+        Log.d("Check id + name category", idCategory + nameCategory);
     }
 
 

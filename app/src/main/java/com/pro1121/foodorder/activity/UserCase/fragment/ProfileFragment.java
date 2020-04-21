@@ -1,8 +1,10 @@
 package com.pro1121.foodorder.activity.UserCase.fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import com.pro1121.foodorder.LibraryClass;
 import com.pro1121.foodorder.R;
 import com.pro1121.foodorder.activity.SignInOut.ChangePassWord;
 import com.pro1121.foodorder.activity.SignInOut.MainActivity;
@@ -37,7 +40,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_profile, container,false);
         setHasOptionsMenu(true);
 
-        circleImageView = view.findViewById(R.id.profile_image);
+        circleImageView = view.findViewById(R.id.crc_profile_image_user);
         tv_greeting =view.findViewById(R.id.tv_greeting);
         tv_display_name = view.findViewById(R.id.tv_display_name);
         tv_order_history = view.findViewById(R.id.tv_order_history);
@@ -53,6 +56,15 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         UserModel user = SignInActivity.currentUser;
         tv_greeting.setText("Xin chào "+user.getName());
         tv_display_name.setText(user.getName());
+        try {
+       //     circleImageView.setImageBitmap(LibraryClass.convertStringToImg(user.getImage()));
+        }catch (Exception e){
+            //Set ảnh bị lỗi hoặc chưa có ảnh
+            circleImageView.setBackgroundColor(Color.BLACK);
+            Toast.makeText(getActivity(), "Chưa có ảnh hoặc lỗi ảnh, Log d to check", Toast.LENGTH_SHORT).show();
+            Log.d("Set image errorrrrrrrrrrrrrrrrrrrrrrrrrrrrr", e.toString());
+        }
+
 
         return view;
     }
