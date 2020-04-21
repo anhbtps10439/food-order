@@ -111,25 +111,25 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
                 final EditText etCategoryDes = alertDialog.findViewById(R.id.etCategoryDesDialog);
 
                 //Click to open gallery
-                ivCategoryAvatar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(getActivity(), "Mở Gallery !!!", Toast.LENGTH_SHORT).show();
-                        //intent mở gallery
-                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                        intent.setType("image/*");
-                        startActivityForResult(intent, REQUEST_CHOOSE_PHOTO_FROM_GALLERY);
-                    }
-                });
+//                ivCategoryAvatar.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Toast.makeText(getActivity(), "Mở Gallery !!!", Toast.LENGTH_SHORT).show();
+//                        //intent mở gallery
+//                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//                        intent.setType("image/*");
+//                        startActivityForResult(intent, REQUEST_CHOOSE_PHOTO_FROM_GALLERY);
+//                    }
+//                });
                 //Click to open Camera
-                btnOpenCam.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //Open Camera
-                        Toast.makeText(getActivity(), "Mở Camera !!!", Toast.LENGTH_SHORT).show();
-                        openCam();
-                    }
-                });
+//                btnOpenCam.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        //Open Camera
+//                        Toast.makeText(getActivity(), "Mở Camera !!!", Toast.LENGTH_SHORT).show();
+//                        openCam();
+//                    }
+//                });
 
                 btnPositive.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -145,10 +145,10 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
                             } else if (ivCategoryAvatar.getDrawable() == null) {
                                 Toast.makeText(getActivity(), "Chưa có ảnh", Toast.LENGTH_SHORT).show();
                             } else {
-                                downloadURL = photoUpload(getActivity(), currrentPhoto);
-                                dao.insert(categoryID, categoryName, categoryDes, downloadURL);
-                                dishCategoryModelList.add(new DishCategoryModel(categoryID, categoryName, categoryDes, downloadURL));
-                                categoryPicList.add(currrentPhoto);
+//                                downloadURL = photoUpload(getActivity(), currrentPhoto);
+                                dao.insert(categoryID, categoryName, categoryDes, "none");
+                                dishCategoryModelList.add(new DishCategoryModel(categoryID, categoryName, categoryDes, "none"));
+//                                categoryPicList.add(currrentPhoto);
                                 dishCategoryAdapter.notifyDataSetChanged();
                             }
                         } catch (Exception e) {

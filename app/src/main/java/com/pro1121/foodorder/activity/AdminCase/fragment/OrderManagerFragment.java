@@ -11,15 +11,31 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.pro1121.foodorder.R;
+import com.pro1121.foodorder.adapter.OrderManagementRecyclerViewAdapter;
+
+import static com.pro1121.foodorder.LibraryClass.orderModelList;
+import static com.pro1121.foodorder.LibraryClass.priceList;
 
 public class OrderManagerFragment extends Fragment {
+
+
     private Toolbar toolbar;
+    private RecyclerView rvOrderManagement;
+    private OrderManagementRecyclerViewAdapter adapter;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_order_manager,container,false);
+
+        rvOrderManagement = view.findViewById(R.id.rvOrderManagement);
+        setAdapter();
+
         return view;
     }
 
@@ -55,5 +71,13 @@ public class OrderManagerFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         toolbar.setNavigationIcon(null);
+    }
+
+    private void setAdapter()
+    {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        rvOrderManagement.setLayoutManager(layoutManager);
+        adapter = new OrderManagementRecyclerViewAdapter(getContext(), orderModelList, priceList);
+        rvOrderManagement.setAdapter(adapter);
     }
 }

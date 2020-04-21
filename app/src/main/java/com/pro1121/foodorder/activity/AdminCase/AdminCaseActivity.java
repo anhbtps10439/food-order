@@ -14,6 +14,7 @@ import com.pro1121.foodorder.R;
 import com.pro1121.foodorder.activity.AdminCase.fragment.CategoryAdminFragment;
 import com.pro1121.foodorder.activity.AdminCase.fragment.HomeAdminFragment;
 import com.pro1121.foodorder.activity.AdminCase.fragment.StoreFragment;
+import com.pro1121.foodorder.dao.OrderDao;
 
 public class AdminCaseActivity extends AppCompatActivity {
 
@@ -32,6 +33,10 @@ public class AdminCaseActivity extends AppCompatActivity {
         chipNavigationBar.setOnItemSelectedListener(onItemSelectedListener);
         //open tab home first
         chipNavigationBar.setItemSelected(R.id.navHome, true);
+
+        //lấy data order
+        OrderDao orderDao = new OrderDao(this);
+        orderDao.getAllRuntime();
     }
 
     private void hideTitleToolbar() {

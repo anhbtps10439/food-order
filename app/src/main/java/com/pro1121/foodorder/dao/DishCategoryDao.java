@@ -70,14 +70,14 @@ public class DishCategoryDao {
                     dishCategoryModelList.add(data.getValue(DishCategoryModel.class));
                 }
 
-                if (dishCategoryModelList.size() > 0)
-                {
-                    for (int i = 0; i < dishCategoryModelList.size(); i++)
-                    {
-                        downloadPhoto(dishCategoryModelList.get(i).getImage(), context, "category");
-                        categoryPicList.size();
-                    }
-                }
+//                if (dishCategoryModelList.size() > 0)
+//                {
+//                    for (int i = 0; i < dishCategoryModelList.size(); i++)
+//                    {
+//                        downloadPhoto(dishCategoryModelList.get(i).getImage(), context, "category");
+//                        categoryPicList.size();
+//                    }
+//                }
             }
 
             @Override
