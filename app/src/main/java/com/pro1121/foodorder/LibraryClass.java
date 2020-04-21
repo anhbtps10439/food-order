@@ -49,6 +49,9 @@ public class LibraryClass {
     public static ArrayList<OrderModel> orderModelList = new ArrayList<>();
     public static ArrayList<Integer> priceList = new ArrayList<>();
 
+    public static ArrayList<DishModel> buyList = new ArrayList<>();
+    public static ArrayList<Integer> buyAmountList = new ArrayList<>();
+
     public static ArrayList<Bitmap> categoryPicList = new ArrayList<>();
     public static ArrayList<Bitmap> dishPicList = new ArrayList<>();
     public static ArrayList<Bitmap> userPicList = new ArrayList<>();

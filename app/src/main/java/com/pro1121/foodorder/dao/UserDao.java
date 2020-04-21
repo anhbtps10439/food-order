@@ -47,14 +47,14 @@ public class UserDao {
                     userModelList.add(data.getValue(UserModel.class));
                 }
 
-                if (userModelList.size() > 0)
-
-                {
-                    for (int i = 0; i < userModelList.size(); i++)
-                    {
-                        downloadPhoto(userModelList.get(i).getImage(), context, "user");
-                    }
-                }
+//                if (userModelList.size() > 0)
+//
+//                {
+//                    for (int i = 0; i < userModelList.size(); i++)
+//                    {
+//                        downloadPhoto(userModelList.get(i).getImage(), context, "user");
+//                    }
+//                }
             }
 
             @Override

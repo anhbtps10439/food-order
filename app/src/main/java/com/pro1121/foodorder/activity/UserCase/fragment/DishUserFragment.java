@@ -7,10 +7,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -26,6 +28,9 @@ import com.pro1121.foodorder.model.DishModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.pro1121.foodorder.LibraryClass.buyAmountList;
+import static com.pro1121.foodorder.LibraryClass.buyList;
 
 public class DishUserFragment extends Fragment implements DishAdapter.OnItemClick{
     private Toolbar toolbar;
@@ -51,7 +56,7 @@ public class DishUserFragment extends Fragment implements DishAdapter.OnItemClic
         flb_add.hide();
 
         dishList = LibraryClass.dishFilter(idCategory);
-        picList = LibraryClass.dishPicFilter(idCategory);
+//        picList = LibraryClass.dishPicFilter(idCategory);
 
         //=============
 
@@ -87,7 +92,7 @@ public class DishUserFragment extends Fragment implements DishAdapter.OnItemClic
         getActivity().getWindow().setStatusBarColor(Color.parseColor("#FFFFFF"));
     }
     @Override
-    public void onClick(View view, int position) {
+    public void onClick(View view, final int position) {
 
     }
 
