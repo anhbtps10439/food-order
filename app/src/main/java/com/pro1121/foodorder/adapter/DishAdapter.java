@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,7 +36,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
     private Context context;
     private OnItemClick onItemClick;
 
-    public DishAdapter(Context context, ArrayList<DishModel> dishList, ArrayList<Bitmap> picList, OnItemClick onItemClick){
+    public DishAdapter(Context context, ArrayList<DishModel> dishList, @Nullable ArrayList<Bitmap> picList, OnItemClick onItemClick){
         this.context=context;
         this.dishList=dishList;
         this.picList = picList;
