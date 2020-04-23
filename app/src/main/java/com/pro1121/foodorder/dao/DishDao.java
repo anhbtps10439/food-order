@@ -6,6 +6,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,10 +34,17 @@ public class DishDao {
         String id = categoryId + db.child("dish").push().getKey();
 
         DishModel dishModel = new DishModel(id, categoryId, name,price, des, image);
-        db.child("dish").child(id).setValue(dishModel);
-       // Thêm 1 tí
-        dishModelList.add(dishModel);
-
+        db.child("dish").child(id).setValue(dishModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(context, "Thêm thành công!", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context, "Có lỗi xảy ra! " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
         return id;
     }
 

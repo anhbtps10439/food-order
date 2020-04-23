@@ -137,21 +137,26 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
                             categoryDes = etCategoryDes.getText().toString();
 
                             //Check null
-                            if (categoryID.equals("") || categoryName.equals("") || categoryDes.equals("")) {
+                            if (categoryID.equals("") || categoryName.equals("") || categoryDes.equals(""))
+                            {
                                 Toast.makeText(getActivity(), "Chưa đủ dữ liệu", Toast.LENGTH_SHORT).show();
-                            } else if (ivCategoryAvatar.getDrawable() == null) {
-                                Toast.makeText(getActivity(), "Chưa có ảnh", Toast.LENGTH_SHORT).show();
-                            } else {
+                            }
+                            else
+                            {
 //                                downloadURL = photoUpload(getActivity(), currrentPhoto);
                                 dao.insert(categoryID, categoryName, categoryDes, "none");
                                 dishCategoryModelList.add(new DishCategoryModel(categoryID, categoryName, categoryDes, "none"));
 //                                categoryPicList.add(currrentPhoto);
                                 dishCategoryAdapter.notifyDataSetChanged();
+                                alertDialog.dismiss();
                             }
-                        } catch (Exception e) {
-                            Toast.makeText(getActivity(), "Lỗi thêm", Toast.LENGTH_SHORT).show();
                         }
-                        alertDialog.dismiss();
+                        catch (Exception e)
+                        {
+
+                            Toast.makeText(getActivity(), "Lỗi thêm " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                 });
 
