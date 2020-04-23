@@ -114,6 +114,7 @@ public class DishUserFragment extends Fragment implements DishAdapter.OnItemClic
                 break;
                 //Detail dish
             case R.id.tv_show:
+                UserCaseActivity.position_dish_detail = position;
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.nav_host_user_case, new DetailDishFragment()).commit();
                 break;

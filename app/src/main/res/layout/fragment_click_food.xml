@@ -1,118 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.UserCase.fragment.ClickFoodFragment">
-
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:orientation="vertical">
-
-   </LinearLayout>
-
-
+   >
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="420dp"
+    android:layout_height="400dp"
     android:background="@drawable/pizzaga"/>
 <de.hdodenhof.circleimageview.CircleImageView
     android:layout_width="45dp"
     android:layout_height="wrap_content"
     android:src="@drawable/favourites_icon"
     android:layout_marginTop="263dp"
-    android:layout_marginLeft="310dp" />
+    android:layout_marginStart="310dp" />
 
-   <RelativeLayout
-       android:layout_marginTop="420dp"
+   <androidx.constraintlayout.widget.ConstraintLayout
        android:layout_width="match_parent"
-       android:layout_height="420dp">
+       android:layout_height="420dp"
+       android:layout_marginTop="420dp">
 
       <TextView
+          android:id="@+id/tv_dish_name_detail"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:text="Pizza Gà"
+          android:layout_marginStart="20sp"
           android:textColor="#000000"
           android:textSize="32dp"
           android:textStyle="bold"
-          android:layout_marginTop="5dp"
-          android:layout_marginLeft="35dp" />
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.0"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="0.0" />
 
       <TextView
+          android:id="@+id/tv_dish_des_detail"
+          android:layout_width="match_parent"
+          android:layout_height="100sp"
+          android:text="idhasodugaougauasgduassodiutasd \n hagsduyasgduagduasduasgd"
+          android:layout_marginStart="20dp"
+          android:layout_margin="10dp"
+          app:layout_constraintBottom_toTopOf="@+id/textView2"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.0"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/tv_dish_name_detail"
+          app:layout_constraintVertical_bias="0.25" />
+
+      <TextView
+          android:id="@+id/textView2"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:text="Đơn giá"
-          android:textStyle="bold"
-          android:layout_marginTop="86dp"
-          android:layout_marginLeft="35dp"
+          android:layout_marginStart="20dp"
           android:textSize="18dp"
-          />
+          android:textStyle="bold"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.0"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="0.595" />
+
 
       <TextView
+          android:id="@+id/tv_dish_price_detail"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          android:gravity="end"
           android:text="1.000.000 VND"
-          android:layout_marginTop="79dp"
-          android:layout_marginLeft="230dp"
           android:textColor="#000000"
+          android:layout_marginEnd="10dp"
+          android:textSize="25dp"
           android:textStyle="bold"
-          android:textSize="25dp" />
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.0"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="0.581" />
 
       <TextView
 
           android:layout_width="110dp"
           android:layout_height="50dp"
           android:background="@drawable/shape3"
-          android:layout_marginTop="162dp"
-          android:layout_marginLeft="30dp"/>
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.093"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="0.865" />
 
 
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="-"
-          android:textSize="30dp"
-          android:textColor="#000000"
-          android:layout_marginTop="165dp"
-          android:layout_marginLeft="42dp"
-          />
+      <Button
+          android:id="@+id/btn_add_cart"
+          android:layout_width="221dp"
+          android:layout_height="66dp"
+          android:background="@drawable/shape5"
 
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="1"
-          android:textSize="25dp"
-          android:textColor="#000000"
-          android:layout_marginTop="170dp"
-          android:layout_marginLeft="75dp"
-          />
-
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="+"
-          android:textSize="30dp"
-          android:textColor="#000000"
-          android:layout_marginTop="165dp"
-          android:layout_marginLeft="110dp"
-          />
+          android:text="Thêm vào giỏ hàng"
+          android:textColor="#FFFFFF"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="1.0"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="0.893" />
 
 
-<Button
-    android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:background="@drawable/shape5"
-    android:layout_marginTop="156dp"
-    android:layout_marginLeft="171dp"
-
-    android:text="Thêm vào giỏ hàng"
-    android:textColor="#FFFFFF"
-    />
-
-
-
-   </RelativeLayout>
+   </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </RelativeLayout>
