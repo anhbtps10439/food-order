@@ -22,11 +22,9 @@ import static com.pro1121.foodorder.LibraryClass.priceList;
 
 public class OrderManagerFragment extends Fragment {
 
-
     private Toolbar toolbar;
     private RecyclerView rvOrderManagement;
     private OrderManagementRecyclerViewAdapter adapter;
-
 
     @Nullable
     @Override

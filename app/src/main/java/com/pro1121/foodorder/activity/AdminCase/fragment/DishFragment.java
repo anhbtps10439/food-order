@@ -152,8 +152,6 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
                         } catch (Exception e) {
                             Toast.makeText(getActivity(), "Lỗi thêm", Toast.LENGTH_SHORT).show();
                         }
-
-
                         Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                     }
                 });

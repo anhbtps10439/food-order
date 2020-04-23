@@ -102,9 +102,6 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
 
                 alertDialog = builder.create();
                 alertDialog.show();
-
-                ivCategoryAvatar = alertDialog.findViewById(R.id.ivCategoryAvatarDialog);
-                Button btnOpenCam = alertDialog.findViewById(R.id.btnOpenCamDialog);
                 Button btnPositive = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
                 final EditText etCategoryCode = alertDialog.findViewById(R.id.etCategoryCodeDialog);
                 final EditText etCategoryName = alertDialog.findViewById(R.id.etCategoryNameDialog);
@@ -181,85 +178,6 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
         inflater.inflate(R.menu.toolbar_category, menu);
         setColorToolbarAndStatusBar(toolbar);
     }
-
-
-    //hàm lưu file ảnh, đặt tên bằng ngày giờ chụp
-    //File này chưa có data ảnh, chỉ có tên, đường dẫn
-    //hàm này sẽ được gọi để tạo ra một file chứa thống tin trên, sau đó để vào Uri rồi cho vào intent
-    private File createPhotoFile() throws IOException {
-        String takenDate = new SimpleDateFormat("ddMMyyyy_hhmmss_").format(new Date());
-
-        //lấy đường dẫn của riêng app, app khác sẽ không truy cập được
-        File storageDir = getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-
-        //tạo file
-        //các tham số là (tên file, định dạng, đường dẫn)
-        File photoFile = File.createTempFile(takenDate, ".jpg", storageDir);
-
-        //lưu đường dẫn của file
-        photoPath = photoFile.getAbsolutePath();
-
-        return photoFile;
-    }
-
-    private void openCam() {
-        //Khai báo một Intent thực hiện việc gọi một activity chụp ảnh
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        // câu lệnh if này để kiểm tra xem hệ thống có Activity nào để chụp ảnh không
-        //vì nếu gọi intent mà không có activity nào hoạt động thì ứng dụng sẽ bị crash
-        if (intent.resolveActivity(getContext().getPackageManager()) != null) {
-            //tạo một file trước
-            File photoFile;
-
-            try {
-                //sau khi gọi createPhotoFile, photoPath đã có data đường dẫn
-                photoFile = createPhotoFile();
-
-                //nếu photoFile đã được tạo thành công
-                if (photoFile != null) {
-                    //gán Uri cho currentPhotoUri
-                    photoUri = FileProvider.getUriForFile(context, "com.example.android.fileprovider", photoFile);
-
-                    //đặt Uri vào intent
-                    //vì action của intent là ACTION_IMAGE_CAPTURE
-                    //nên cái extra có key EXTRA_OUTPUT này sẽ giúp camera lưu hình ảnh vào currentPhotoUri
-                    //và Intent data ở onActivityResult sẽ null, vì file ảnh đã được lưu trong path rồi
-
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-                    startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == Activity.RESULT_OK) {
-            switch (requestCode) {
-                case REQUEST_CHOOSE_PHOTO_FROM_GALLERY: {
-                    currrentPhoto = convertToBitmap(getContext(), data.getData());
-                    ivCategoryAvatar.setImageBitmap(currrentPhoto);
-                    break;
-                }
-
-                case REQUEST_IMAGE_CAPTURE: {
-                    currrentPhoto = convertToBitmap(getContext(), photoUri);
-                    ivCategoryAvatar.setImageBitmap(currrentPhoto);
-                    break;
-                }
-            }
-        }
-
-    }
-
     // Onclick button show all dish in new Fragment
     @Override
     public void onClick(View view, int position) {
@@ -302,9 +220,10 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
                         try {
                             if (LibraryClass.dishFilter(dishCategoryModelList.get(position).getId()).size()>0){
                                 Toast.makeText(getActivity(), "Ko thể xoá khi bên trong còn quá nhiều món ăn", Toast.LENGTH_SHORT).show();
+                            }else {
+                                dao.delete(dishCategoryModelList.get(position).getId(), position, dishCategoryModelList.get(position).getImage());
+                                dishCategoryAdapter.notifyDataSetChanged();
                             }
-                            dao.delete(dishCategoryModelList.get(position).getId(),position,dishCategoryModelList.get(position).getImage());
-                            dishCategoryAdapter.notifyDataSetChanged();
                         } catch (Exception ex) {
                             Toast.makeText(getActivity(), "Something wrong", Toast.LENGTH_SHORT).show();
                             Log.d("Delete CateDis Error............", ex.toString());
@@ -327,8 +246,7 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
         alertDialog = builder.create();
         alertDialog.show();
 
-        ivCategoryAvatar = alertDialog.findViewById(R.id.ivCategoryAvatarDialog);
-        Button btnOpenCam = alertDialog.findViewById(R.id.btnOpenCamDialog);
+
         Button btnPositive = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
         final EditText etCategoryCode = alertDialog.findViewById(R.id.etCategoryCodeDialog);
         final EditText etCategoryName = alertDialog.findViewById(R.id.etCategoryNameDialog);
@@ -339,27 +257,6 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
         etCategoryCode.setText(dishCategoryModelList.get(position).getId());
         etCategoryDes.setText(dishCategoryModelList.get(position).getDes());
         etCategoryName.setText(dishCategoryModelList.get(position).getName());
-
-        //Click to open gallery
-        ivCategoryAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "Mở Gallery !!!", Toast.LENGTH_SHORT).show();
-                //intent mở gallery
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, REQUEST_CHOOSE_PHOTO_FROM_GALLERY);
-            }
-        });
-        //Click to open Camera
-        btnOpenCam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Open Camera
-                Toast.makeText(getActivity(), "Mở Camera !!!", Toast.LENGTH_SHORT).show();
-                openCam();
-            }
-        });
 
         btnPositive.setOnClickListener(new View.OnClickListener() {
             @Override

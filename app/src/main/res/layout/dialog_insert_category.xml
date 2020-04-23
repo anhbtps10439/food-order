@@ -12,41 +12,6 @@
         android:layout_height="match_parent"
         android:layout_margin="25dp"
         android:orientation="vertical">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="178dp">
-
-            <ImageView
-                android:id="@+id/ivCategoryAvatarDialog"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:background="@drawable/shape_border_20dp_white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintCircleRadius="30dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                android:clickable="true"
-                android:scaleType="centerCrop"/>
-
-
-            <Button
-                android:id="@+id/btnOpenCamDialog"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/ic_open_camera"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0"
-                android:clickable="true"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
         <EditText
             android:id="@+id/etCategoryCodeDialog"
             android:layout_width="match_parent"

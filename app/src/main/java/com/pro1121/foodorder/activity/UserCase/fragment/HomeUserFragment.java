@@ -32,6 +32,7 @@ public class HomeUserFragment extends Fragment {
         toolbar = getActivity().findViewById(R.id.toolbarUserCase);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         toolbar.setTitle("");
+        setColorToolbarAndStatusBar(toolbar);
     }
 
     @Override
@@ -41,5 +42,14 @@ public class HomeUserFragment extends Fragment {
         inflater.inflate(R.menu.toolbar_home_user_case,menu);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        setColorToolbarAndStatusBar(toolbar);
+    }
 
+    public void setColorToolbarAndStatusBar(Toolbar toolbar) {
+        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        getActivity().getWindow().setStatusBarColor(Color.parseColor("#FFFFFF"));
+    }
 }

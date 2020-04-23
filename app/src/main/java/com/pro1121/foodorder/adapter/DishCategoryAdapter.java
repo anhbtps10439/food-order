@@ -19,8 +19,11 @@ import com.pro1121.foodorder.LibraryClass;
 import com.pro1121.foodorder.R;
 import com.pro1121.foodorder.activity.AdminCase.AdminCaseActivity;
 import com.pro1121.foodorder.activity.AdminCase.fragment.DishFragment;
+import com.pro1121.foodorder.activity.SignInOut.MainActivity;
 import com.pro1121.foodorder.model.DishCategoryModel;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import static com.pro1121.foodorder.LibraryClass.categoryPicList;
@@ -85,14 +88,8 @@ public class DishCategoryAdapter extends RecyclerView.Adapter<DishCategoryAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        try{
-            holder.iv_category_image.setImageBitmap(categoryPicList.get(position));
-
-        }catch (Exception e) {
-          holder.iv_category_image.setBackgroundColor(Color.parseColor("#ff3737"));
-        }
+        holder.iv_category_image.setBackgroundColor(Color.parseColor(MainActivity.colorList.get(position).getmColor()));
         holder.name.setText(dishCategoryModelList.get(position).getName());
-
         holder.bindData();
     }
 
