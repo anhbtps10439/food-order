@@ -11,14 +11,14 @@
         android:layout_height="wrap_content"
         android:background="@color/colorRedMain"
         android:orientation="horizontal"
-        android:padding="@dimen/size10dp">
+        android:padding="10dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="tenmonan"
-            android:textSize="@dimen/size18sp"
+            android:textSize="18dp"
             android:textStyle="bold"
 
             />
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="soluong"
-            android:textSize="@dimen/size18sp"
+            android:textSize="18dp"
             android:textStyle="bold" />
 
         <TextView
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="giatien"
-            android:textSize="@dimen/size18sp"
+            android:textSize="18dp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -47,7 +47,7 @@
 
     <Button
         android:id="@+id/btn_delete"
-        android:layout_width="130"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:text="xóa"
         android:elevation="10dp"

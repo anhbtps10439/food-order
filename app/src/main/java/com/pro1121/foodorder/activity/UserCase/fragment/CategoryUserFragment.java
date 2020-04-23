@@ -21,6 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pro1121.foodorder.LibraryClass;
 import com.pro1121.foodorder.R;
 import com.pro1121.foodorder.activity.AdminCase.fragment.DishFragment;
+import com.pro1121.foodorder.activity.UserCase.UserCaseActivity;
 import com.pro1121.foodorder.adapter.DishCategoryAdapter;
 
 import static com.pro1121.foodorder.LibraryClass.dishCategoryModelList;
@@ -66,13 +67,8 @@ public class CategoryUserFragment extends Fragment implements DishCategoryAdapte
     @Override
     public void onClick(View view, int position) {
         try {
-            String id = dishCategoryModelList.get(position).getId();
-            String name = dishCategoryModelList.get(position).getName();
-            Bundle bundle = new Bundle();
-            bundle.putString("nameCategory", name);
-            bundle.putString("id", id);
+            UserCaseActivity.positon_dish = position;
             Fragment fragment = new DishUserFragment();
-            fragment.setArguments(bundle);
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.nav_host_user_case, fragment).commit();
         } catch (Exception e) {

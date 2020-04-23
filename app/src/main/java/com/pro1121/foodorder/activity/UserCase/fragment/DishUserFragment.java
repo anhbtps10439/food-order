@@ -27,6 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pro1121.foodorder.LibraryClass;
 import com.pro1121.foodorder.R;
 import com.pro1121.foodorder.activity.AdminCase.fragment.CategoryAdminFragment;
+import com.pro1121.foodorder.activity.UserCase.UserCaseActivity;
 import com.pro1121.foodorder.adapter.DishAdapter;
 import com.pro1121.foodorder.model.DishModel;
 
@@ -45,6 +46,7 @@ public class DishUserFragment extends Fragment implements DishAdapter.OnItemClic
     private ArrayList<DishModel> dishList;
     private ArrayList<Bitmap> picList;
     private DishAdapter dishAdapter;
+    static int position;
 
 
 
@@ -56,11 +58,12 @@ public class DishUserFragment extends Fragment implements DishAdapter.OnItemClic
         View view = inflater.inflate(R.layout.fragment_dish,container,false);
 
         tv_set_dish_category_name = view.findViewById(R.id.tv_set_dish_category_name);
+        tv_set_dish_category_name.setText(LibraryClass.dishCategoryModelList.get(position).getName());
         ryc_dish = view.findViewById(R.id.ryc_dish);
         flb_add = view.findViewById(R.id.flb_add_dish);
         flb_add.hide();
 
-        dishList = LibraryClass.dishFilter(idCategory);
+        dishList = LibraryClass.dishFilter(LibraryClass.dishCategoryModelList.get(position).getId());
 //        picList = LibraryClass.dishPicFilter(idCategory);
 
         //=============
@@ -84,21 +87,109 @@ public class DishUserFragment extends Fragment implements DishAdapter.OnItemClic
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_user_case, new CategoryUserFragment()).commit();
+
             }
         });
-        idCategory = getArguments().getString("id");
-        nameCategory = getArguments().getString("nameCategory");
-        Log.d("Checkkkkkkkkkkkkkkkkkkkk", idCategory + nameCategory);
+        position = UserCaseActivity.positon_dish;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setColorToolbarAndStatusBar(toolbar);
     }
 
     public void setColorToolbarAndStatusBar(Toolbar toolbar) {
         toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
         getActivity().getWindow().setStatusBarColor(Color.parseColor("#FFFFFF"));
     }
+
+    //Icon on dish clicked
     @Override
     public void onClick(View view, final int position) {
-
+        switch (view.getId()){
+            //Cart
+            case R.id.iv_cart:
+                addFoodToCart(position);
+                break;
+                //Detail dish
+            case R.id.tv_show:
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.nav_host_user_case, new DetailDishFragment()).commit();
+                break;
+        }
     }
+
+    private void addFoodToCart(final int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(LayoutInflater.from(getActivity()).inflate(R.layout.dialog_dish_info, null, false));
+
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        final Button btnAddToCart = alertDialog.findViewById(R.id.btnAddToCartDialog);
+        Button btnPlus = alertDialog.findViewById(R.id.btnPlus);
+        final Button btnSub = alertDialog.findViewById(R.id.btnSub);
+        final TextView tvAmount = alertDialog.findViewById(R.id.tvAmoumt);
+        TextView tvName = alertDialog.findViewById(R.id.tvDishNameDialog);
+        TextView tvPrice = alertDialog.findViewById(R.id.tvDishPriceDialog);
+        TextView tvDes = alertDialog.findViewById(R.id.tvDishDesDialog);
+
+        tvName.setText(dishList.get(position).getName());
+        tvPrice.setText(dishList.get(position).getPrice() + "");
+        tvDes.setText(dishList.get(position).getDes());
+        btnAddToCart.setEnabled(false); //ban đầu không cho nút hoạt động
+
+        //cộng trừ số lượng
+
+        btnPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int amount = Integer.parseInt(tvAmount.getText().toString());
+                amount++;
+                tvAmount.setText("" + amount);
+
+                //bấm nút cộng thì sẽ enable nút trừ và add
+                btnAddToCart.setEnabled(true);
+                btnSub.setEnabled(true);
+            }
+        });
+
+        btnSub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int amount = Integer.parseInt(tvAmount.getText().toString());
+                amount--;
+                //nếu amount = 0 thì disable nút add và nút trừ
+                if (amount <= 0)
+                {
+                    tvAmount.setText("" + 0);
+                    btnAddToCart.setEnabled(false);
+                    btnSub.setEnabled(false);
+                }
+                else
+                {
+                    tvAmount.setText(amount+"");
+                }
+            }
+        });
+
+        btnAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int amount = Integer.parseInt(tvAmount.getText().toString());
+                //nếu amount = 0 thì không làm gì cả
+
+                if (amount > 0)
+                {
+                    buyList.add(dishList.get(position));
+                    buyAmountList.add(amount);
+                    alertDialog.dismiss();
+                    Log.e("size", "List: " + buyList.size() + "    Amount size: " + buyAmountList.size());
+                }
+            }
+        });
+        }
 
     //Ko dùng
     @Override

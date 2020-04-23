@@ -26,6 +26,7 @@ public class UserCaseActivity extends AppCompatActivity {
     private ChipNavigationBar chipNavigationBar;
     private Toolbar toolbar;
     private long backTime;
+    public static int positon_dish;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

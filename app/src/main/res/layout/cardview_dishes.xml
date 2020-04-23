@@ -9,6 +9,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="220dp">
+
         <ImageView
             android:id="@+id/ivDishAvatarDialog"
             android:layout_width="match_parent"
@@ -16,6 +17,13 @@
             android:background="@drawable/pizza"
             android:scaleType="centerCrop"
             />
+        <ImageView
+            android:id="@+id/iv_cart"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/ic_cart"
+            android:alpha="0.8"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="115dp"
