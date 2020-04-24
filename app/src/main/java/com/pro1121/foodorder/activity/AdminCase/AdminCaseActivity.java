@@ -21,6 +21,8 @@ public class AdminCaseActivity extends AppCompatActivity {
     private ChipNavigationBar chipNavigationBar;
     private Toolbar toolbar;
     private long backTime;
+
+    public static int idCategory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

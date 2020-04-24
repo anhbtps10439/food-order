@@ -43,7 +43,7 @@ public class CategoryUserFragment extends Fragment implements DishCategoryAdapte
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
         recyclerView.setLayoutManager(layoutManager);
-        DishCategoryAdapter dishCategoryAdapter = new DishCategoryAdapter(getContext(), this);
+        DishCategoryAdapter dishCategoryAdapter = new DishCategoryAdapter(getContext(),dishCategoryModelList, this);
         recyclerView.setAdapter(dishCategoryAdapter);
 
         return view;

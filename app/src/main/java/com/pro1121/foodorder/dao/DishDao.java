@@ -1,6 +1,7 @@
 package com.pro1121.foodorder.dao;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,7 +14,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.pro1121.foodorder.activity.AdminCase.fragment.DishFragment;
 import com.pro1121.foodorder.model.DishModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.pro1121.foodorder.LibraryClass.dishCategoryModelList;
 import static com.pro1121.foodorder.LibraryClass.dishModelList;
@@ -37,7 +42,7 @@ public class DishDao {
         db.child("dish").child(id).setValue(dishModel).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(context, "Thêm thành công!", Toast.LENGTH_SHORT).show();
+                Log.d("Insert Successfullyyyyyyyyyyyyyyyyyy", "Thêm thành công");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -60,15 +65,6 @@ public class DishDao {
                     //tạo đối tượng User và thêm vào List
                     dishModelList.add(data.getValue(DishModel.class));
                 }
-
-//                if (dishModelList.size() > 0)
-//
-//                {
-//                    for (int i = 0; i < dishModelList.size(); i++)
-//                    {
-//                         downloadPhoto(dishModelList.get(i).getImage(), context, "dish");
-//                    }
-//                }
             }
 
             @Override
@@ -102,6 +98,7 @@ public class DishDao {
                     //tạo đối tượng User và thêm vào List
                     dishModelList.add(data.getValue(DishModel.class));
                 }
+                DishFragment.notifyDataChanged();
             }
 
             @Override
@@ -109,7 +106,6 @@ public class DishDao {
 
             }
         };
-
         db.child("dish").addValueEventListener(valueEventListener);
     }
 
@@ -118,9 +114,11 @@ public class DishDao {
         db.child("dish").child(id).setValue(new DishModel(id, categoryId, name, price, des, image)).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(context, "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                getAll();
             }
         });
+
     }
 
 
