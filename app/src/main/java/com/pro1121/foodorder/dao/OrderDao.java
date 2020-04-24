@@ -116,7 +116,7 @@ public class OrderDao {
             for (int k = 0; k < detailOrderModels.size(); k++)
             {
                 //lấy số lượng, giá, nhân với nhau, sau đó add vào list
-                price+= (detailOrderModels.get(i).getAmount() * detailOrderModels.get(i).getDish().getPrice());
+                price+= (detailOrderModels.get(k).getAmount() * detailOrderModels.get(k).getDish().getPrice());
             }
             priceList.add(price);
             price = 0;

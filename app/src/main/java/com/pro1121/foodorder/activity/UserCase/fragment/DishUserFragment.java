@@ -192,6 +192,7 @@ public class DishUserFragment extends Fragment implements DishAdapter.OnItemClic
                 {
                     buyList.add(dishList.get(position));
                     buyAmountList.add(amount);
+                    Toast.makeText(getContext(), "Đã thêm vào giỏ!", Toast.LENGTH_SHORT).show();
                     alertDialog.dismiss();
                     Log.e("size", "List: " + buyList.size() + "    Amount size: " + buyAmountList.size());
                 }
