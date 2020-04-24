@@ -46,15 +46,6 @@ public class UserDao {
                     //tạo đối tượng User và thêm vào List
                     userModelList.add(data.getValue(UserModel.class));
                 }
-
-//                if (userModelList.size() > 0)
-//
-//                {
-//                    for (int i = 0; i < userModelList.size(); i++)
-//                    {
-//                        downloadPhoto(userModelList.get(i).getImage(), context, "user");
-//                    }
-//                }
             }
 
             @Override
@@ -101,5 +92,6 @@ public class UserDao {
                 Toast.makeText(context, "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
             }
         });
+        getAllRuntime();
     }
 }

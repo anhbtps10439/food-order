@@ -19,8 +19,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.pro1121.foodorder.activity.AdminCase.fragment.CategoryAdminFragment;
+import com.pro1121.foodorder.activity.AdminCase.fragment.DishFragment;
 import com.pro1121.foodorder.adapter.DishCategoryAdapter;
 import com.pro1121.foodorder.model.DishCategoryModel;
+import com.pro1121.foodorder.model.DishModel;
 import com.pro1121.foodorder.model.UserModel;
 
 import static com.pro1121.foodorder.LibraryClass.categoryPicList;
@@ -62,22 +64,16 @@ public class DishCategoryDao {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 dishCategoryModelList.clear();
-                categoryPicList.clear();
                 //mỗi child trong dataSnapshot
                 for (DataSnapshot data : dataSnapshot.getChildren())
                 {
                     //tạo đối tượng User và thêm vào List
                     dishCategoryModelList.add(data.getValue(DishCategoryModel.class));
                 }
+                try{
 
-//                if (dishCategoryModelList.size() > 0)
-//                {
-//                    for (int i = 0; i < dishCategoryModelList.size(); i++)
-//                    {
-//                        downloadPhoto(dishCategoryModelList.get(i).getImage(), context, "category");
-//                        categoryPicList.size();
-//                    }
-//                }
+                }catch (Exception e ){}
+
             }
 
             @Override
@@ -89,11 +85,31 @@ public class DishCategoryDao {
         db.child("dishCategory").addListenerForSingleValueEvent(valueEventListener);
     }
 
-    public void delete(String id, int position, String url)
-    {   FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageReference = storage.getReferenceFromUrl(url);
-        storageReference.delete();
-        dishCategoryModelList.remove(position);
+    public void getAll()
+    {
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dishCategoryModelList.clear();
+                //mỗi child trong dataSnapshot
+                for (DataSnapshot data : dataSnapshot.getChildren())
+                {
+                    //tạo đối tượng User và thêm vào List
+                    dishCategoryModelList.add(data.getValue(DishCategoryModel.class));
+                }
+                CategoryAdminFragment.dishCategoryAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+        db.child("dishCategory").addValueEventListener(valueEventListener);
+    }
+
+    public void delete(String id)
+    {
         db.child("dishCategory").child(id).removeValue(new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
@@ -105,10 +121,11 @@ public class DishCategoryDao {
 
     public void update(String id, String name, String des, String image)
     {
-        db.child("category").child(id).setValue(new DishCategoryModel(id, name, des, image)).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.child("dishCategory").child(id).setValue(new DishCategoryModel(id, name, des, image)).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(context, "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Xin hãy cập nhật lại danh sách", Toast.LENGTH_SHORT).show();
+                getAll();
             }
         });
     }

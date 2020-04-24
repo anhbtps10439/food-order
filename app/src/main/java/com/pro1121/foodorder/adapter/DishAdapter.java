@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pro1121.foodorder.LibraryClass;
 import com.pro1121.foodorder.R;
+import com.pro1121.foodorder.activity.AdminCase.AdminCaseActivity;
 import com.pro1121.foodorder.model.DishModel;
 import com.squareup.picasso.Picasso;
 
@@ -32,14 +33,14 @@ import static com.pro1121.foodorder.LibraryClass.buyList;
 public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
 
     private ArrayList<DishModel> dishList;
-    private ArrayList<Bitmap> picList;
     private Context context;
     private OnItemClick onItemClick;
 
-    public DishAdapter(Context context, ArrayList<DishModel> dishList, @Nullable ArrayList<Bitmap> picList, OnItemClick onItemClick){
+    public DishAdapter (){}
+
+    public DishAdapter(Context context, ArrayList<DishModel> dishList, OnItemClick onItemClick){
         this.context=context;
         this.dishList=dishList;
-        this.picList = picList;
         this.onItemClick=onItemClick;
     }
 
@@ -54,13 +55,14 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         //set background id ff3737 if picList
         try{
-            holder.dis_image.setImageBitmap(picList.get(position));
+            Picasso.get().load(dishList.get(position).getImage()).fit().into(holder.dis_image);
         }catch (Exception e){
+            Log.d("Lỗi picassooooooooooooooo", e.toString());
             holder.dis_image.setBackgroundColor(Color.parseColor("#ff3737"));
         }
         holder.name.setText(dishList.get(position).getName());
         holder.des.setText(dishList.get(position).getDes());
-        holder.price.setText(dishList.get(position).getPrice()+"");
+        holder.price.setText(dishList.get(position).getPrice()+ " VND");
         holder.bindData();
 
     }
@@ -69,6 +71,8 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
     public int getItemCount() {
         return dishList.size();
     }
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnLongClickListener, View.OnClickListener{
         private TextView name, price, des, show;
@@ -94,7 +98,8 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
         }
         @Override
         public boolean onLongClick(View v) {
-            return false;
+            onItemClick.onLongClick(v, getAdapterPosition());
+            return true;
         }
 
         public void bindData() {

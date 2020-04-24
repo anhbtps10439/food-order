@@ -119,9 +119,9 @@ public class EditProfileUserFragment extends Fragment {
 
     private void updateUser() {
         try {
-            downloadURL = LibraryClass.photoUpload(getActivity(),currrentPhoto);
+         //   downloadURL = LibraryClass.photoUpload(getActivity(),currrentPhoto);
             dao.update(currentUser.getId(),tv_name.getText().toString(),tv_birth.getText().toString(),
-                    tv_email.getText().toString(),currentUser.getPassword(), currentUser.getRole(), downloadURL);
+                    tv_email.getText().toString(),currentUser.getPassword(), currentUser.getRole(), "none");
         }catch (Exception e){
             Toast.makeText(getActivity(), "Lỗi cập nhật, check Log d", Toast.LENGTH_SHORT).show();
             Log.d("Update User Errrorrrrrrrrrrrrrrrrrrrrrrrr", e.toString());

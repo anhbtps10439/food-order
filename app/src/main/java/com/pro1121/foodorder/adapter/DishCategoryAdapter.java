@@ -22,6 +22,7 @@ import com.pro1121.foodorder.activity.AdminCase.fragment.DishFragment;
 import com.pro1121.foodorder.activity.SignInOut.MainActivity;
 import com.pro1121.foodorder.model.DishCategoryModel;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -33,11 +34,14 @@ public class DishCategoryAdapter extends RecyclerView.Adapter<DishCategoryAdapte
 
     static Context context;
     private OnItemClick onItemClick;
+    private ArrayList<DishCategoryModel> dishCategoryModels;
 
 
-    public DishCategoryAdapter(Context context, OnItemClick onItemClick){
+    public DishCategoryAdapter(Context context,ArrayList<DishCategoryModel> dishCategoryModels
+                               ,OnItemClick onItemClick){
         this.context=context;
         this.onItemClick = onItemClick;
+        this.dishCategoryModels = dishCategoryModels;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
@@ -89,13 +93,13 @@ public class DishCategoryAdapter extends RecyclerView.Adapter<DishCategoryAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.iv_category_image.setBackgroundColor(Color.parseColor(MainActivity.colorList.get(position).getmColor()));
-        holder.name.setText(dishCategoryModelList.get(position).getName());
+        holder.name.setText(dishCategoryModels.get(position).getName());
         holder.bindData();
     }
 
     @Override
     public int getItemCount() {
-        return dishCategoryModelList.size();
+        return dishCategoryModels.size();
     }
 
     public interface OnItemClick{

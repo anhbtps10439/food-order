@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     DetailOrderDao detailOrderDao;
     DishCategoryDao dishCategoryDao;
     public static final int REQUEST_PERMISSION_CODE = 5;
-    private ColorDishCaterogyModel c,c1,c2,c3,c4,c5,c6;
+    private ColorDishCaterogyModel c,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12;
     public static final List<ColorDishCaterogyModel> colorList = new ArrayList<>();
 
 
@@ -139,6 +139,12 @@ public class MainActivity extends AppCompatActivity {
         c4 = new ColorDishCaterogyModel("#FCFC57");
         c5 = new ColorDishCaterogyModel("#FEA858");
         c6 = new ColorDishCaterogyModel("#FF82D8");
+        c7 = new ColorDishCaterogyModel("#FF82D8");
+        c8 = new ColorDishCaterogyModel("#FF82D8");
+        c9 = new ColorDishCaterogyModel("#FF82D8");
+        c10 = new ColorDishCaterogyModel("#FF82D8");
+        c11 = new ColorDishCaterogyModel("#FF82D8");
+        c12 = new ColorDishCaterogyModel("#FF82D8");
 
         colorList.add(c);
         colorList.add(c1);
@@ -147,5 +153,11 @@ public class MainActivity extends AppCompatActivity {
         colorList.add(c4);
         colorList.add(c5);
         colorList.add(c6);
+        colorList.add(c7);
+        colorList.add(c8);
+        colorList.add(c9);
+        colorList.add(c10);
+        colorList.add(c11);
+        colorList.add(c12);
     }
 }

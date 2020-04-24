@@ -1,3 +1,4 @@
+
 package com.pro1121.foodorder.dao;
 
 import android.content.Context;
@@ -19,8 +20,7 @@ public class DetailOrderDao {
         this.db = FirebaseDatabase.getInstance().getReference();
     }
 
-    public void insert(String orderID, DishModel dishModel, int amount)
-    {
+    public void insert(String orderID, DishModel dishModel, int amount) {
         //tạo id cho detailOrder
         String id = db.child("order").push().getKey();
         DetailOrderModel detailOrderModel = new DetailOrderModel(id, dishModel, amount);

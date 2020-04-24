@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.Uri;
 import android.provider.MediaStore;
+
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import com.pro1121.foodorder.activity.AdminCase.fragment.DishFragment;
+import com.pro1121.foodorder.activity.SignInOut.MainActivity;
+import com.pro1121.foodorder.adapter.DishAdapter;
+import com.pro1121.foodorder.dao.DishDao;
+
 import com.pro1121.foodorder.model.DishCategoryModel;
 import com.pro1121.foodorder.model.DishModel;
 import com.pro1121.foodorder.model.OrderModel;
@@ -42,6 +49,7 @@ public class LibraryClass {
     public static ArrayList<Bitmap> dishPicList = new ArrayList<>();
     public static ArrayList<Bitmap> userPicList = new ArrayList<>();
 
+    public static ArrayList<DishModel> dishListById = new ArrayList<>();
 
     public static String downloadURL;
 
@@ -105,7 +113,7 @@ public class LibraryClass {
 
     //upload bằng bytes[]
     //return một downloadURL
-    public static String  photoUpload(final Context context, Bitmap photo)
+    public static void  photoUpload(final Context context, Bitmap photo, final DishModel dishModel)
     {
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -119,15 +127,15 @@ public class LibraryClass {
         storageReference.putBytes(convertedPhoto).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(context, "Upload Successfully", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                Toast.makeText(context, "Upload Completely", Toast.LENGTH_SHORT).show();
+                Task<Uri> uriTask = taskSnapshot.getMetadata().getReference().getDownloadUrl();
+                while(!uriTask.isSuccessful());
+                Uri uri = uriTask.getResult();
+                String imageUrl = uri.toString();
+
+                DishDao dishDao = new DishDao(context);
+                dishDao.update(dishModel.getId(),dishModel.getDishCategoryId(),dishModel.getName(),dishModel.getPrice(),dishModel.getDes(),imageUrl);
             }
         });
-        return "gs://food-order-2-e2475.appspot.com/"+location;
     }
 
     //convert bitmap sang byte để upload

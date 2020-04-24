@@ -77,7 +77,7 @@ public class DishUserFragment extends Fragment implements DishAdapter.OnItemClic
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
         ryc_dish.setLayoutManager(layoutManager);
-        dishAdapter = new DishAdapter(getActivity(), dishList, picList, this);
+        dishAdapter = new DishAdapter(getActivity(), dishList, this);
         ryc_dish.setAdapter(dishAdapter);
 
         return view;
