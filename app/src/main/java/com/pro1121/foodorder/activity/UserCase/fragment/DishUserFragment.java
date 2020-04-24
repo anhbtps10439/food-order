@@ -237,16 +237,24 @@ public class DishUserFragment extends Fragment implements DishAdapter.OnItemClic
                 btnOrder.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //đặt đơn
-                        String des= etDes.getText().toString();
-                        OrderDao dao = new OrderDao(getContext());
-                        String id = dao.insert(createDate(), currentUser.getId(), des);
-                        DetailOrderDao detailDao = new DetailOrderDao(getContext());
-                        for (int i = 0; i < buyList.size(); i++)
+                        if (buyList.size() <= 0)
                         {
-                            detailDao.insert(id, buyList.get(i), buyAmountList.get(i));
+                            Toast.makeText(getContext(), "Hãy thêm món ăn vào giỏ hàng!", Toast.LENGTH_SHORT).show();
                         }
-                        alertDialog.dismiss();
+                        else
+                        {
+                            //đặt đơn
+                            String des= etDes.getText().toString();
+                            OrderDao dao = new OrderDao(getContext());
+                            String id = dao.insert(createDate(), currentUser.getId(), des);
+                            DetailOrderDao detailDao = new DetailOrderDao(getContext());
+                            for (int i = 0; i < buyList.size(); i++)
+                            {
+                                detailDao.insert(id, buyList.get(i), buyAmountList.get(i));
+                            }
+                            alertDialog.dismiss();
+                        }
+
                     }
                 });
                 break;
