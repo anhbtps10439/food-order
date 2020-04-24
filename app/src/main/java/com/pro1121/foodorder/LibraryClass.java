@@ -1,45 +1,31 @@
 package com.pro1121.foodorder;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Base64;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.FileProvider;
 
-import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.pro1121.foodorder.activity.SignInOut.MainActivity;
 import com.pro1121.foodorder.model.DishCategoryModel;
 import com.pro1121.foodorder.model.DishModel;
 import com.pro1121.foodorder.model.OrderModel;
 import com.pro1121.foodorder.model.UserModel;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.logging.Logger;
 
 public class LibraryClass {
 
@@ -112,9 +98,9 @@ public class LibraryClass {
             return data;
     }
 
-    public static String createFileName()
+    public static String createDate()
     {
-        return new SimpleDateFormat("ddMMyyyy_hhmmss_").format(new Date());
+        return new SimpleDateFormat("ddMMyyyy_HHmmss_").format(new Date());
     }
 
     //upload bằng bytes[]
@@ -125,7 +111,7 @@ public class LibraryClass {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         //storageReferece đóng vai trò như đường dẫn đến file
         //getLastPathSegment để lấy địa chỉ cuối cùng của file, ở đây là file name
-        String location = "images/"+createFileName()+".jpg";
+        String location = "images/"+ createDate()+".jpg";
         final StorageReference storageReference = storage.getReference(location);
 
         byte[] convertedPhoto = convertToBytes(photo);

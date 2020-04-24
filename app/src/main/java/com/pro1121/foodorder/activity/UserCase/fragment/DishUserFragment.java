@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -28,7 +30,10 @@ import com.pro1121.foodorder.LibraryClass;
 import com.pro1121.foodorder.R;
 import com.pro1121.foodorder.activity.AdminCase.fragment.CategoryAdminFragment;
 import com.pro1121.foodorder.activity.UserCase.UserCaseActivity;
+import com.pro1121.foodorder.adapter.CartDishRecyclerViewAdapter;
 import com.pro1121.foodorder.adapter.DishAdapter;
+import com.pro1121.foodorder.dao.DetailOrderDao;
+import com.pro1121.foodorder.dao.OrderDao;
 import com.pro1121.foodorder.model.DishModel;
 
 import java.util.ArrayList;
@@ -36,6 +41,8 @@ import java.util.List;
 
 import static com.pro1121.foodorder.LibraryClass.buyAmountList;
 import static com.pro1121.foodorder.LibraryClass.buyList;
+import static com.pro1121.foodorder.LibraryClass.createDate;
+import static com.pro1121.foodorder.activity.SignInOut.SignInActivity.currentUser;
 
 public class DishUserFragment extends Fragment implements DishAdapter.OnItemClick{
     private Toolbar toolbar;
@@ -209,6 +216,36 @@ public class DishUserFragment extends Fragment implements DishAdapter.OnItemClic
         switch (item.getItemId()){
             case R.id.it_cart:
                 Toast.makeText(getActivity(), "Cart Clicked!!", Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setView(LayoutInflater.from(getContext()).inflate(R.layout.dialog_cart, null, false));
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+
+                Button btnOrder = alertDialog.findViewById(R.id.btnOrder);
+                RecyclerView rvCart = alertDialog.findViewById(R.id.rvCart);
+                final EditText etDes = alertDialog.findViewById(R.id.etDesCartDialog);
+
+                LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+                rvCart.setLayoutManager(layoutManager);
+                CartDishRecyclerViewAdapter adapter = new CartDishRecyclerViewAdapter(buyList, buyAmountList, getContext());
+                rvCart.setAdapter(adapter);
+
+                btnOrder.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //đặt đơn
+                        String des= etDes.getText().toString();
+                        OrderDao dao = new OrderDao(getContext());
+                        String id = dao.insert(createDate(), currentUser.getId(), des);
+                        DetailOrderDao detailDao = new DetailOrderDao(getContext());
+                        for (int i = 0; i < buyList.size(); i++)
+                        {
+                            detailDao.insert(id, buyList.get(i), buyAmountList.get(i));
+                        }
+                    }
+                });
                 break;
         }
         return super.onOptionsItemSelected(item);
