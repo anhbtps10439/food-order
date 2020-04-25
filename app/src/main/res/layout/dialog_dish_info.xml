@@ -4,8 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="25dp"
+
     >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,6 +33,7 @@
             android:layout_height="wrap_content"
             android:text="00000D"
             android:textSize="30dp"
+            android:textColor="@color/colorRedMain"
             android:id="@+id/tvDishPriceDialog"
             android:textStyle="bold"
             android:gravity="right"/>
@@ -38,6 +44,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_margin="10dp"
         android:text="Day la cho de dat descripton cho mon an"
         android:id="@+id/tvDishDesDialog"/>
     
@@ -76,13 +83,14 @@
 
     </LinearLayout>
 
+    </LinearLayout>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape"
         android:text="Thêm vào giỏ"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
+        android:background="@color/colorRedMain"
         android:id="@+id/btnAddToCartDialog"/>
 
 </LinearLayout>

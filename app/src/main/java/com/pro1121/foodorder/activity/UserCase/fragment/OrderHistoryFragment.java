@@ -1,5 +1,6 @@
 package com.pro1121.foodorder.activity.UserCase.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -58,9 +59,9 @@ public class OrderHistoryFragment extends Fragment {
 
         toolbar = getActivity().findViewById(R.id.toolbarUserCase);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        toolbar.setTitle("");
+        toolbar.setTitle("Lịch sử đặt hàng");
         setColorToolbarAndStatusBar(toolbar);
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_close_white,null));
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_close_black_24dp,null));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,8 +71,8 @@ public class OrderHistoryFragment extends Fragment {
     }
 
     public void setColorToolbarAndStatusBar(Toolbar toolbar){
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorRedMain,null));
-        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.colorRedMain,null));
+        toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        getActivity().getWindow().setStatusBarColor(Color.parseColor("#FFFFFF"));
     }
 
     @Override

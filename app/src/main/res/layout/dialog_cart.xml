@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Giỏ hàng"
-        android:textSize="40dp"
+        android:textSize="30dp"
         android:textStyle="bold"
         android:textColor="@color/colorRedMain"
         android:layout_margin="10dp"/>
@@ -26,6 +26,7 @@
         android:layout_height="100dp"
         android:text=""
         android:textSize="13sp"
+        android:layout_margin="10dp"
         android:id="@+id/etDesCartDialog"
         android:hint="Ghi chú cho đầu bếp:"
         android:gravity="left|top"/>

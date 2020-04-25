@@ -217,7 +217,6 @@ public class DishUserFragment extends Fragment implements DishAdapter.OnItemClic
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.it_cart:
-                Toast.makeText(getActivity(), "Cart Clicked!!", Toast.LENGTH_SHORT).show();
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setView(LayoutInflater.from(getContext()).inflate(R.layout.dialog_cart, null, false));

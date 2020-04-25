@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="70dp">
+    android:layout_height="90dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="69dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -21,7 +22,7 @@
                 android:layout_weight="6"
                 android:text="Tên món"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:id="@+id/tvDishNameCart"/>
@@ -30,8 +31,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="4"
+                android:textColor="@color/colorRedMain"
                 android:text="Đơn giá: 20000đ"
-                android:textSize="10sp"
+                android:textSize="15sp"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:id="@+id/tvPriceCart"/>
@@ -99,9 +101,5 @@
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#CACACA"/>
 
 </LinearLayout>

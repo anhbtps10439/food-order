@@ -1,5 +1,6 @@
 package com.pro1121.foodorder.activity.AdminCase.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,9 +42,9 @@ public class OrderManagerFragment extends Fragment {
         super.onCreate(savedInstanceState);
         toolbar = getActivity().findViewById(R.id.toolbarAdminCase);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        toolbar.setTitle("");
+        toolbar.setTitle("Quản lí đơn hàng");
         setColorToolbarAndStatusBar(toolbar);
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_close_white,null));
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_close_black_24dp,null));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,8 +61,8 @@ public class OrderManagerFragment extends Fragment {
     }
 
     public void setColorToolbarAndStatusBar(Toolbar toolbar){
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorRedMain,null));
-        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.colorRedMain,null));
+        toolbar.setBackgroundColor(Color.WHITE);
+        getActivity().getWindow().setStatusBarColor(Color.WHITE);
     }
 
     @Override
