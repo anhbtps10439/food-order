@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.pro1121.foodorder.model.UserModel;
 
 public class SignInActivity extends AppCompatActivity {
     EditText et_sdt, et_password;
+    CheckBox checkBox;
     public static UserModel currentUser;
 
     @Override
@@ -25,9 +27,11 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
         et_sdt = findViewById(R.id.et_sdt);
         et_password = findViewById(R.id.et_password);
+        checkBox = findViewById(R.id.checkBox);
 
         et_sdt.setText("0966644939");
         et_password.setText("l");
+        checkBox.setChecked(true);
     }
 
 

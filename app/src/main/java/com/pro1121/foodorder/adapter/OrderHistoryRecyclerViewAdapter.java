@@ -62,8 +62,8 @@ public class OrderHistoryRecyclerViewAdapter extends RecyclerView.Adapter<OrderH
                 TextView tvPrice = alertDialog.findViewById(R.id.tvTotalPrice);
 
 
-                etDes.setText(dataList.get(position).getDes());
-                tvPrice.setText(""+priceList.get(position));
+                etDes.setText("Ghi chú: "+dataList.get(position).getDes());
+                tvPrice.setText(priceList.get(position) + " VND");
 
                 ArrayList<DetailOrderModel> detailOrder = dataList.get(position).getDetailOrderList();
                 LinearLayoutManager layoutManager = new LinearLayoutManager(context);
