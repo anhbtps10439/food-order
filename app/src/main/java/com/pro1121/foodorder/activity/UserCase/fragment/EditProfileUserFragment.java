@@ -34,6 +34,7 @@ import com.pro1121.foodorder.activity.SignInOut.SignInActivity;
 import com.pro1121.foodorder.dao.UserDao;
 import com.pro1121.foodorder.model.UserModel;
 import  com.pro1121.foodorder.activity.SignInOut.SignInActivity;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
@@ -104,24 +105,38 @@ public class EditProfileUserFragment extends Fragment {
         tv_birth.setText(user.getBirthday());
         tv_email.setText(user.getEmail());
 
+
         try {
-            Log.d("Set image errorrrrrrrrrrrrrrrrrrrrrrrrrrrrr", userModelList.size()+"");
-            Log.d("Set image errorrrrrrrrrrrrrrrrrrrrrrrrrrrrr", userPicList.size()+"");
+            //dùng picasso để load url của ảnh
+            Picasso.get().load(currentUser.getImage()).fit().into(iv_avatar);
         }catch (Exception e){
             //Set ảnh bị lỗi hoặc chưa có ảnh
             iv_avatar.setBackgroundColor(Color.BLACK);
             Toast.makeText(getActivity(), "Chưa có ảnh hoặc lỗi ảnh, Log d to check", Toast.LENGTH_SHORT).show();
             Log.d("Set image errorrrrrrrrrrrrrrrrrrrrrrrrrrrrr", e.toString());
         }
+        iv_avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent, REQUEST_CHOOSE_PHOTO_FROM_GALLERY);
+            }
+        });
 
         return view;
     }
 
     private void updateUser() {
         try {
-         //   downloadURL = LibraryClass.photoUpload(getActivity(),currrentPhoto);
-            dao.update(currentUser.getId(),tv_name.getText().toString(),tv_birth.getText().toString(),
-                    tv_email.getText().toString(),currentUser.getPassword(), currentUser.getRole(), "none");
+            if (currrentPhoto != null) {
+
+                UserModel userModel = new UserModel(currentUser.getId(), tv_name.getText().toString(), tv_birth.getText().toString(),
+                        tv_email.getText().toString(), currentUser.getPassword(), currentUser.getRole(), "none");
+                LibraryClass.photoUpload(getActivity(), currrentPhoto, null, userModel, "user");
+            }else {
+                Toast.makeText(getActivity(), "Something Wrong!!!", Toast.LENGTH_SHORT).show();
+            }
         }catch (Exception e){
             Toast.makeText(getActivity(), "Lỗi cập nhật, check Log d", Toast.LENGTH_SHORT).show();
             Log.d("Update User Errrorrrrrrrrrrrrrrrrrrrrrrrr", e.toString());

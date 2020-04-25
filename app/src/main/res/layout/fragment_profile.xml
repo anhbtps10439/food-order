@@ -54,8 +54,7 @@
                     android:layout_width="98dp"
                     android:layout_height="96dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="30dp"
-                    android:src="@drawable/trang" />
+                    android:layout_marginTop="30dp" />
 
                 <TextView
                     android:id="@+id/tv_display_name"

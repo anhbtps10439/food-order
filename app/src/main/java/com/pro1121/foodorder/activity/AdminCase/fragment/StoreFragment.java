@@ -31,6 +31,7 @@ public class StoreFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_store_manager,container,false);
+        //bắt buộc phải có để button trên toolbar hoạt động
         setHasOptionsMenu(true);
 
         tv_display_name = view.findViewById(R.id.tv_display_name);

@@ -26,8 +26,11 @@ import com.pro1121.foodorder.activity.SignInOut.ChangePassWord;
 import com.pro1121.foodorder.activity.SignInOut.MainActivity;
 import com.pro1121.foodorder.activity.SignInOut.SignInActivity;
 import com.pro1121.foodorder.model.UserModel;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.pro1121.foodorder.activity.SignInOut.SignInActivity.currentUser;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
     private Toolbar toolbar;
@@ -57,7 +60,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         tv_greeting.setText("Xin chào "+user.getName());
         tv_display_name.setText(user.getName());
         try {
-       //     circleImageView.setImageBitmap(LibraryClass.convertStringToImg(user.getImage()));
+            Picasso.get().load(currentUser.getImage()).fit().into(circleImageView);
         }catch (Exception e){
             //Set ảnh bị lỗi hoặc chưa có ảnh
             circleImageView.setBackgroundColor(Color.BLACK);

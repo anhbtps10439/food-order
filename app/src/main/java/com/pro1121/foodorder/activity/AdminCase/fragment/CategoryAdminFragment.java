@@ -82,11 +82,13 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category, container, false);
+        //bắt buộc phải có để button trên toolbar hoạt động
         setHasOptionsMenu(true);
 
         recyclerView = view.findViewById(R.id.rv_dish);
         fbCategory = view.findViewById(R.id.fbCategory);
 
+        //Chia 2 recyclerview rồi setAdapter
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(layoutManager);
         dishCategoryAdapter = new DishCategoryAdapter(getActivity(), dishCategoryModelList, this);
@@ -124,6 +126,7 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
                             if (categoryID.equals("") || categoryName.equals("") || categoryDes.equals("")) {
                                 Toast.makeText(getActivity(), "Chưa đủ dữ liệu", Toast.LENGTH_SHORT).show();
                             } else {
+
                                 dao.insert(categoryID.toUpperCase(), categoryName, categoryDes, "none");
                                 dishCategoryModelList.add(new DishCategoryModel(categoryID, categoryName, categoryDes, "none"));
                                 dishCategoryAdapter.notifyDataSetChanged();
@@ -171,6 +174,7 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.it_refresh:
+                //cập nhật lại adapter
                 dishCategoryAdapter.notifyDataSetChanged();
 
         }
@@ -233,7 +237,9 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
         popupMenu.show();
     }
 
+    //Sửa loại món
     private void editDishCategory(int position) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.CustomAlertDialog);
         builder.setView(LayoutInflater.from(context).inflate(R.layout.dialog_insert_category, null, false));
         builder.setTitle("Thêm loại");

@@ -21,9 +21,11 @@ import com.google.firebase.storage.UploadTask;
 
 import com.pro1121.foodorder.activity.AdminCase.fragment.DishFragment;
 import com.pro1121.foodorder.activity.SignInOut.MainActivity;
+import com.pro1121.foodorder.activity.SignInOut.SignInActivity;
 import com.pro1121.foodorder.adapter.DishAdapter;
 import com.pro1121.foodorder.dao.DishDao;
 
+import com.pro1121.foodorder.dao.UserDao;
 import com.pro1121.foodorder.model.DishCategoryModel;
 import com.pro1121.foodorder.model.DishModel;
 import com.pro1121.foodorder.model.OrderModel;
@@ -68,20 +70,6 @@ public class LibraryClass {
         }
         return true;
     }
-//    public static String convertImgToString(Context context, Bitmap image){
-//
-//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//        image.compress(Bitmap.CompressFormat.PNG, 50, baos);
-//        byte[] b = baos.toByteArray();
-//        String encoded = Base64.encodeToString(b,Base64.DEFAULT);
-//        return encoded;
-//    }
-//
-  //  public static Bitmap convertStringToImg(String s){
-  //      byte[] b = Base64.decode(s,Base64.DEFAULT);
-   //     Bitmap bitmap = BitmapFactory.decodeByteArray(b,0,b.length);
-  //      return bitmap;
- //  }
 
     public static ArrayList<DishModel> dishFilter(String categoryID)
     {
@@ -113,7 +101,7 @@ public class LibraryClass {
 
     //upload bằng bytes[]
     //return một downloadURL
-    public static void  photoUpload(final Context context, Bitmap photo, final DishModel dishModel)
+    public static void  photoUpload(final Context context, Bitmap photo, final DishModel dishModel, final UserModel userModel,final String which)
     {
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -127,13 +115,27 @@ public class LibraryClass {
         storageReference.putBytes(convertedPhoto).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                //Lấy link của ảnh về
                 Task<Uri> uriTask = taskSnapshot.getMetadata().getReference().getDownloadUrl();
                 while(!uriTask.isSuccessful());
                 Uri uri = uriTask.getResult();
                 String imageUrl = uri.toString();
 
-                DishDao dishDao = new DishDao(context);
-                dishDao.update(dishModel.getId(),dishModel.getDishCategoryId(),dishModel.getName(),dishModel.getPrice(),dishModel.getDes(),imageUrl);
+                //lấy link hoàn tất thì cập nhật dish được truyền vào
+                //NotifyDataChanged được gắn bên trong hàm update.
+                switch (which){
+                    case "dish":
+                        DishDao dishDao = new DishDao(context);
+                        dishDao.update(dishModel.getId(),dishModel.getDishCategoryId(),dishModel.getName(),dishModel.getPrice(),dishModel.getDes(),imageUrl);
+                    break;
+                    case "user":
+                        UserDao userDao = new UserDao(context);
+                        userDao.update(userModel.getId(),userModel.getName(),userModel.getBirthday(),userModel.getEmail(),userModel.getPassword(),userModel.getRole(),imageUrl);
+                        SignInActivity.currentUser = new UserModel(userModel.getId(),userModel.getName(),userModel.getBirthday(),userModel.getEmail(),userModel.getPassword(),userModel.getRole(),imageUrl);
+                }
+
+
+
             }
         });
     }
@@ -160,49 +162,6 @@ public class LibraryClass {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public static void downloadPhoto(String url, final Context context, final String whereToAdd)
-    {
-        try
-        {
-            //Reference
-            FirebaseStorage storage = FirebaseStorage.getInstance();
-            StorageReference storageReference = storage.getReferenceFromUrl(url);
-            //convert bytes sang bitmap
-            final long LIMITSIZE = 10 * 1024 * 1024;//10mb
-            storageReference.getBytes(LIMITSIZE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                @Override
-                public void onSuccess(byte[] bytes) {
-
-                    //offset là chỉ số index bắt đầu decode, length là độ dài của mảng bytes
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0, bytes.length);
-                    switch (whereToAdd)
-                    {
-                        case "category":{
-                            categoryPicList.add(bitmap);
-                            break;
-                        }
-
-                        case "dish":{
-                            dishPicList.add(bitmap);
-                            break;
-                        }
-
-                        case "user":{
-                            userPicList.add(bitmap);
-                            break;
-                        }
-                    }
-
-                    Toast.makeText(context, "Download Successfully!", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
     }
 
 }

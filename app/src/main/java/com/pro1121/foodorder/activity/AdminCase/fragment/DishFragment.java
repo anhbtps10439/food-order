@@ -85,13 +85,16 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dish, container, false);
+        //bắt buộc phải có để button trên toolbar hoạt động
         setHasOptionsMenu(true);
+
         dishDao = new DishDao(getActivity());
 
         tv_set_dish_category_name = view.findViewById(R.id.tv_set_dish_category_name);
         ryc_dish = view.findViewById(R.id.ryc_dish);
         flb_add_dish = view.findViewById(R.id.flb_add_dish);
 
+        //set title
         tv_set_dish_category_name.setText(LibraryClass.dishCategoryModelList.get(AdminCaseActivity.idCategory).getName());
 
         //============= Lọc list by id
@@ -103,6 +106,7 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
         }
         //=============
 
+        //Chia 2 recyclerview rồi setAdapter
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
         ryc_dish.setLayoutManager(layoutManager);
         dishAdapter = new DishAdapter(getActivity(), LibraryClass.dishListById, this);
@@ -149,12 +153,16 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
                                 Toast.makeText(getActivity(), "Chưa có ảnh", Toast.LENGTH_SHORT).show();
                             }
                             else {
-//                                insert vào db và add vào các list hiện có
+//                                  //get id of dish category
                                     String idCategory = LibraryClass.dishCategoryModelList.get(AdminCaseActivity.idCategory).getId();
+
+                                    //insert to firebase and take id of dish
                                     String id = dishDao.insert(idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, "none");
+
                                     //Tạo model mới để chuyển sang hàm upload để cập nhật link ảnh vào.
                                     DishModel dishModel = new DishModel(id, idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, "none");
-                                    LibraryClass.photoUpload(getActivity(), currrentPhoto, dishModel);
+                                    //Hàm up load ảnh
+                                    LibraryClass.photoUpload(getActivity(), currrentPhoto, dishModel, null, "dish");
 
                                     //add vào list
                                     dishModelList.add(new DishModel(id, idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, "none"));
@@ -296,7 +304,7 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
                                 dishDao.update(dishListById.get(position).getId(), idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, "none");
                                 //Tạo model mới để chuyển sang hàm upload để cập nhật link ảnh vào.
                                 DishModel dishModel = new DishModel(dishListById.get(position).getId(), idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, "none");
-                                LibraryClass.photoUpload(getActivity(), currrentPhoto, dishModel);
+                                LibraryClass.photoUpload(getActivity(), currrentPhoto, dishModel, null, "dish");
 
                                 //add vào list
                             }

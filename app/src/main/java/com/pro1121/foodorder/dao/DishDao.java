@@ -22,7 +22,7 @@ import java.util.List;
 
 import static com.pro1121.foodorder.LibraryClass.dishCategoryModelList;
 import static com.pro1121.foodorder.LibraryClass.dishModelList;
-import static com.pro1121.foodorder.LibraryClass.downloadPhoto;
+
 
 public class DishDao {
     private DatabaseReference db;
@@ -98,6 +98,7 @@ public class DishDao {
                     //tạo đối tượng User và thêm vào List
                     dishModelList.add(data.getValue(DishModel.class));
                 }
+                //notifyData
                 DishFragment.notifyDataChanged();
             }
 
@@ -115,6 +116,8 @@ public class DishDao {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                //getall để cập nhật lại list
+                //getall xong sẽ tự notify
                 getAll();
             }
         });

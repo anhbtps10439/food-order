@@ -79,7 +79,7 @@ public class AdminNotifyService extends Service {
 //        create Noti
 
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID_ADMIN_NOTI);
-                builder.setSmallIcon(R.drawable.logo);
+                builder.setSmallIcon(R.drawable.logo_remake);
                 builder.setContentTitle("Có đơn hàng mới");
                 builder.setContentText("Hãy vào kiểm tra!");
                 builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);

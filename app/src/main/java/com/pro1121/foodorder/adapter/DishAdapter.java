@@ -53,8 +53,9 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        //set background id ff3737 if picList
+
         try{
+            //dùng picasso để load url của ảnh
             Picasso.get().load(dishList.get(position).getImage()).fit().into(holder.dis_image);
         }catch (Exception e){
             Log.d("Lỗi picassooooooooooooooo", e.toString());

@@ -46,7 +46,7 @@ public class DishCategoryAdapter extends RecyclerView.Adapter<DishCategoryAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
         private ImageView iv_category_image;
-        private TextView name;
+        private TextView name, sumDish;
         private ImageButton ib_show_all_dish;
         private OnItemClick onItemClick;
 
@@ -55,6 +55,7 @@ public class DishCategoryAdapter extends RecyclerView.Adapter<DishCategoryAdapte
             iv_category_image = itemView.findViewById(R.id.iv_dish_category);
             name = itemView.findViewById(R.id.tv_dish_category_name);
             ib_show_all_dish = itemView.findViewById(R.id.ib_show_all_dish);
+            sumDish = itemView.findViewById(R.id.tv_sum_dish);
             this.onItemClick = onItemClick;
             ib_show_all_dish.setOnClickListener(this);
             itemView.setOnLongClickListener(this);

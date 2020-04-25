@@ -28,7 +28,8 @@ import com.pro1121.foodorder.model.UserModel;
 import static com.pro1121.foodorder.LibraryClass.categoryPicList;
 import static com.pro1121.foodorder.LibraryClass.dishCategoryModelList;
 import static com.pro1121.foodorder.LibraryClass.dishModelList;
-import static com.pro1121.foodorder.LibraryClass.downloadPhoto;
+
+
 import static com.pro1121.foodorder.LibraryClass.userModelList;
 
 public class DishCategoryDao {
@@ -125,6 +126,7 @@ public class DishCategoryDao {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(context, "Xin hãy cập nhật lại danh sách", Toast.LENGTH_SHORT).show();
+                //Upload xong thì getall lại để cập nhật lại list
                 getAll();
             }
         });

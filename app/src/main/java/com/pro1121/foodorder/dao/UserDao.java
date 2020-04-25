@@ -12,10 +12,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.pro1121.foodorder.LibraryClass;
+import com.pro1121.foodorder.activity.SignInOut.SignInActivity;
 import com.pro1121.foodorder.model.UserModel;
 
 import static com.pro1121.foodorder.LibraryClass.dishModelList;
-import static com.pro1121.foodorder.LibraryClass.downloadPhoto;
+
 import static com.pro1121.foodorder.LibraryClass.userModelList;
 
 public class UserDao {
@@ -73,7 +74,6 @@ public class UserDao {
                     userModelList.add(data.getValue(UserModel.class));
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -90,8 +90,9 @@ public class UserDao {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(context, "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
+                getAll();
             }
         });
-        getAllRuntime();
+
     }
 }

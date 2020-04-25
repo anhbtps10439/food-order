@@ -49,6 +49,7 @@ public class HomeAdminFragment extends Fragment implements DishAdapter.OnItemCli
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home,container,false);
+        //bắt buộc phải có để button trên toolbar hoạt động
         setHasOptionsMenu(true);
 
 
@@ -56,13 +57,11 @@ public class HomeAdminFragment extends Fragment implements DishAdapter.OnItemCli
 
         //Tạo 1 list món ăn ngẫu nhiên
 
-
+        //Chia 2 recyclerview rồi setAdapter
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
         ryc_you_can_like.setLayoutManager(layoutManager);
-    //    dish_adapter = new DishAdapter(getActivity(), this);
+        dish_adapter = new DishAdapter(getActivity(), LibraryClass.dishModelList, this);
         ryc_you_can_like.setAdapter(dish_adapter);
-
-
 
 
         btn_dish_likest = view.findViewById(R.id.btn_dish_likest);
@@ -96,6 +95,7 @@ public class HomeAdminFragment extends Fragment implements DishAdapter.OnItemCli
         menu.clear();
         inflater.inflate(R.menu.toolbar_home_admin_case,menu);
     }
+    // set color toolbar
     public void setColorToolbarAndStatusBar(Toolbar toolbar){
         toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
         getActivity().getWindow().setStatusBarColor(Color.parseColor("#FFFFFF"));

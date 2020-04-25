@@ -41,6 +41,7 @@ public class AdminCaseActivity extends AppCompatActivity {
         orderDao.getAllRuntime();
     }
 
+    //ẩn title tool bar
     private void hideTitleToolbar() {
         setSupportActionBar(toolbar);
         toolbar.setTitle("");
@@ -52,7 +53,8 @@ public class AdminCaseActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbarAdminCase);
 
     }
-
+    // BottomNavgation
+    //Sử  dụng thử viện bên ngoài
     private ChipNavigationBar.OnItemSelectedListener onItemSelectedListener = new
             ChipNavigationBar.OnItemSelectedListener() {
                 @Override
@@ -71,6 +73,8 @@ public class AdminCaseActivity extends AppCompatActivity {
                     }
                 }
             };
+
+    //back 2 time to exit
     @Override
     public void onBackPressed() {
         if(backTime + 3000 > System.currentTimeMillis()){
