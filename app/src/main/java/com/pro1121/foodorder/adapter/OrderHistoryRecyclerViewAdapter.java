@@ -52,7 +52,6 @@ public class OrderHistoryRecyclerViewAdapter extends RecyclerView.Adapter<OrderH
 
                 final AlertDialog alertDialog = builder.create();
                 builder.setPositiveButton("Oke",null);
-                alertDialog.setCancelable(false);
                 alertDialog.show();
 
                 Button btnOke = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);

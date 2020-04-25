@@ -20,7 +20,7 @@ public class DetailOrderDao {
         this.db = FirebaseDatabase.getInstance().getReference();
     }
 
-    public void insert(String orderID, DishModel dishModel, int amount) {
+    public String insert(String orderID, DishModel dishModel, int amount) {
         //tạo id cho detailOrder
         String id = db.child("order").push().getKey();
         DetailOrderModel detailOrderModel = new DetailOrderModel(id, dishModel, amount);
@@ -31,6 +31,8 @@ public class DetailOrderDao {
                 Toast.makeText(context, "Đặt hàng thành công!", Toast.LENGTH_SHORT).show();
             }
         });
+
+        return id;
 
     }
 }

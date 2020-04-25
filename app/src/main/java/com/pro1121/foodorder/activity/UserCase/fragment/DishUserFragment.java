@@ -33,7 +33,9 @@ import com.pro1121.foodorder.adapter.CartDishRecyclerViewAdapter;
 import com.pro1121.foodorder.adapter.DishAdapter;
 import com.pro1121.foodorder.dao.DetailOrderDao;
 import com.pro1121.foodorder.dao.OrderDao;
+import com.pro1121.foodorder.model.DetailOrderModel;
 import com.pro1121.foodorder.model.DishModel;
+import com.pro1121.foodorder.model.OrderModel;
 
 import java.util.ArrayList;
 
@@ -41,6 +43,7 @@ import static com.pro1121.foodorder.LibraryClass.buyAmountList;
 import static com.pro1121.foodorder.LibraryClass.buyList;
 import static com.pro1121.foodorder.LibraryClass.createDate;
 import static com.pro1121.foodorder.LibraryClass.createDateForFileName;
+import static com.pro1121.foodorder.LibraryClass.orderModelList;
 import static com.pro1121.foodorder.activity.SignInOut.SignInActivity.currentUser;
 
 public class DishUserFragment extends Fragment implements DishAdapter.OnItemClick{
@@ -243,14 +246,30 @@ public class DishUserFragment extends Fragment implements DishAdapter.OnItemClic
                         else
                         {
                             //đặt đơn
+                            //tạo id, ngày tháng, ghi chú
                             String des= etDes.getText().toString();
-                            OrderDao dao = new OrderDao(getContext());
-                            String id = dao.insert(createDate(), currentUser.getId(), des);
+                            OrderDao orderDao = new OrderDao(getContext());
+                            String date = createDate();
+                            String id = orderDao.insert(date, currentUser.getId(), des);
+
+                            //thêm các món ăn vào child detailOrder
                             DetailOrderDao detailDao = new DetailOrderDao(getContext());
+
+                            ArrayList<DetailOrderModel> detailOrderList = new ArrayList<>();
                             for (int i = 0; i < buyList.size(); i++)
                             {
-                                detailDao.insert(id, buyList.get(i), buyAmountList.get(i));
+
+                                String detailOrderID = detailDao.insert(id, buyList.get(i), buyAmountList.get(i));
+                                detailOrderList.add(new DetailOrderModel(detailOrderID, buyList.get(i), buyAmountList.get(i)));
                             }
+
+
+                            OrderModel orderModel = new OrderModel(id, date, currentUser.getId(), des);
+                            orderModel.setDetailOrderList(detailOrderList);
+                            orderModelList.add(orderModel);
+
+                            orderDao.priceCal();
+
                             alertDialog.dismiss();
                         }
 

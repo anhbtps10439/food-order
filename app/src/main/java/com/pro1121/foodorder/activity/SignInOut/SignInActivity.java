@@ -3,6 +3,7 @@ package com.pro1121.foodorder.activity.SignInOut;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,7 +19,7 @@ import com.pro1121.foodorder.model.UserModel;
 
 public class SignInActivity extends AppCompatActivity {
     EditText et_sdt, et_password;
-    CheckBox checkBox;
+    CheckBox chkRemember;
     public static UserModel currentUser;
 
     @Override
@@ -27,11 +28,11 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
         et_sdt = findViewById(R.id.et_sdt);
         et_password = findViewById(R.id.et_password);
-        checkBox = findViewById(R.id.checkBox);
 
-        et_sdt.setText("0966644939");
-        et_password.setText("l");
-        checkBox.setChecked(true);
+        chkRemember = findViewById(R.id.checkBox);
+        et_sdt.setText("");
+        et_password.setText("");
+
     }
 
 
@@ -45,11 +46,25 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void moveToMain(View view) {
+
         if (!LibraryClass.isOnline(this)){
             return;
         }
 
-
+        //check validate
+        if (et_sdt.getText().toString().equals(""))
+        {
+            Toast.makeText(this, "Vui lòng nhập số điện thoại đã đăng kí!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else
+        {
+            if (et_password.getText().toString().equals(""))
+            {
+                Toast.makeText(this, "Vui lòng nhập mật khẩu!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
 
         String sdt = et_sdt.getText().toString()+"";
         String pass = et_password.getText().toString()+"";
@@ -85,5 +100,46 @@ public class SignInActivity extends AppCompatActivity {
         et_password.setText("");
         Toast.makeText(this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
 
+    }
+
+
+    //Bấm nút remember
+    public void rememberPassword()
+    {
+        //taoj sharePreference
+
+        SharedPreferences sharedPreferences = getSharedPreferences("account", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String user = et_sdt.getText().toString();
+        String pass = et_password.getText().toString();
+        boolean check = chkRemember.isChecked(); // check là true, không check là false
+
+        if (check)
+        {
+            editor.putString("id", user);
+            editor.putString("pass", pass);
+            editor.putBoolean("check", check);
+        }
+        else
+        {
+            editor.clear();
+        }
+
+        editor.commit();
+    }
+
+    public void restorePassword()
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("account", MODE_PRIVATE);
+        //mặc định là ko check vào ô
+        boolean chk = sharedPreferences.getBoolean("check", false);
+
+        //nếu đã chọn lưu trước đó, phục hồi lại các trạng thái đăng nhập
+        if (chk)
+        {
+            et_sdt.setText(sharedPreferences.getString("id", ""));
+            et_password.setText(sharedPreferences.getString("pass", ""));
+        }
+        chkRemember.setChecked(chk);
     }
 }

@@ -48,7 +48,7 @@
 
         <!-- HEAD -->
         <activity android:name=".TestActivity"/>
-        <activity android:name=".huyTest.ClickKindFood"/>
+<!--        <activity android:name=".huyTest.ClickKindFood"/>-->
 
             <!-- <activity android:name=".huyTest.ClickKindFood"> -->
             <!-- ed079f76c4964467b66f8e26706177674d8bcd2e -->

@@ -106,8 +106,9 @@ public class OrderDao {
     }
 
     //tính toán giá trị của mỗi đơn hàng
-    private void priceCal()
+    public void priceCal()
     {
+        priceList.clear();
         int price = 0;
         for (int i = 0; i < orderModelList.size(); i++)
         {
