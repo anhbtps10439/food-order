@@ -43,22 +43,51 @@ public class SignUpActivity extends AppCompatActivity {
             if (list.get(i).getId().equalsIgnoreCase(et_id.getText().toString()+"")){
                 Toast.makeText(this, "Số điện thoại đã được sử dụng", Toast.LENGTH_SHORT).show();
                 return;
-            }else {
-                if (et_pass.getText().toString().equalsIgnoreCase(et_confirm_pass.getText().toString()+"")){
-                dao.insert(et_id.getText().toString()+"",
-                        et_display_name.getText().toString()+"",
-                        "",
-                        "",
-                        et_pass.getText().toString()+"",
-                        "user",
-                        "image tạm");
-                    Intent intent = new Intent(this,SignInActivity.class);
-                    startActivity(intent);
-                    finish();// không cho người dùng back lại sau khi đăng ký thành công
-                }else {
-                    Toast.makeText(this, "Mật khẩu chưa trùng khớp", Toast.LENGTH_SHORT).show();
-                    et_pass.requestFocus();
+            }
+            else
+            {
+                if (et_id.getText().toString().equals(""))
+                {
+                    Toast.makeText(this, "Vui lòng nhập số điện thoại!", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+                else
+                {
+                    if (!et_id.getText().toString().matches("\\d{10}"))
+                    {
+                        Toast.makeText(this, "Số điện thoải phải có 10 chữ số!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    else
+                    {
+                        if (et_pass.getText().toString().equals("") || et_confirm_pass.getText().toString().equals(""))
+                        {
+                            Toast.makeText(this, "Mật khẩu và Xác nhận không được để trống!", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        else
+                        {
+                            if (et_pass.getText().toString().equalsIgnoreCase(et_confirm_pass.getText().toString()+"")){
+                                dao.insert(et_id.getText().toString()+"",
+                                        et_display_name.getText().toString()+"",
+                                        "",
+                                        "",
+                                        et_pass.getText().toString()+"",
+                                        "user",
+                                        "image tạm");
+                                Intent intent = new Intent(this,SignInActivity.class);
+                                startActivity(intent);
+                                finish();// không cho người dùng back lại sau khi đăng ký thành công
+                            }
+                            else
+                            {
+                                Toast.makeText(this, "Mật khẩu chưa trùng khớp", Toast.LENGTH_SHORT).show();
+                                et_pass.requestFocus();
+                            }
+                        }
+                    }
+                }
+
             }
 
         }

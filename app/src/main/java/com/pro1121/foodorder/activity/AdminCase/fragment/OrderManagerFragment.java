@@ -1,6 +1,5 @@
 package com.pro1121.foodorder.activity.AdminCase.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pro1121.foodorder.R;
-import com.pro1121.foodorder.adapter.OrderManagementRecyclerViewAdapter;
+import com.pro1121.foodorder.adapter.OrderHistoryRecyclerViewAdapter;
 
 import static com.pro1121.foodorder.LibraryClass.orderModelList;
 import static com.pro1121.foodorder.LibraryClass.priceList;
@@ -24,7 +23,7 @@ public class OrderManagerFragment extends Fragment {
 
     private Toolbar toolbar;
     private RecyclerView rvOrderManagement;
-    private OrderManagementRecyclerViewAdapter adapter;
+    private OrderHistoryRecyclerViewAdapter adapter;
 
     @Nullable
     @Override
@@ -75,7 +74,7 @@ public class OrderManagerFragment extends Fragment {
     {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvOrderManagement.setLayoutManager(layoutManager);
-        adapter = new OrderManagementRecyclerViewAdapter(getContext(), orderModelList, priceList);
+        adapter = new OrderHistoryRecyclerViewAdapter(getContext(), orderModelList, priceList);
         rvOrderManagement.setAdapter(adapter);
     }
 }

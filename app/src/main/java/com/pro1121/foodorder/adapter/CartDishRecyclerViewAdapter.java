@@ -37,6 +37,7 @@ public class CartDishRecyclerViewAdapter extends RecyclerView.Adapter<CartDishRe
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         holder.tvName.setText(dataList.get(position).getName());
+        holder.tvName.setText("Đơn giá: " + dataList.get(position).getPrice() + "đ");
         holder.tvAmount.setText(""+amountList.get(position));
         holder.ivDel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +85,7 @@ public class CartDishRecyclerViewAdapter extends RecyclerView.Adapter<CartDishRe
 
         TextView tvName;
         TextView tvAmount;
+        TextView tvPrice;
         Button btnSub;
         Button btnPlus;
         ImageView ivDel;
@@ -93,6 +95,7 @@ public class CartDishRecyclerViewAdapter extends RecyclerView.Adapter<CartDishRe
 
             tvName = itemView.findViewById(R.id.tvDishNameCart);
             tvAmount = itemView.findViewById(R.id.tvAmountCart);
+            tvPrice = itemView.findViewById(R.id.tvPriceCart);
             btnSub = itemView.findViewById(R.id.btnSubCart);
             btnPlus = itemView.findViewById(R.id.btnPlusCart);
             ivDel = itemView.findViewById(R.id.ivDel);

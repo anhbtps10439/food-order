@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -84,5 +85,10 @@ public class CategoryUserFragment extends Fragment implements DishCategoryAdapte
     public void setColorToolbarAndStatusBar(Toolbar toolbar) {
         toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
         getActivity().getWindow().setStatusBarColor(Color.parseColor("#FFFFFF"));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 }

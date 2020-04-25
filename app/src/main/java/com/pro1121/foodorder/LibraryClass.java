@@ -10,9 +10,6 @@ import android.provider.MediaStore;
 
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
@@ -23,6 +20,7 @@ import com.pro1121.foodorder.activity.AdminCase.fragment.DishFragment;
 import com.pro1121.foodorder.activity.SignInOut.MainActivity;
 import com.pro1121.foodorder.activity.SignInOut.SignInActivity;
 import com.pro1121.foodorder.adapter.DishAdapter;
+
 import com.pro1121.foodorder.dao.DishDao;
 
 import com.pro1121.foodorder.dao.UserDao;
@@ -96,6 +94,11 @@ public class LibraryClass {
 
     public static String createDate()
     {
+        return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
+    }
+
+    public static String createDateForFileName()
+    {
         return new SimpleDateFormat("ddMMyyyy_HHmmss_").format(new Date());
     }
 
@@ -107,7 +110,7 @@ public class LibraryClass {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         //storageReferece đóng vai trò như đường dẫn đến file
         //getLastPathSegment để lấy địa chỉ cuối cùng của file, ở đây là file name
-        String location = "images/"+ createDate()+".jpg";
+        String location = "images/"+ createDateForFileName()+".jpg";
         final StorageReference storageReference = storage.getReference(location);
 
         byte[] convertedPhoto = convertToBytes(photo);

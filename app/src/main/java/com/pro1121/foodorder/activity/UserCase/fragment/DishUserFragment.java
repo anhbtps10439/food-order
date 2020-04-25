@@ -28,7 +28,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pro1121.foodorder.LibraryClass;
 import com.pro1121.foodorder.R;
-import com.pro1121.foodorder.activity.AdminCase.fragment.CategoryAdminFragment;
 import com.pro1121.foodorder.activity.UserCase.UserCaseActivity;
 import com.pro1121.foodorder.adapter.CartDishRecyclerViewAdapter;
 import com.pro1121.foodorder.adapter.DishAdapter;
@@ -37,11 +36,11 @@ import com.pro1121.foodorder.dao.OrderDao;
 import com.pro1121.foodorder.model.DishModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.pro1121.foodorder.LibraryClass.buyAmountList;
 import static com.pro1121.foodorder.LibraryClass.buyList;
 import static com.pro1121.foodorder.LibraryClass.createDate;
+import static com.pro1121.foodorder.LibraryClass.createDateForFileName;
 import static com.pro1121.foodorder.activity.SignInOut.SignInActivity.currentUser;
 
 public class DishUserFragment extends Fragment implements DishAdapter.OnItemClick{
@@ -212,6 +211,8 @@ public class DishUserFragment extends Fragment implements DishAdapter.OnItemClic
         inflater.inflate(R.menu.menu_dish_user, menu);
     }
 
+
+    //Nhấn nút xem giỏ hàng
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
@@ -221,7 +222,7 @@ public class DishUserFragment extends Fragment implements DishAdapter.OnItemClic
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setView(LayoutInflater.from(getContext()).inflate(R.layout.dialog_cart, null, false));
 
-                AlertDialog alertDialog = builder.create();
+                final AlertDialog alertDialog = builder.create();
                 alertDialog.show();
 
                 Button btnOrder = alertDialog.findViewById(R.id.btnOrder);
@@ -236,15 +237,24 @@ public class DishUserFragment extends Fragment implements DishAdapter.OnItemClic
                 btnOrder.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //đặt đơn
-                        String des= etDes.getText().toString();
-                        OrderDao dao = new OrderDao(getContext());
-                        String id = dao.insert(createDate(), currentUser.getId(), des);
-                        DetailOrderDao detailDao = new DetailOrderDao(getContext());
-                        for (int i = 0; i < buyList.size(); i++)
+                        if (buyList.size() <= 0)
                         {
-                            detailDao.insert(id, buyList.get(i), buyAmountList.get(i));
+                            Toast.makeText(getContext(), "Hãy thêm món ăn vào giỏ hàng!", Toast.LENGTH_SHORT).show();
                         }
+                        else
+                        {
+                            //đặt đơn
+                            String des= etDes.getText().toString();
+                            OrderDao dao = new OrderDao(getContext());
+                            String id = dao.insert(createDate(), currentUser.getId(), des);
+                            DetailOrderDao detailDao = new DetailOrderDao(getContext());
+                            for (int i = 0; i < buyList.size(); i++)
+                            {
+                                detailDao.insert(id, buyList.get(i), buyAmountList.get(i));
+                            }
+                            alertDialog.dismiss();
+                        }
+
                     }
                 });
                 break;

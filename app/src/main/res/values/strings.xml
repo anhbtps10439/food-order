@@ -9,7 +9,7 @@
     <string name="nav_profile">Người dùng</string>
     <string name="title_home" />
 
-<!--    notify-->
+    <!--    notify-->
     <string name="channel_name">Menu</string>
     <string name="channel_description">Noti when menu update!</string>
 

@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     UserDao userDao;
     OrderDao orderDao;
     DishDao dishDao;
-    DetailOrderDao detailOrderDao;
     DishCategoryDao dishCategoryDao;
     public static final int REQUEST_PERMISSION_CODE = 5;
     private ColorDishCaterogyModel c,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12;

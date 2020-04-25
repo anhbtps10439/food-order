@@ -19,6 +19,7 @@ import com.pro1121.foodorder.R;
 import com.pro1121.foodorder.activity.UserCase.fragment.CategoryUserFragment;
 import com.pro1121.foodorder.activity.UserCase.fragment.HomeUserFragment;
 import com.pro1121.foodorder.activity.UserCase.fragment.ProfileFragment;
+import com.pro1121.foodorder.dao.OrderDao;
 
 
 public class UserCaseActivity extends AppCompatActivity {
@@ -38,6 +39,10 @@ public class UserCaseActivity extends AppCompatActivity {
         //create bottom nav
         chipNavigationBar.setOnItemSelectedListener(onItemSelectedListener);
         chipNavigationBar.setItemSelected(R.id.navHomeUser,true);
+
+        //lấy data order
+        OrderDao orderDao = new OrderDao(this);
+        orderDao.getAllRuntime();
     }
 
 

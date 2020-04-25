@@ -28,7 +28,7 @@ public class DetailOrderDao {
         db.child("order").child(orderID).child("detailOrder").child(id).setValue(detailOrderModel).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(context, "Thêm thành công!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Đặt hàng thành công!", Toast.LENGTH_SHORT).show();
             }
         });
 

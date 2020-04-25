@@ -25,7 +25,10 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:text=""
-        android:id="@+id/etDesCartDialog"/>
+        android:textSize="13sp"
+        android:id="@+id/etDesCartDialog"
+        android:hint="Ghi chú cho đầu bếp:"
+        android:gravity="left|top"/>
 
     <Button
         android:id="@+id/btnOrder"
