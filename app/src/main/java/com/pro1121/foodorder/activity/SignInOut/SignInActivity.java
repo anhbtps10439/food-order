@@ -30,8 +30,8 @@ public class SignInActivity extends AppCompatActivity {
         et_password = findViewById(R.id.et_password);
 
         chkRemember = findViewById(R.id.checkBox);
-        et_sdt.setText("");
-        et_password.setText("");
+        et_sdt.setText("0123456789");
+        et_password.setText("admin");
 
     }
 

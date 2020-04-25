@@ -57,6 +57,7 @@ public class DishCategoryDao {
                 Toast.makeText(context, "Có lỗi xảy ra! Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
             }
         });
+        getAllRuntime();
     }
 
     public void getAllRuntime()
@@ -71,9 +72,6 @@ public class DishCategoryDao {
                     //tạo đối tượng User và thêm vào List
                     dishCategoryModelList.add(data.getValue(DishCategoryModel.class));
                 }
-                try{
-
-                }catch (Exception e ){}
 
             }
 

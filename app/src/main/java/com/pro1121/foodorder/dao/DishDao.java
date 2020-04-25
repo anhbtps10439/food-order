@@ -50,6 +50,7 @@ public class DishDao {
                 Toast.makeText(context, "Có lỗi xảy ra! " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+        getAllRuntime();
         return id;
     }
 
@@ -116,8 +117,6 @@ public class DishDao {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
-                //getall để cập nhật lại list
-                //getall xong sẽ tự notify
                 getAll();
             }
         });

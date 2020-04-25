@@ -165,9 +165,8 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
                                     LibraryClass.photoUpload(getActivity(), currrentPhoto, dishModel, null, "dish");
 
                                     //add vào list
-                                    dishModelList.add(new DishModel(id, idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, "none"));
-                                    LibraryClass.dishListById.add(new DishModel(id, idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, "none"));
-                                    dishAdapter.notifyDataSetChanged();
+                                    dishDao.getAll();
+
                             }
                         } catch (Exception e) {
                             Log.d("Lỗi thêm món ănnnnnnnnnnnnnnnnnnnnnnnnnnnnnn", e.toString());
@@ -248,8 +247,7 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
                         //Delete DishCategory
                         try {
                             dishDao.delete(dishListById.get(position).getId());
-                            dishListById.remove(position);
-                            dishAdapter.notifyDataSetChanged();
+                            dishDao.getAll();
                         } catch (Exception ex) {
                             Toast.makeText(getActivity(), "Something wrong", Toast.LENGTH_SHORT).show();
                             Log.d("Delete CateDis Error............", ex.toString());
@@ -421,6 +419,7 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
         toolbar.setNavigationIcon(null);
     }
 
+
     public void setColorToolbarAndStatusBar(Toolbar toolbar) {
         toolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
         getActivity().getWindow().setStatusBarColor(Color.parseColor("#FFFFFF"));
@@ -447,6 +446,8 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
         }
 
     }
+
+    //Update lại list sau đó notify
     public static void notifyDataChanged(){
         LibraryClass.dishListById.clear();
         LibraryClass.dishListById.addAll(LibraryClass.dishFilter(LibraryClass.dishCategoryModelList.get(AdminCaseActivity.idCategory).getId()));

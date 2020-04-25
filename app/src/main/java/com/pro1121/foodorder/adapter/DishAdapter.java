@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,8 +59,8 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
             //dùng picasso để load url của ảnh
             Picasso.get().load(dishList.get(position).getImage()).fit().into(holder.dis_image);
         }catch (Exception e){
-            Log.d("Lỗi picassooooooooooooooo", e.toString());
-            holder.dis_image.setBackgroundColor(Color.parseColor("#ff3737"));
+            holder.pb_dish.setVisibility(View.VISIBLE);
+            Toast.makeText(context, "Lỗi load ảnh, check trong adapter", Toast.LENGTH_SHORT).show();
         }
         holder.name.setText(dishList.get(position).getName());
         holder.des.setText(dishList.get(position).getDes());
@@ -79,6 +80,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
         private TextView name, price, des, show;
         private ImageView dis_image,cart;
         private OnItemClick onItemClick;
+        private ProgressBar pb_dish;
 
         public ViewHolder(@NonNull View itemView, OnItemClick onItemClick) {
             super(itemView);
@@ -86,6 +88,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
             name = itemView.findViewById(R.id.tv_dish_name);
             price = itemView.findViewById(R.id.tv_dish_prices);
             des = itemView.findViewById(R.id.tv_dish_des);
+            pb_dish = itemView.findViewById(R.id.pb_dish);
             show = itemView.findViewById(R.id.tv_show);
             cart = itemView.findViewById(R.id.iv_cart);
             this.onItemClick=onItemClick;

@@ -10,6 +10,14 @@
         android:layout_width="wrap_content"
         android:layout_height="220dp">
 
+        <ProgressBar
+            android:id="@+id/pb_dish"
+            android:layout_margin="60dp"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/colorRedMain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
         <ImageView
             android:id="@+id/ivDishAvatarDialog"
             android:layout_width="match_parent"

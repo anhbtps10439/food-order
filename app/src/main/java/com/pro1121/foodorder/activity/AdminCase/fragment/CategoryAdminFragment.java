@@ -88,6 +88,8 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
         recyclerView = view.findViewById(R.id.rv_dish);
         fbCategory = view.findViewById(R.id.fbCategory);
 
+        dao = new DishCategoryDao(getActivity());
+
         //Chia 2 recyclerview rồi setAdapter
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(layoutManager);
@@ -128,9 +130,8 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
                             } else {
 
                                 dao.insert(categoryID.toUpperCase(), categoryName, categoryDes, "none");
-                                dishCategoryModelList.add(new DishCategoryModel(categoryID, categoryName, categoryDes, "none"));
-                                dishCategoryAdapter.notifyDataSetChanged();
-
+                                dishCategoryModelList.clear();
+                                dao.getAll();
                                 alertDialog.cancel();
                             }
                         } catch (Exception e) {
@@ -175,7 +176,7 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
         switch (item.getItemId()){
             case R.id.it_refresh:
                 //cập nhật lại adapter
-                dishCategoryAdapter.notifyDataSetChanged();
+
 
         }
         return super.onOptionsItemSelected(item);
@@ -200,7 +201,7 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
     // Onclick long Item DishRecycle View
     @Override
     public void onLongClick(View view, final int position) {
-        PopupMenu popupMenu = new PopupMenu(getActivity(), view);
+        final PopupMenu popupMenu = new PopupMenu(getActivity(), view);
         popupMenu.getMenuInflater().inflate(R.menu.menu_on_long_click_dish_category, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
@@ -218,13 +219,15 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
                         //Delete DishCategory
                         try {
                             if (LibraryClass.dishFilter(dishCategoryModelList.get(position).getId()).size() > 0) {
-                                Toast.makeText(getActivity(), "Ko thể xoá khi bên trong còn quá nhiều món ăn", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "Không thể xoá khi bên trong còn quá nhiều món ăn", Toast.LENGTH_SHORT).show();
                             } else {
                                 dao.delete(dishCategoryModelList.get(position).getId());
-                                dishCategoryModelList.remove(position);
+                                dishCategoryModelList.clear();
+                                dao.getAll();
                                 dishCategoryAdapter.notifyDataSetChanged();
                             }
                         } catch (Exception ex) {
+                            Log.d("Iddddddddddddddd", dishCategoryModelList.get(position).getId()+" " +position);
                             Toast.makeText(getActivity(), "Something wrong", Toast.LENGTH_SHORT).show();
                             Log.d("Delete CateDis Error............", ex.toString());
                         }
@@ -241,7 +244,7 @@ public class CategoryAdminFragment extends Fragment implements DishCategoryAdapt
     private void editDishCategory(int position) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.CustomAlertDialog);
-        builder.setView(LayoutInflater.from(context).inflate(R.layout.dialog_insert_category, null, false));
+        builder.setView(LayoutInflater.from(getActivity()).inflate(R.layout.dialog_insert_category, null, false));
         builder.setTitle("Thêm loại");
         builder.setPositiveButton("Sửa", null);
         builder.setNegativeButton("Huỷ", null);
