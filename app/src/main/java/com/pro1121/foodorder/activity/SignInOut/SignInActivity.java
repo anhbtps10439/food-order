@@ -37,13 +37,8 @@ public class SignInActivity extends AppCompatActivity {
         chkRemember = findViewById(R.id.checkBox);
 
         restorePassword();
+        rememberPassword();
 
-        chkRemember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                rememberPassword();
-            }
-        });
 
     }
 

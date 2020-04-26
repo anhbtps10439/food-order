@@ -77,6 +77,8 @@ public class SignUpActivity extends AppCompatActivity {
                                         "image tạm");
                                 Intent intent = new Intent(this,SignInActivity.class);
                                 startActivity(intent);
+                                UserDao userDao = new UserDao(this);
+                                userDao.getAll();
                                 finish();// không cho người dùng back lại sau khi đăng ký thành công
                             }
                             else
