@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -31,40 +33,41 @@ import java.util.List;
 import static com.pro1121.foodorder.LibraryClass.buyAmountList;
 import static com.pro1121.foodorder.LibraryClass.buyList;
 
-public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
+public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
 
     private ArrayList<DishModel> dishList;
     private Context context;
     private OnItemClick onItemClick;
 
-    public DishAdapter (){}
+    public DishAdapter() {
+    }
 
-    public DishAdapter(Context context, ArrayList<DishModel> dishList, OnItemClick onItemClick){
-        this.context=context;
-        this.dishList=dishList;
-        this.onItemClick=onItemClick;
+    public DishAdapter(Context context, ArrayList<DishModel> dishList, OnItemClick onItemClick) {
+        this.context = context;
+        this.dishList = dishList;
+        this.onItemClick = onItemClick;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.cardview_dishes, parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.cardview_dishes, parent, false);
         return new ViewHolder(view, onItemClick);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
-        try{
+        try {
             //dùng picasso để load url của ảnh
             Picasso.get().load(dishList.get(position).getImage()).fit().into(holder.dis_image);
-        }catch (Exception e){
+        } catch (Exception e) {
             holder.pb_dish.setVisibility(View.VISIBLE);
             Toast.makeText(context, "Lỗi load ảnh, check trong adapter", Toast.LENGTH_SHORT).show();
         }
         holder.name.setText(dishList.get(position).getName());
         holder.des.setText(dishList.get(position).getDes());
-        holder.price.setText(dishList.get(position).getPrice()+ " VND");
+        holder.price.setText(dishList.get(position).getPrice() + " VND");
         holder.bindData();
 
     }
@@ -75,10 +78,9 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
     }
 
 
-
-    public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnLongClickListener, View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
         private TextView name, price, des, show;
-        private ImageView dis_image,cart;
+        private ImageView dis_image, cart;
         private OnItemClick onItemClick;
         private ProgressBar pb_dish;
 
@@ -91,15 +93,17 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
             pb_dish = itemView.findViewById(R.id.pb_dish);
             show = itemView.findViewById(R.id.tv_show);
             cart = itemView.findViewById(R.id.iv_cart);
-            this.onItemClick=onItemClick;
+            this.onItemClick = onItemClick;
             show.setOnClickListener(this);
             cart.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
         }
+
         @Override
         public void onClick(View v) {
             onItemClick.onClick(v, getAdapterPosition());
         }
+
         @Override
         public boolean onLongClick(View v) {
             onItemClick.onLongClick(v, getAdapterPosition());
@@ -107,19 +111,21 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder> {
         }
 
         public void bindData() {
-            RecyclerView.LayoutParams params =(RecyclerView.LayoutParams) itemView.getLayoutParams();
-            if (getAdapterPosition()%2 == 0){
-                params.setMargins(50,50,25,0);
-            }else {
-                params.setMargins(25,50,50,0);
+            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) itemView.getLayoutParams();
+            if (getAdapterPosition() % 2 == 0) {
+                params.setMargins(50, 50, 25, 0);
+            } else {
+                params.setMargins(25, 50, 50, 0);
 
             }
             itemView.setLayoutParams(params);
         }
     }
 
-    public interface OnItemClick{
+    public interface OnItemClick {
         void onClick(View view, int position);
+
         void onLongClick(View view, int position);
     }
+
 }

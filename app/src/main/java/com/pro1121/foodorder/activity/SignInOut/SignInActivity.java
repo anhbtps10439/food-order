@@ -2,12 +2,17 @@ package com.pro1121.foodorder.activity.SignInOut;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -30,8 +35,15 @@ public class SignInActivity extends AppCompatActivity {
         et_password = findViewById(R.id.et_password);
 
         chkRemember = findViewById(R.id.checkBox);
-        et_sdt.setText("0123456789");
-        et_password.setText("admin");
+
+        restorePassword();
+
+        chkRemember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                rememberPassword();
+            }
+        });
 
     }
 
@@ -57,56 +69,77 @@ public class SignInActivity extends AppCompatActivity {
             Toast.makeText(this, "Vui lòng nhập số điện thoại đã đăng kí!", Toast.LENGTH_SHORT).show();
             return;
         }
-        else
-        {
-            if (et_password.getText().toString().equals(""))
+        else if (et_password.getText().toString().equals(""))
             {
                 Toast.makeText(this, "Vui lòng nhập mật khẩu!", Toast.LENGTH_SHORT).show();
                 return;
             }
+        else if(!chkRemember.isChecked()){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this,R.style.CustomAlertDialog);
+            builder.setTitle("Nhớ mật khẩu")
+                    .setMessage("Bạn có tôi muốn ghi nhớ tài khoản của mình cho lần đăng nhập sau")
+                    .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                            chkRemember.setChecked(true);
+                            rememberPassword();
+                            // Kiểm tra tài khoản bao gồm sdt, password, role
+                            signIn();
+
+                        }
+            })
+                    .setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    signIn();
+                }
+            }).show();
+        }else {
+            signIn();
         }
 
-        String sdt = et_sdt.getText().toString()+"";
-        String pass = et_password.getText().toString()+"";
 
+    }
+    public void signIn() {
 
-        // Kiểm tra tài khoản bao gồm sdt, password, role
-        for (int i =0; i<LibraryClass.userModelList.size();i++){
+        final String sdt = et_sdt.getText().toString()+"";
+        final String pass = et_password.getText().toString()+"";
+
+        for (int i = 0; i < LibraryClass.userModelList.size(); i++) {
             //Admin
             if (LibraryClass.userModelList.get(i).getId().equalsIgnoreCase(sdt)
-            && LibraryClass.userModelList.get(i).getPassword().equalsIgnoreCase(pass)
-            && LibraryClass.userModelList.get(i).getRole().equalsIgnoreCase("admin")){
+                    && LibraryClass.userModelList.get(i).getPassword().equalsIgnoreCase(pass)
+                    && LibraryClass.userModelList.get(i).getRole().equalsIgnoreCase("admin")) {
                 currentUser = LibraryClass.userModelList.get(i);
-                startActivity(new Intent(this, AdminCaseActivity.class));
+                startActivity(new Intent(SignInActivity.this, AdminCaseActivity.class));
                 et_sdt.setText("");
                 et_password.setText("");
-                Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignInActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                 return;
             }
             //User
             if (LibraryClass.userModelList.get(i).getId().equalsIgnoreCase(sdt)
                     && LibraryClass.userModelList.get(i).getPassword().equalsIgnoreCase(pass)
-                    && LibraryClass.userModelList.get(i).getRole().equalsIgnoreCase("user")){
+                    && LibraryClass.userModelList.get(i).getRole().equalsIgnoreCase("user")) {
                 currentUser = LibraryClass.userModelList.get(i);
-                startActivity(new Intent(this, UserCaseActivity.class));
+                startActivity(new Intent(SignInActivity.this, UserCaseActivity.class));
                 et_sdt.setText("");
                 et_password.setText("");
-                Toast.makeText(this, "Đăng nhập thành công "+currentUser.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignInActivity.this, "Đăng nhập thành công " + currentUser.getName(), Toast.LENGTH_SHORT).show();
                 return;
             }
         }
         // Nếu kiểm tra không có ai có thông tin trùng khớp
         et_sdt.setText("");
         et_password.setText("");
-        Toast.makeText(this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+        Toast.makeText(SignInActivity.this, "Tài khoản hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();
+        chkRemember.setChecked(false);
 
     }
-
-
     //Bấm nút remember
     public void rememberPassword()
     {
-        //taoj sharePreference
+        //tạo sharePreference
 
         SharedPreferences sharedPreferences = getSharedPreferences("account", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

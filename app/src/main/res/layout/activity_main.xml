@@ -25,6 +25,7 @@
             android:text="Đăng nhập"
             android:textColor="@color/colorWhite"
             android:textSize="20dp"
+            android:textAllCaps="false"
             android:onClick="moveToSignIn"/>
 
         <Button
@@ -36,6 +37,7 @@
             android:fontFamily="@font/segoe_ui_bold"
             android:background="@drawable/shape"
             android:text="Đăng kí"
+            android:textAllCaps="false"
             android:textColor="@color/colorWhite"
             android:textSize="20dp"
             android:onClick="moveToSignUp"/>

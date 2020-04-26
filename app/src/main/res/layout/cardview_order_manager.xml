@@ -4,9 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="110dp"
-    android:layout_margin="10dp"
-    android:padding="11dp"
+    android:layout_height="130dp"
+    android:layout_margin="5dp"
+    android:padding="16dp"
     android:background="@drawable/shape"
     android:orientation="horizontal"
     android:paddingHorizontal="10dp">

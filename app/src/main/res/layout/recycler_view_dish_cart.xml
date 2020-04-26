@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="90dp">
-
+    <ImageView
+        android:id="@+id/ivDishAvatar"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_margin="10dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="69dp"
@@ -13,7 +17,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="6"
+            android:layout_weight="4"
             android:orientation="vertical">
 
             <TextView
@@ -46,6 +50,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
+            android:layout_marginEnd="10dp"
             android:orientation="horizontal">
 
             <Button
@@ -56,7 +61,7 @@
                 android:background="@null"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                android:textColor="@color/colorRedMain"
+                android:textColor="@color/Black"
                 android:gravity="center"
                 android:id="@+id/btnSubCart"/>
 
@@ -76,7 +81,7 @@
                 android:text="+"
                 android:background="@null"
                 android:textSize="30sp"
-                android:textColor="@color/colorRedMain"
+                android:textColor="@color/Black"
                 android:gravity="center"
                 android:id="@+id/btnPlusCart"/>
 
@@ -85,16 +90,17 @@
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2">
+            android:layout_weight="1"
+            android:background="@color/colorRedMain">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/ic_close_black_24dp"
                 android:scaleType="centerCrop"
                 android:clickable="true"
                 android:layout_gravity="center"
-                android:tint="@color/colorRedMain"
+                android:tint="@color/colorWhite"
                 android:id="@+id/ivDel"/>
 
         </FrameLayout>

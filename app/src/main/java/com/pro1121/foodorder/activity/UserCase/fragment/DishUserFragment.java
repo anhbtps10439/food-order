@@ -258,16 +258,13 @@ public class DishUserFragment extends Fragment implements DishAdapter.OnItemClic
                             ArrayList<DetailOrderModel> detailOrderList = new ArrayList<>();
                             for (int i = 0; i < buyList.size(); i++)
                             {
-
                                 String detailOrderID = detailDao.insert(id, buyList.get(i), buyAmountList.get(i));
                                 detailOrderList.add(new DetailOrderModel(detailOrderID, buyList.get(i), buyAmountList.get(i)));
                             }
 
-
                             OrderModel orderModel = new OrderModel(id, date, currentUser.getId(), des);
                             orderModel.setDetailOrderList(detailOrderList);
                             orderModelList.add(orderModel);
-
                             orderDao.priceCal();
 
                             alertDialog.dismiss();

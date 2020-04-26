@@ -48,10 +48,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //Loading
         userDao = new UserDao(this);
-        userDao.getAllRuntime();
         dishCategoryDao = new DishCategoryDao(this);
-        dishCategoryDao.getAllRuntime();
         dishDao = new DishDao(this);
+
+        //Get all data lưu vào arraylist tĩnh ở LibraryClass
+        userDao.getAllRuntime();
+        dishCategoryDao.getAllRuntime();
         dishDao.getAllRuntime();
 
 //        LibraryClass.loadAllImg(this);

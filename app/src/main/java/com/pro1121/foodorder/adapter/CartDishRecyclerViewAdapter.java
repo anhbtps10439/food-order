@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pro1121.foodorder.R;
 import com.pro1121.foodorder.model.DishModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -36,8 +37,9 @@ public class CartDishRecyclerViewAdapter extends RecyclerView.Adapter<CartDishRe
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+        Picasso.get().load(dataList.get(position).getImage()).fit().into(holder.ivAvatarDish);
         holder.tvName.setText(dataList.get(position).getName());
-        holder.tvName.setText("Đơn giá: " + dataList.get(position).getPrice() + "đ");
+        holder.tvPrice.setText("Đơn giá: " + dataList.get(position).getPrice() + "đ");
         holder.tvAmount.setText(""+amountList.get(position));
         holder.ivDel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,11 +90,11 @@ public class CartDishRecyclerViewAdapter extends RecyclerView.Adapter<CartDishRe
         TextView tvPrice;
         Button btnSub;
         Button btnPlus;
-        ImageView ivDel;
+        ImageView ivDel, ivAvatarDish;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+             ivAvatarDish = itemView.findViewById(R.id.ivDishAvatar);
             tvName = itemView.findViewById(R.id.tvDishNameCart);
             tvAmount = itemView.findViewById(R.id.tvAmountCart);
             tvPrice = itemView.findViewById(R.id.tvPriceCart);

@@ -82,6 +82,7 @@
             android:fontFamily="@font/segoe_ui_bold"
             android:background="@drawable/shape"
             android:padding="10dp"
+            android:textAllCaps="false"
             android:text="Let's go !!!"
             android:textColor="@color/colorWhite"
             android:textSize="16dp"

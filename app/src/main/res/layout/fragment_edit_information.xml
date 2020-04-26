@@ -14,14 +14,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="390dp"
+        android:layout_height="300dp"
         android:layout_weight="2">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:text="Ảnh đại diện"
             android:textColor="#000000"
             android:textSize="20dp"
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="310dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="10dp"
             android:text="Chỉnh sửa"
             android:textColor="#2E2EFE"
             android:textSize="18dp" />
@@ -42,7 +42,7 @@
             android:layout_width="150dp"
             android:layout_height="140dp"
             android:layout_marginLeft="131dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="50dp"
             android:scaleType="centerCrop"
             android:src="@color/Black"
             app:siShape="@drawable/shape6"
@@ -54,7 +54,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="480dp"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="190dp"
         android:layout_weight="2">
 
         <TextView
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="295dp"
             android:layout_marginTop="122dp"
-            android:text="Trang"
+            android:text=""
             android:gravity="end"
             android:layout_marginEnd="20dp"
             android:textColor="#000000"
@@ -113,7 +113,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="295dp"
             android:layout_marginTop="178dp"
-            android:text="02/20/2002"
             android:gravity="end"
             android:layout_marginEnd="20dp"
             android:textColor="#000000"
@@ -133,7 +132,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="295dp"
             android:layout_marginTop="230dp"
-            android:text="0393267994"
             android:gravity="end"
             android:layout_marginEnd="20dp"
             android:textColor="#000000"
@@ -153,7 +151,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="160dp"
             android:layout_marginTop="285dp"
-            android:text="trangvnkps08516@fpt.edu.vn"
             android:textColor="#000000"
             android:textSize="18dp" />
     </RelativeLayout>

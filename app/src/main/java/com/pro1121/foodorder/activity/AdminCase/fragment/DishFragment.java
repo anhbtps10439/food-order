@@ -248,6 +248,7 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
                         try {
                             dishDao.delete(dishListById.get(position).getId());
                             dishDao.getAll();
+
                         } catch (Exception ex) {
                             Toast.makeText(getActivity(), "Something wrong", Toast.LENGTH_SHORT).show();
                             Log.d("Delete CateDis Error............", ex.toString());
@@ -271,7 +272,6 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
         final EditText etDishDes = view.findViewById(R.id.etDesDialog);
         final EditText etDishPrice = view.findViewById(R.id.etPriceDialog);
 
-        Picasso.get().load(dishListById.get(position).getImage()).fit().into(ivCategoryAvatar);
         etDishName.setText(dishListById.get(position).getName());
         etDishDes.setText(dishListById.get(position).getDes());
         etDishPrice.setText(dishListById.get(position).getPrice()+"");
@@ -299,7 +299,8 @@ public class DishFragment extends Fragment implements DishAdapter.OnItemClick {
                             else {
 //                                insert vào db và add vào các list hiện có
                                 String idCategory = LibraryClass.dishCategoryModelList.get(AdminCaseActivity.idCategory).getId();
-                                dishDao.update(dishListById.get(position).getId(), idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, "none");
+                                dishDao.update(dishListById.get(position).getId(), idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, dishListById.get(position).getImage());
+                                dishDao.getAll();
                                 //Tạo model mới để chuyển sang hàm upload để cập nhật link ảnh vào.
                                 DishModel dishModel = new DishModel(dishListById.get(position).getId(), idCategory, mDishName, Integer.parseInt(mDishPrice), mDishDes, "none");
                                 LibraryClass.photoUpload(getActivity(), currrentPhoto, dishModel, null, "dish");

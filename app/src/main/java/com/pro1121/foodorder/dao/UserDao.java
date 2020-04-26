@@ -36,7 +36,6 @@ public class UserDao {
 
     public void getAllRuntime()
     {
-        
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -48,21 +47,17 @@ public class UserDao {
                     userModelList.add(data.getValue(UserModel.class));
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         };
 
         //hàm này chỉ được gọi một lần duy nhất vào lúc app chạy
         db.child("user").addListenerForSingleValueEvent(valueEventListener);
-
     }
 
     public void getAll()
     {
-
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
