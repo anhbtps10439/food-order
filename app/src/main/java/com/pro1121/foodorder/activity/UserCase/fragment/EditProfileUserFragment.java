@@ -54,7 +54,7 @@ import static com.pro1121.foodorder.activity.AdminCase.fragment.CategoryAdminFra
 import static com.pro1121.foodorder.activity.AdminCase.fragment.CategoryAdminFragment.REQUEST_IMAGE_CAPTURE;
 import static com.pro1121.foodorder.activity.SignInOut.SignInActivity.currentUser;
 
-public class EditProfileUserFragment extends Fragment {
+public class    EditProfileUserFragment extends Fragment {
 
     static Context context;
     private TextView tv_birth, tv_phone_num, tv_email;

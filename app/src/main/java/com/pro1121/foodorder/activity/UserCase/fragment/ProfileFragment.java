@@ -43,7 +43,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private Toolbar toolbar;
     private CircleImageView circleImageView;
     private TextView tv_greeting, tv_display_name, tv_order_history, tv_profile, tv_change_password, tv_sign_out;
-
     private ArrayList<OrderModel> orderHistoryList;
     private ArrayList<Integer> orderHistoryPriceList;
 
